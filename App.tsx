@@ -1,38 +1,24 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import Navbar from './components/Home/Navbar';
 import Hero from './components/Home/Hero';
 import FeaturedBanners from './components/Home/FeaturedBanners';
 import News from './components/Home/News';
 import MayorMessage from './components/Home/MayorMessage';
-import CitizensCharter from './components/Home/CitizensCharter';
 import Highlights from './components/Home/Highlights';
 import LocationMap from './components/Home/LocationMap';
 import Footer from './components/Home/Footer';
 import CityAssistant from './components/Home/CityAssistant';
-import Tourism from './components/Home/Tourism';
-import Departments from './components/Department/Departments';
-=======
-import Navbar from './components/Navbar.tsx';
-import Hero from './components/Hero.tsx';
-import FeaturedBanners from './components/FeaturedBanners.tsx';
-import News from './components/News.tsx';
-import MayorMessage from './components/MayorMessage.tsx';
-import Highlights from './components/Highlights.tsx';
-import LocationMap from './components/LocationMap.tsx';
-import Footer from './components/Footer.tsx';
-import CityAssistant from './components/CityAssistant.tsx';
-import PageSkeleton from './components/PageSkeleton.tsx';
-import DepartmentsSkeleton from './components/DepartmentsSkeleton.tsx';
-import CitizensCharterSkeleton from './components/CitizensCharterSkeleton.tsx';
+
+import PageSkeleton from './components/Shared/PageSkeleton';
+import DepartmentsSkeleton from './components/Department/DepartmentsSkeleton';
+import CitizensCharterSkeleton from './components/Home/CitizensCharterSkeleton';
 
 // Lazy load heavy page components for performance and loading states
-const Departments = React.lazy(() => import('./components/Departments.tsx'));
-const CitizensCharter = React.lazy(() => import('./components/CitizensCharter.tsx'));
-const GADDatabase = React.lazy(() => import('./components/GADDatabase.tsx'));
-const Procurement = React.lazy(() => import('./components/Procurement.tsx'));
-const Tourism = React.lazy(() => import('./components/Tourism.tsx'));
->>>>>>> 4fedca0e2b8aa8692f3bcce2f179a9b39fdc829a
+const Departments = React.lazy(() => import('./components/Department/Departments'));
+const CitizensCharter = React.lazy(() => import('./components/Home/CitizensCharter'));
+const GADDatabase = React.lazy(() => import('./components/GadDatabase/GADDatabase'));
+const Procurement = React.lazy(() => import('./components/Procurement/Procurement'));
+const Tourism = React.lazy(() => import('./components/Home/Tourism'));
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter'>('home');
@@ -44,7 +30,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <Navbar onNavigate={navigateTo} currentPage={currentPage} />
-
+      
       <main>
         {currentPage === 'home' && (
           <>
@@ -56,13 +42,13 @@ const App: React.FC = () => {
             <LocationMap />
           </>
         )}
-
+        
         {currentPage === 'tourism' && (
           <React.Suspense fallback={<PageSkeleton />}>
             <Tourism />
           </React.Suspense>
         )}
-
+        
         {currentPage === 'departments' && (
           <React.Suspense fallback={<DepartmentsSkeleton />}>
             <Departments />
