@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
-  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement') => void;
-  currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement';
+  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter') => void;
+  currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter';
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement', e: React.MouseEvent) => {
+  const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter', e: React.MouseEvent) => {
     e.preventDefault();
     onNavigate(page);
     setMobileMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
-  const NavItem = ({ label, page, isExternal = false }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement', isExternal?: boolean }) => {
+  const NavItem = ({ label, page, isExternal = false }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter', isExternal?: boolean }) => {
     const baseClasses = "hover:text-blue-700 transition-colors px-2 lg:px-4 py-2 block md:inline-block";
 
     if (isExternal) {
@@ -102,7 +102,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
               <Separator />
               <NavItem label="DEPARTMENTS" page="departments" />
               <Separator />
-              <NavItem label="CITIZEN'S CHARTER" isExternal />
+              <NavItem label="CITIZEN'S CHARTER" page="citizens-charter" />
               <Separator />
               <NavItem label="GAD DATABASE" page="gad-database" />
               <Separator />
@@ -123,7 +123,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
             <div className="flex flex-col p-4 space-y-1 divide-y divide-gray-100">
               <NavItem label="HOME" page="home" />
               <NavItem label="DEPARTMENTS" page="departments" />
-              <NavItem label="CITIZEN'S CHARTER" isExternal />
+              <NavItem label="CITIZEN'S CHARTER" page="citizens-charter" />
               <NavItem label="GAD DATABASE" page="gad-database" />
               <NavItem label="LGU EO" isExternal />
               <NavItem label="PROCUREMENT" page="procurement" />

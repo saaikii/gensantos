@@ -4,20 +4,25 @@ import Hero from './components/Hero.tsx';
 import FeaturedBanners from './components/FeaturedBanners.tsx';
 import News from './components/News.tsx';
 import MayorMessage from './components/MayorMessage.tsx';
-import CitizensCharter from './components/CitizensCharter.tsx';
 import Highlights from './components/Highlights.tsx';
 import LocationMap from './components/LocationMap.tsx';
 import Footer from './components/Footer.tsx';
 import CityAssistant from './components/CityAssistant.tsx';
-import Tourism from './components/Tourism.tsx';
-import Departments from './components/Departments.tsx';
-import GADDatabase from './components/GADDatabase.tsx';
-import Procurement from './components/Procurement.tsx';
+import PageSkeleton from './components/PageSkeleton.tsx';
+import DepartmentsSkeleton from './components/DepartmentsSkeleton.tsx';
+import CitizensCharterSkeleton from './components/CitizensCharterSkeleton.tsx';
+
+// Lazy load heavy page components for performance and loading states
+const Departments = React.lazy(() => import('./components/Departments.tsx'));
+const CitizensCharter = React.lazy(() => import('./components/CitizensCharter.tsx'));
+const GADDatabase = React.lazy(() => import('./components/GADDatabase.tsx'));
+const Procurement = React.lazy(() => import('./components/Procurement.tsx'));
+const Tourism = React.lazy(() => import('./components/Tourism.tsx'));
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter'>('home');
 
-  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement') => {
+  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter') => {
     setCurrentPage(page);
   };
 
@@ -33,18 +38,39 @@ const App: React.FC = () => {
             <News />
             <MayorMessage />
             <Highlights />
-            <CitizensCharter />
             <LocationMap />
           </>
         )}
 
-        {currentPage === 'tourism' && <Tourism />}
+        {currentPage === 'tourism' && (
+          <React.Suspense fallback={<PageSkeleton />}>
+            <Tourism />
+          </React.Suspense>
+        )}
 
-        {currentPage === 'departments' && <Departments />}
+        {currentPage === 'departments' && (
+          <React.Suspense fallback={<DepartmentsSkeleton />}>
+            <Departments />
+          </React.Suspense>
+        )}
 
-        {currentPage === 'gad-database' && <GADDatabase />}
+        {currentPage === 'citizens-charter' && (
+          <React.Suspense fallback={<CitizensCharterSkeleton />}>
+            <CitizensCharter />
+          </React.Suspense>
+        )}
 
-        {currentPage === 'procurement' && <Procurement />}
+        {currentPage === 'gad-database' && (
+          <React.Suspense fallback={<PageSkeleton />}>
+            <GADDatabase />
+          </React.Suspense>
+        )}
+
+        {currentPage === 'procurement' && (
+          <React.Suspense fallback={<PageSkeleton />}>
+            <Procurement />
+          </React.Suspense>
+        )}
       </main>
 
       <Footer />
