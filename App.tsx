@@ -5,8 +5,8 @@ import FeaturedBanners from './components/FeaturedBanners.tsx';
 import News from './components/News.tsx';
 import MayorMessage from './components/MayorMessage.tsx';
 import CitizensCharter from './components/CitizensCharter.tsx';
-import Services from './components/Services.tsx';
 import Highlights from './components/Highlights.tsx';
+import LocationMap from './components/LocationMap.tsx';
 import Footer from './components/Footer.tsx';
 import CityAssistant from './components/CityAssistant.tsx';
 import Tourism from './components/Tourism.tsx';
@@ -33,8 +33,8 @@ const App: React.FC = () => {
             <News />
             <MayorMessage />
             <Highlights />
-            <Services />
             <CitizensCharter />
+            <LocationMap />
           </>
         )}
 
