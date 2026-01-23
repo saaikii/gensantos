@@ -83,7 +83,13 @@ const allItems = [
   },
 ];
 
-const News: React.FC = () => {
+  // ... (data array remains same)
+
+interface NewsProps {
+  onReadMore?: (news: NewsItem) => void;
+}
+
+const News: React.FC<NewsProps> = ({ onReadMore }) => {
   const [activeTab, setActiveTab] = useState<'Announcement' | 'News' | 'Activities'>('News');
 
   const filteredItems = allItems.filter(item => item.category === activeTab);
@@ -164,7 +170,11 @@ const News: React.FC = () => {
         {/* Content Grid */}
         <div key={activeTab} className="grid grid-cols-1 md:grid-cols-3 gap-10 animate-fade-in-up">
           {filteredItems.map((news) => (
-            <article key={news.id} className="group cursor-pointer flex flex-col h-full bg-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-1">
+            <article 
+                key={news.id} 
+                onClick={() => onReadMore?.(news)}
+                className="group cursor-pointer flex flex-col h-full bg-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-1"
+            >
               <div className="relative overflow-hidden aspect-[4/3]">
                 <img 
                   src={news.image} 

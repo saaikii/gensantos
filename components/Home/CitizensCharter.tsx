@@ -1,77 +1,55 @@
 import React from 'react';
-import { Calculator, Home, ArrowRight } from 'lucide-react';
+import { Construction, HardHat, Clock } from 'lucide-react';
 
 const CitizensCharter: React.FC = () => {
   return (
-    <section className="py-24 bg-blue-50 relative overflow-hidden">
-      {/* Background Seal Watermark */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-[0.03] pointer-events-none select-none">
-         <img
-            src="https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo.png"
-            alt="Watermark"
-            className="w-full h-full object-contain grayscale"
-         />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        
-        {/* Header */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-           <span className="text-blue-600 font-bold tracking-widest uppercase text-xs md:text-sm mb-3 block animate-fade-in-up">Transparency & Efficiency</span>
-           <h2 className="text-4xl md:text-5xl font-black text-blue-900 mb-6 uppercase tracking-tight animate-fade-in-up">Citizen's Guides</h2>
-           <div className="h-2 w-24 bg-yellow-400 mx-auto rounded-full mb-8 animate-fade-in-up"></div>
-           <p className="text-slate-600 text-lg leading-relaxed animate-fade-in-up">
-             Comprehensive guides to help you navigate government services. Detailed steps, requirements, and procedures for a hassle-free experience.
-           </p>
-        </div>
-
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-yellow-50 pt-32 pb-20 flex items-center justify-center">
+      <div className="container mx-auto px-6">
+        <div className="max-w-2xl mx-auto text-center">
           
-          {/* Business Tax Card */}
-          <a href="#" className="group relative bg-white rounded-[2rem] p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:-translate-y-2 flex flex-col items-start overflow-hidden animate-fade-in-up">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-[100px] -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
-            
-            <div className="relative w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-600/30 group-hover:rotate-6 transition-transform duration-300">
-               <Calculator size={32} />
+          {/* Icon */}
+          <div className="relative inline-block mb-8">
+            <div className="w-32 h-32 bg-yellow-400 rounded-3xl flex items-center justify-center shadow-xl shadow-yellow-400/30 animate-bounce">
+              <Construction size={64} className="text-blue-900" />
             </div>
-
-            <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-700 transition-colors">
-              Business Tax Payment
-            </h3>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-               Step-by-step guide on assessment, billing, and payment schedules for new and renewing business owners.
-            </p>
-
-            <div className="mt-auto flex items-center gap-2 text-blue-600 font-bold uppercase tracking-wide text-sm group-hover:gap-3 transition-all">
-               View Guide <ArrowRight size={18} />
+            <div className="absolute -top-2 -right-2 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center animate-pulse">
+              <HardHat size={20} className="text-white" />
             </div>
-          </a>
+          </div>
 
-          {/* Real Property Tax Card */}
-          <a href="#" className="group relative bg-white rounded-[2rem] p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:-translate-y-2 flex flex-col items-start overflow-hidden animate-fade-in-up" style={{ animationDelay: '100ms' }}>
-             <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-50 rounded-bl-[100px] -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
-            
-             <div className="relative w-16 h-16 bg-yellow-400 text-blue-900 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-yellow-400/30 group-hover:-rotate-6 transition-transform duration-300">
-               <Home size={32} />
+          {/* Title */}
+          <h1 className="text-4xl md:text-5xl font-black text-blue-900 mb-4 uppercase tracking-tight">
+            Under Construction
+          </h1>
+          
+          <div className="h-2 w-24 bg-yellow-400 mx-auto rounded-full mb-8"></div>
+
+          {/* Message */}
+          <p className="text-slate-600 text-lg leading-relaxed mb-8">
+            We're working hard to bring you the complete <strong className="text-blue-700">Citizen's Charter</strong> with detailed service standards, processing times, and requirements for all city government services.
+          </p>
+
+          {/* Coming Soon Box */}
+          <div className="bg-white rounded-2xl p-6 shadow-lg border border-blue-100 inline-flex items-center gap-4">
+            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+              <Clock size={24} />
             </div>
-
-            <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-yellow-600 transition-colors">
-              Real Property Tax
-            </h3>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-               Understand your tax declaration, assessment levels, and payment deadlines for land and building properties.
-            </p>
-
-            <div className="mt-auto flex items-center gap-2 text-yellow-600 font-bold uppercase tracking-wide text-sm group-hover:gap-3 transition-all">
-               View Guide <ArrowRight size={18} />
+            <div className="text-left">
+              <p className="text-sm text-slate-500 font-medium">Expected Completion</p>
+              <p className="text-lg font-bold text-blue-900">Coming Soon</p>
             </div>
-          </a>
+          </div>
+
+          {/* Decorative Elements */}
+          <div className="mt-12 flex justify-center gap-2">
+            <div className="w-3 h-3 bg-blue-600 rounded-full animate-pulse"></div>
+            <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse" style={{ animationDelay: '200ms' }}></div>
+            <div className="w-3 h-3 bg-blue-600 rounded-full animate-pulse" style={{ animationDelay: '400ms' }}></div>
+          </div>
 
         </div>
-
       </div>
-    </section>
+    </div>
   );
 };
 

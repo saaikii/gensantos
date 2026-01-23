@@ -7,6 +7,7 @@ export interface NewsItem {
   date: string;
   image: string;
   summary: string;
+  content?: string;
 }
 
 export interface ServiceItem {

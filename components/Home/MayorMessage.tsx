@@ -1,7 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Quote } from 'lucide-react';
 
 const MayorMessage: React.FC = () => {
+  const fullMessage = "Digitalization in governance opens new avenues for transparency, efficiency, and citizen engagement. It empowers us to create more responsive, accessible, and effective public services. Let's embrace this digital revolution for a more progressive governance.";
+  
+  const [displayedText, setDisplayedText] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+  const [isTyping, setIsTyping] = useState(true);
+  const indexRef = useRef(0);
+
+  useEffect(() => {
+    // Blinking cursor effect
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 530);
+    return () => clearInterval(cursorInterval);
+  }, []);
+
+  useEffect(() => {
+    let typingInterval: NodeJS.Timeout;
+    let pauseTimeout: NodeJS.Timeout;
+
+    const startTyping = () => {
+      setIsTyping(true);
+      indexRef.current = 0;
+      setDisplayedText('');
+
+      typingInterval = setInterval(() => {
+        if (indexRef.current <= fullMessage.length) {
+          setDisplayedText(fullMessage.slice(0, indexRef.current));
+          indexRef.current++;
+        } else {
+          clearInterval(typingInterval);
+          setIsTyping(false);
+          
+          // Pause for 3 seconds before restarting
+          pauseTimeout = setTimeout(() => {
+            startTyping();
+          }, 3000);
+        }
+      }, 30); // 30ms per character - comfortable reading speed
+    };
+
+    startTyping();
+
+    return () => {
+      clearInterval(typingInterval);
+      clearTimeout(pauseTimeout);
+    };
+  }, []);
+
   return (
     <section className="py-16 bg-gradient-to-r from-blue-900 to-blue-800 text-white relative overflow-hidden">
       {/* Background Pattern */}
@@ -39,8 +87,15 @@ const MayorMessage: React.FC = () => {
             <h2 className="text-2xl md:text-4xl font-bold leading-relaxed mb-6 font-serif">
               "Message of the Mayor"
             </h2>
-            <p className="text-lg md:text-xl text-blue-100 leading-relaxed font-light italic mb-8">
-              Digitalization in governance opens new avenues for transparency, efficiency, and citizen engagement. It empowers us to create more responsive, accessible, and effective public services. Let's embrace this digital revolution for a more progressive governance.
+            <p className="text-lg md:text-xl text-blue-100 leading-relaxed font-light italic mb-8 min-h-[120px] md:min-h-[100px]">
+              {displayedText}
+              <span 
+                className={`inline-block ml-1 text-yellow-400 font-normal transition-opacity duration-100 ${
+                  showCursor ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                |
+              </span>
             </p>
             <div className="border-t border-white/10 pt-6 inline-block md:block">
               <p className="font-bold text-2xl text-white">Lorelie G. Pacquiao</p>
