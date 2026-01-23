@@ -5,8 +5,8 @@ import FeaturedBanners from './components/FeaturedBanners';
 import News from './components/News';
 import MayorMessage from './components/MayorMessage';
 import CitizensCharter from './components/CitizensCharter';
-import Services from './components/Services';
 import Highlights from './components/Highlights';
+import LocationMap from './components/LocationMap';
 import Footer from './components/Footer';
 import CityAssistant from './components/CityAssistant';
 import Tourism from './components/Tourism';
@@ -31,8 +31,8 @@ const App: React.FC = () => {
             <News />
             <MayorMessage />
             <Highlights />
-            <Services />
             <CitizensCharter />
+            <LocationMap />
           </>
         )}
         
