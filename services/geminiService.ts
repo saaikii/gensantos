@@ -1,8 +1,9 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
-// Initialize the Gemini AI client
+// Initialize the Gemini AI client only if API key is available
 // Using process.env.API_KEY as per guidelines
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 const SYSTEM_INSTRUCTION = `
 You are the "GenSan Virtual Assistant", a helpful AI guide for the official website of General Santos City, Philippines.
@@ -22,6 +23,12 @@ Keep responses relatively short (under 150 words) unless asked for a detailed it
 
 export const sendMessageToGemini = async (message: string, history: { role: string, parts: { text: string }[] }[]): Promise<string> => {
   try {
+    // Check if AI client is initialized
+    if (!ai) {
+      console.warn("Gemini API key not configured. Please set GEMINI_API_KEY in your environment variables.");
+      return "The AI assistant is currently unavailable. Please contact the administrator to configure the API key.";
+    }
+
     const chat = ai.chats.create({
       model: 'gemini-3-flash-preview',
       config: {
