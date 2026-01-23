@@ -1,8 +1,17 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
-// Initialize the Gemini AI client
+// Lazy initialization of the Gemini AI client
 // Using process.env.API_KEY as per guidelines
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+let ai: GoogleGenAI | null = null;
+
+const getAI = (): GoogleGenAI | null => {
+  if (ai) return ai;
+  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+  if (apiKey) {
+    ai = new GoogleGenAI({ apiKey });
+  }
+  return ai;
+};
 
 const SYSTEM_INSTRUCTION = `
 You are the "GenSan Virtual Assistant", a helpful AI guide for the official website of General Santos City, Philippines.
@@ -21,8 +30,14 @@ Keep responses relatively short (under 150 words) unless asked for a detailed it
 `;
 
 export const sendMessageToGemini = async (message: string, history: { role: string, parts: { text: string }[] }[]): Promise<string> => {
+  const aiClient = getAI();
+  
+  if (!aiClient) {
+    return "The AI assistant is currently unavailable. Please check back later or contact the city office for assistance.";
+  }
+  
   try {
-    const chat = ai.chats.create({
+    const chat = aiClient.chats.create({
       model: 'gemini-3-flash-preview',
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,

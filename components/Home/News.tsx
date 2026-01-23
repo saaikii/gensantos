@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, CalendarDays, Megaphone, Newspaper, PartyPopper } from 'lucide-react';
-import { NewsItem } from '../types';
+import { NewsItem } from '../../types';
 
 // Mock Data
 const allItems = [

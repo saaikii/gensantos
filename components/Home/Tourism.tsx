@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Star, Users, X, Check, Search, Cloud, Sun, Utensils, Mountain, Landmark, Factory, Trophy, Thermometer } from 'lucide-react';
-import { TouristSpot } from '../types';
+import { TouristSpot } from '../../types';
 
 const allSpots: TouristSpot[] = [
   {

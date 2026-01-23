@@ -1,6 +1,6 @@
 import React from 'react';
 import { FileText, Briefcase, Map, Building2, Phone, Calendar } from 'lucide-react';
-import { ServiceItem } from '../types';
+import { ServiceItem } from '../../types';
 
 const services: ServiceItem[] = [
   { id: '1', title: 'Business Permits', icon: <Building2 className="w-6 h-6" />, description: 'Apply or renew business licenses online', link: '#' },

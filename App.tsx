@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import FeaturedBanners from './components/FeaturedBanners';
-import News from './components/News';
-import MayorMessage from './components/MayorMessage';
-import CitizensCharter from './components/CitizensCharter';
-import Highlights from './components/Highlights';
-import LocationMap from './components/LocationMap';
-import Footer from './components/Footer';
-import CityAssistant from './components/CityAssistant';
-import Tourism from './components/Tourism';
-import Departments from './components/Departments';
+import Navbar from './components/Home/Navbar';
+import Hero from './components/Home/Hero';
+import FeaturedBanners from './components/Home/FeaturedBanners';
+import News from './components/Home/News';
+import MayorMessage from './components/Home/MayorMessage';
+import CitizensCharter from './components/Home/CitizensCharter';
+import Highlights from './components/Home/Highlights';
+import LocationMap from './components/Home/LocationMap';
+import Footer from './components/Home/Footer';
+import CityAssistant from './components/Home/CityAssistant';
+import Tourism from './components/Home/Tourism';
+import Departments from './components/Department/Departments';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments'>('home');
