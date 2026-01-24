@@ -30,13 +30,13 @@ const slides = [
   },
   {
     id: 3,
-    image: '/sarangani_highlands.jpg',
-    alt: 'Sarangani Highlands',
+    image: '/sanchez_peak.png',
+    alt: 'Sanchez Peak',
     type: 'tourism',
-    position: 'object-center',
-    title: 'Sarangani Highlands',
-    subtitle: 'Adventure Awaits',
-    description: 'Explore breathtaking mountain views, ziplines, and eco-adventures just minutes from the city.'
+    position: 'object-[50%_75%]',
+    title: 'Sanchez Peak',
+    subtitle: 'Majestic Views',
+    description: 'Trek to the highest point of General Santos City and witness panoramic views of the landscape.'
   },
   {
     id: 4,
@@ -55,8 +55,13 @@ const slides = [
   }
 ];
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onSearch?: (query: string) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onSearch }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [localQuery, setLocalQuery] = useState('');
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [displayedText, setDisplayedText] = useState({
     welcome: '',
@@ -161,10 +166,23 @@ const Hero: React.FC = () => {
     }
   };
 
+  const handleSearch = () => {
+    if (onSearch && localQuery.trim()) {
+      onSearch(localQuery);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   const slide = slides[currentSlide];
   const showContent = currentSlide === 0 ? animationPhase >= 5 || hasTyped : true;
 
   return (
+    <>
     <section className="relative z-40 h-[85vh] min-h-[600px] flex items-center bg-slate-900 pt-36">
       {/* Background Slideshow */}
       <div className="absolute inset-0 z-0">
@@ -320,27 +338,6 @@ const Hero: React.FC = () => {
         ))}
       </div>
 
-      {/* Search Bar - Thinner */}
-      <div className="absolute bottom-0 left-0 w-full z-30 translate-y-1/2 px-6">
-        <div className="container mx-auto">
-          <div 
-            className={`mx-auto bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-2 flex items-center max-w-3xl transform hover:scale-[1.01] transition-all duration-500 border border-white/40 ring-4 ring-black/5 ${
-              showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            <Search className="text-blue-500 ml-3 w-5 h-5 shrink-0" />
-            <input 
-              type="text" 
-              placeholder="I'm looking for services, departments, or news..." 
-              className="flex-1 bg-transparent border-none text-slate-800 placeholder-slate-400 px-3 py-2.5 focus:outline-none text-base min-w-0"
-            />
-            <button className="shrink-0 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-2.5 px-5 md:px-6 rounded-lg transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 text-sm">
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-      
       <style>{`
         @keyframes subtle-zoom {
           0% { transform: scale(1); }
@@ -348,6 +345,32 @@ const Hero: React.FC = () => {
         }
       `}</style>
     </section>
+
+    {/* Sticky Search Bar Container */}
+    <div className="sticky top-[150px] md:top-[171px] z-[40] -mt-8 px-6 transition-all duration-300 pointer-events-none">
+      <div className="container mx-auto">
+        <div 
+          className="mx-auto bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-2 flex items-center max-w-3xl border border-white/40 ring-4 ring-black/5 pointer-events-auto"
+        >
+          <Search className="text-blue-500 ml-3 w-5 h-5 shrink-0" />
+          <input 
+            type="text" 
+            placeholder="I'm looking for services, departments, or news..." 
+            value={localQuery}
+            onChange={(e) => setLocalQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="flex-1 bg-transparent border-none text-slate-800 placeholder-slate-400 px-3 py-2.5 focus:outline-none text-base min-w-0"
+          />
+          <button 
+            onClick={handleSearch}
+            className="shrink-0 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-2.5 px-5 md:px-6 rounded-lg transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 text-sm"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    </>
   );
 };
 

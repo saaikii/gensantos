@@ -5,9 +5,9 @@ const CitizensGuides: React.FC = () => {
   return (
     <section className="py-24 bg-blue-50 relative overflow-hidden">
       {/* Background Seal Watermark */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-[0.08] pointer-events-none select-none">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-[0.15] pointer-events-none select-none">
         <img
-          src="https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo.png"
+          src="/gensan_seal_large.jpg"
           alt="Watermark"
           className="w-full h-full object-contain"
         />
@@ -17,10 +17,14 @@ const CitizensGuides: React.FC = () => {
 
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span className="text-blue-600 font-bold tracking-widest uppercase text-xs md:text-sm mb-3 block animate-fade-in-up">Transparency & Efficiency</span>
-          <h2 className="text-4xl md:text-5xl font-black text-blue-900 mb-6 uppercase tracking-tight animate-fade-in-up">Citizen's Guides</h2>
-          <div className="h-2 w-24 bg-yellow-400 mx-auto rounded-full mb-8 animate-fade-in-up"></div>
-          <p className="text-slate-600 text-lg leading-relaxed animate-fade-in-up">
+          <span className="inline-block py-1 px-4 rounded-full bg-blue-50 text-[#0038A8] text-xs font-bold tracking-widest uppercase mb-4 border border-blue-200 shadow-sm animate-fade-in-up">
+            Transparency & Efficiency
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0038A8] mb-6 uppercase tracking-tight drop-shadow-sm font-serif animate-fade-in-up">
+            Citizen's Guides
+          </h2>
+          <div className="w-24 h-1.5 bg-gradient-to-r from-[#0038A8] to-yellow-500 mx-auto rounded-full mb-8 animate-fade-in-up"></div>
+          <p className="text-slate-900 text-lg leading-relaxed animate-fade-in-up">
             Comprehensive guides to help you navigate government services. Detailed steps, requirements, and procedures for a hassle-free experience.
           </p>
         </div>

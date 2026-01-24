@@ -1,92 +1,12 @@
 import React, { useState } from 'react';
 import { ArrowRight, CalendarDays, Megaphone, Newspaper, PartyPopper } from 'lucide-react';
-import { NewsItem } from '../../types';
+import { newsItems as allItems } from '../../data/siteData';
 
-// Mock Data
-const allItems = [
-  // News (Blue)
-  {
-    id: 1,
-    title: "New Digital Hub for Tech Startups Opens Downtown",
-    category: "News",
-    date: "August 12, 2024",
-    image: "https://picsum.photos/id/48/800/600",
-    summary: "Mayor Lorelie Pacquiao inaugurates the new Innovation Center designed to support local tech entrepreneurs and students."
-  },
-  {
-    id: 2,
-    title: "City Health Office Launches Mobile Vaccination Drive",
-    category: "News",
-    date: "August 10, 2024",
-    image: "https://picsum.photos/id/338/800/600",
-    summary: "Bringing healthcare closer to barangays, the new mobile clinic will offer free vaccinations and check-ups starting next week."
-  },
-  {
-    id: 3,
-    title: "LGU Receives Award for Good Governance",
-    category: "News",
-    date: "August 05, 2024",
-    image: "https://picsum.photos/id/400/800/600", // Placeholder
-    summary: "General Santos City recognized as one of the most competitive cities in Mindanao during the recent summit."
-  },
-
-  // Announcements (Green)
-  {
-    id: 4,
-    title: "Suspension of Classes on August 21",
-    category: "Announcement",
-    date: "August 18, 2024",
-    image: "https://picsum.photos/id/175/800/600", // Clock/School
-    summary: "Classes in all levels, both public and private, are suspended in observance of Ninoy Aquino Day."
-  },
-  {
-    id: 5,
-    title: "Business Tax Payment Deadline Extended",
-    category: "Announcement",
-    date: "August 15, 2024",
-    image: "https://picsum.photos/id/20/800/600", // Papers/Office
-    summary: "The City Treasurer's Office announces the extension of the deadline for the 3rd quarter business tax payment."
-  },
-  {
-    id: 6,
-    title: "Road Closure Advisory: Pioneer Avenue",
-    category: "Announcement",
-    date: "August 14, 2024",
-    image: "https://picsum.photos/id/1076/800/600", // Road/Construction
-    summary: "Please be advised of the temporary road closure at Pioneer Avenue for road widening projects starting next week."
-  },
-
-  // Activities (Red)
-  {
-    id: 7,
-    title: "GenSan Prepares for Annual Tuna Festival 2024",
-    category: "Activities",
-    date: "August 15, 2024",
-    image: "https://picsum.photos/id/400/800/600",
-    summary: "The city government announces the schedule of activities for the upcoming Tuna Festival, featuring street dancing and culinary showdowns."
-  },
-  {
-    id: 8,
-    title: "Sunday Zumba at the Oval Plaza",
-    category: "Activities",
-    date: "Every Sunday",
-    image: "https://picsum.photos/id/342/800/600", // Exercise
-    summary: "Join the weekly community fitness program every Sunday morning at the Oval Plaza. Free for everyone!"
-  },
-  {
-    id: 9,
-    title: "Barangay Basketball League Finals",
-    category: "Activities",
-    date: "August 25, 2024",
-    image: "https://picsum.photos/id/453/800/600", // Sports
-    summary: "Witness the championship match between Brgy. Lagao and Brgy. Calumpang this coming weekend."
-  },
-];
 
 // ... (data array remains same)
 
 interface NewsProps {
-  onReadMore?: (news: NewsItem) => void;
+  onReadMore?: (news: any) => void;
 }
 
 const News: React.FC<NewsProps> = ({ onReadMore }) => {
@@ -178,7 +98,7 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
               <div className="relative overflow-hidden aspect-[4/3]">
                 <img
                   src={news.image}
-                  alt={news.title}
+                  alt={news.name}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className={`absolute top-4 left-4 ${getTabColor(news.category)} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-md`}>
@@ -193,11 +113,11 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
                 </div>
 
                 <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
-                  {news.title}
+                  {news.name}
                 </h3>
 
                 <p className="text-gray-500 mb-6 line-clamp-3 flex-1 text-sm leading-relaxed">
-                  {news.summary}
+                  {news.description}
                 </p>
 
                 <div className={`flex items-center gap-2 ${getTextColor(activeTab)} font-bold text-sm mt-auto group-hover:gap-3 transition-all`}>

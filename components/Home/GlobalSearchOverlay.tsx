@@ -1,0 +1,183 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Search, X, Building2, FileText, Newspaper, ArrowRight, CornerDownRight } from 'lucide-react';
+import { allSearchableData, SearchResult } from '../../data/siteData';
+
+interface GlobalSearchOverlayProps {
+  isOpen: boolean;
+  onClose: () => void;
+  initialQuery?: string;
+  onNavigateToResult: (result: SearchResult) => void;
+}
+
+const GlobalSearchOverlay: React.FC<GlobalSearchOverlayProps> = ({ 
+  isOpen, 
+  onClose, 
+  initialQuery = '', 
+  onNavigateToResult 
+}) => {
+  const [query, setQuery] = useState(initialQuery);
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setQuery(initialQuery);
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }
+  }, [isOpen, initialQuery]);
+
+  useEffect(() => {
+    if (query.trim() === '') {
+      setResults([]);
+      return;
+    }
+
+    const filtered = allSearchableData.filter(item => 
+      item.name.toLowerCase().includes(query.toLowerCase()) || 
+      item.description.toLowerCase().includes(query.toLowerCase())
+    );
+    setResults(filtered);
+  }, [query]);
+
+  if (!isOpen) return null;
+
+  const groupedResults = {
+    departments: results.filter(r => r.type === 'department'),
+    services: results.filter(r => r.type === 'service'),
+    news: results.filter(r => r.type === 'news' || r.type === 'announcement' || r.type === 'activity'),
+  };
+
+  const ResultItem = ({ result }: { result: SearchResult }) => (
+    <div 
+      onClick={() => onNavigateToResult(result)}
+      className="group flex items-start gap-4 p-4 rounded-xl hover:bg-blue-50 cursor-pointer transition-all border border-transparent hover:border-blue-100"
+    >
+      <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+        {result.icon || (result.type === 'news' ? <Newspaper size={20} /> : <FileText size={20} />)}
+      </div>
+      <div className="flex-1 min-w-0">
+        <h4 className="font-bold text-gray-900 group-hover:text-blue-700 transition-colors truncate">
+          {result.name}
+        </h4>
+        <p className="text-sm text-gray-500 line-clamp-1 group-hover:text-blue-600/70 transition-colors">
+          {result.description}
+        </p>
+      </div>
+      <div className="opacity-0 group-hover:opacity-100 transition-opacity text-blue-600 self-center">
+        <CornerDownRight size={18} />
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="fixed inset-0 z-[100] bg-white/95 backdrop-blur-xl animate-in fade-in duration-300">
+      <div className="container mx-auto max-w-4xl px-6 pt-24 pb-12 flex flex-col h-full">
+        
+        {/* Search Header */}
+        <div className="relative mb-12">
+          <button 
+            onClick={onClose}
+            className="absolute -top-16 right-0 p-2 hover:bg-gray-100 rounded-full text-gray-400 hover:text-gray-900 transition-all"
+          >
+            <X size={32} />
+          </button>
+          
+          <div className="relative">
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-blue-600" size={28} />
+            <input 
+              ref={inputRef}
+              type="text" 
+              placeholder="What are you looking for?"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="w-full pl-16 pr-6 py-6 text-2xl md:text-3xl font-bold bg-gray-50 rounded-2xl border-2 border-transparent focus:border-blue-100 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/5 transition-all shadow-sm"
+            />
+          </div>
+        </div>
+
+        {/* Results Body */}
+        <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
+          {query.trim() === '' ? (
+            <div className="text-center py-20 animate-in slide-in-from-bottom-4 duration-500">
+              <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center text-blue-400 mx-auto mb-6">
+                <Search size={40} />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-400">Search GenSan Online</h3>
+              <p className="text-gray-400 mt-2">Find departments, news, announcements, and official guides.</p>
+            </div>
+          ) : results.length > 0 ? (
+            <div className="space-y-10 animate-in slide-in-from-bottom-4 duration-500 pb-10">
+              {groupedResults.departments.length > 0 && (
+                <div>
+                  <h3 className="text-xs font-black uppercase tracking-widest text-blue-600 mb-4 flex items-center gap-2">
+                    <Building2 size={14} /> Departments ({groupedResults.departments.length})
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {groupedResults.departments.map(r => (
+                      <div key={r.id}>
+                        <ResultItem result={r} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {groupedResults.services.length > 0 && (
+                <div>
+                  <h3 className="text-xs font-black uppercase tracking-widest text-green-600 mb-4 flex items-center gap-2">
+                    <FileText size={14} /> Citizen's Charter & Services ({groupedResults.services.length})
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {groupedResults.services.map(r => (
+                      <div key={r.id}>
+                        <ResultItem result={r} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {groupedResults.news.length > 0 && (
+                <div>
+                  <h3 className="text-xs font-black uppercase tracking-widest text-red-600 mb-4 flex items-center gap-2">
+                    <Newspaper size={14} /> News & Activities ({groupedResults.news.length})
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {groupedResults.news.map(r => (
+                      <div key={r.id}>
+                        <ResultItem result={r} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 mx-auto mb-6">
+                <X size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-500">No results found for "{query}"</h3>
+              <p className="text-gray-400 mt-2">Try searching for something else like "Tax", "Health", or "Mayor".</p>
+            </div>
+          )}
+        </div>
+
+        {/* Footer Info */}
+        <div className="mt-auto pt-8 border-t border-gray-100 flex items-center justify-between text-gray-400 text-sm">
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5"><kbd className="bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 font-sans text-[10px]">ESC</kbd> to close</span>
+            <span className="flex items-center gap-1.5"><kbd className="bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 font-sans text-[10px]">ENTER</kbd> to select</span>
+          </div>
+          <div className="flex items-center gap-2 text-blue-600 font-bold group hover:underline cursor-pointer">
+            Explore All Departments <ArrowRight size={14} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default GlobalSearchOverlay;

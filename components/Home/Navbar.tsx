@@ -4,30 +4,31 @@ import { Menu, X, Search } from 'lucide-react';
 interface NavbarProps {
   onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter') => void;
   currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter';
+  enableStickySearch?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
+const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySearch = false }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show search bar when scrolled past 500px AND on Home page
-      if (window.scrollY > 500 && currentPage === 'home') {
+      // Show search bar when scrolled past 500px AND sticky search is enabled
+      if (window.scrollY > 500 && enableStickySearch) {
         setShowSearch(true);
       } else {
         setShowSearch(false);
       }
     };
 
-    // Reset search visibility when page changes
-    if (currentPage !== 'home') {
+    // Reset search visibility when sticky search is disabled or page changes
+    if (!enableStickySearch) {
       setShowSearch(false);
     }
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentPage]);
+  }, [currentPage, enableStickySearch]);
 
   const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter', e: React.MouseEvent) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   };
 
   const NavItem = ({ label, page, isExternal = false, externalUrl }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter', isExternal?: boolean, externalUrl?: string }) => {
-    const baseClasses = "hover:text-blue-700 transition-colors px-2 lg:px-4 py-2 block md:inline-block";
+    const baseClasses = "hover:text-blue-700 transition-colors px-1 lg:px-3 py-2 block md:inline-block";
 
     if (isExternal || externalUrl) {
       return (
@@ -109,8 +110,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
       </div>
 
       {/* Main Navbar - White */}
-      <nav className="bg-white border-b-4 border-[#CE1126] md:border-b md:border-gray-200 text-gray-700 text-[11px] md:text-[11px] lg:text-xs font-bold uppercase tracking-wide relative">
-        <div className="container mx-auto px-4 md:px-6">
+      <nav className="bg-white border-b-4 border-[#CE1126] md:border-b md:border-gray-200 text-gray-700 text-xs md:text-xs lg:text-sm font-bold uppercase tracking-wide relative">
+        <div className="container mx-auto px-2 md:px-4">
           <div className="flex justify-between md:justify-center items-center h-14 md:h-12">
 
             {/* Mobile Menu Button & Brand (Visible only on Mobile) */}
@@ -122,7 +123,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center justify-center w-full flex-wrap gap-1">
+            <div className="hidden md:flex items-center justify-center w-full flex-nowrap gap-0.5">
               <NavItem label="HOME" page="home" />
               <Separator />
               <NavItem label="DEPARTMENTS" page="departments" />
@@ -138,22 +139,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
               <NavItem label="SCHEDULE OF MARKET VALUES (SMV)" isExternal />
               <Separator />
               <NavItem label="TOURISM" page="tourism" />
-
-              {/* Sticky Search Bar - Slides in next to Tourism */}
-              <div className={`
-                  hidden md:flex items - center overflow - hidden transition - all duration - 500 ease -in -out
-                  ${showSearch ? 'w-56 opacity-100 ml-4' : 'w-0 opacity-0 ml-0'}
-`}>
-                <div className="relative group w-full">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="bg-gray-100 border border-gray-200 rounded-full pl-9 pr-4 py-1.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:bg-white transition-all shadow-sm"
-                  />
-                  <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500" />
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
@@ -161,19 +146,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
         {/* Mobile Dropdown */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-xl">
-            {/* Mobile Sticky Search */}
-            {showSearch && (
-              <div className="p-4 border-b border-gray-100 bg-gray-50 animate-fade-in-up">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search services..."
-                    className="w-full bg-white border border-gray-200 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
-                  />
-                  <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                </div>
-              </div>
-            )}
             <div className="flex flex-col p-4 space-y-1 divide-y divide-gray-100">
               <NavItem label="HOME" page="home" />
               <NavItem label="DEPARTMENTS" page="departments" />

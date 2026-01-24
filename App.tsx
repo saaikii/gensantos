@@ -21,12 +21,16 @@ const GADDatabase = React.lazy(() => import('./components/GadDatabase/GADDatabas
 const Procurement = React.lazy(() => import('./components/Procurement/Procurement'));
 const Tourism = React.lazy(() => import('./components/Home/Tourism'));
 const NewsDetail = React.lazy(() => import('./components/Home/NewsDetail'));
+import GlobalSearchOverlay from './components/Home/GlobalSearchOverlay';
 
 import { NewsItem } from './types';
+import { SearchResult } from './data/siteData';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'news-detail'>('home');
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [globalSearchQuery, setGlobalSearchQuery] = useState('');
 
   const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter') => {
     setCurrentPage(page);
@@ -39,18 +43,48 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
+  const handleGlobalSearch = (query: string) => {
+    setGlobalSearchQuery(query);
+    setIsSearchOpen(true);
+  };
+
+  const handleNavigateToResult = (result: SearchResult) => {
+    setIsSearchOpen(false);
+    
+    if (result.type === 'department') {
+      navigateTo('departments');
+    } else if (result.type === 'service') {
+      navigateTo('citizens-charter');
+    } else if (result.type === 'news' || result.type === 'announcement' || result.type === 'activity') {
+      // For news, we might need more specific logic to show details
+      // For now, navigate to news list or handle specifically if possible
+      navigateTo('home');
+      // Scroll to news section
+      setTimeout(() => {
+        const newsSection = document.getElementById('news-section');
+        if (newsSection) newsSection.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {currentPage !== 'gad-database' && (
-        <Navbar onNavigate={navigateTo} currentPage={currentPage === 'news-detail' ? 'home' : currentPage} />
+        <Navbar 
+          onNavigate={navigateTo} 
+          currentPage={currentPage === 'news-detail' ? 'home' : currentPage} 
+          enableStickySearch={currentPage === 'home'}
+        />
       )}
 
       <main>
         {currentPage === 'home' && (
           <>
-            <Hero />
+            <Hero onSearch={handleGlobalSearch} />
             <FeaturedBanners />
-            <News onReadMore={handleReadNews} />
+            <div id="news-section">
+              <News onReadMore={handleReadNews} />
+            </div>
             <MayorMessage />
             <CitizensGuides />
             <Highlights />
@@ -78,7 +112,7 @@ const App: React.FC = () => {
 
         {currentPage === 'gad-database' && (
           <React.Suspense fallback={<PageSkeleton />}>
-            <GADDatabase onBack={() => navigateTo('home')} />
+            <GADDatabase onNavigate={navigateTo} />
           </React.Suspense>
         )}
 
@@ -100,6 +134,13 @@ const App: React.FC = () => {
 
       {currentPage !== 'gad-database' && <Footer />}
       <CityAssistant />
+
+      <GlobalSearchOverlay 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)}
+        initialQuery={globalSearchQuery}
+        onNavigateToResult={handleNavigateToResult}
+      />
     </div>
   );
 };

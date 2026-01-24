@@ -45,9 +45,19 @@ const MayorMessage: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-gradient-to-r from-blue-900 to-blue-800 text-white relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-r from-blue-900 to-blue-800 text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+
+      {/* Ornate Stitched/Sewed Outline */}
+      <div className="absolute inset-4 border-2 border-dashed border-white/10 rounded-[2rem] pointer-events-none z-0"></div>
+      <div className="absolute inset-6 border border-dashed border-yellow-500/20 rounded-[1.75rem] pointer-events-none z-0"></div>
+      
+      {/* Corner Decorative Stitches */}
+      <div className="absolute top-8 left-8 w-12 h-12 border-t-2 border-l-2 border-dashed border-yellow-400/30 rounded-tl-xl pointer-events-none z-0"></div>
+      <div className="absolute top-8 right-8 w-12 h-12 border-t-2 border-r-2 border-dashed border-yellow-400/30 rounded-tr-xl pointer-events-none z-0"></div>
+      <div className="absolute bottom-8 left-8 w-12 h-12 border-b-2 border-l-2 border-dashed border-yellow-400/30 rounded-bl-xl pointer-events-none z-0"></div>
+      <div className="absolute bottom-8 right-8 w-12 h-12 border-b-2 border-r-2 border-dashed border-yellow-400/30 rounded-br-xl pointer-events-none z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 max-w-6xl mx-auto">

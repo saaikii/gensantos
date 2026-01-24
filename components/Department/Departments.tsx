@@ -7,50 +7,8 @@ import {
     Cpu, FileBadge, Accessibility, Briefcase, Trophy, GraduationCap, ShieldCheck, Search,
     Filter
 } from 'lucide-react';
+import { departments as allDepartments } from '../../data/siteData';
 
-interface DepartmentItem {
-    name: string;
-    icon: React.ReactNode;
-    description: string;
-}
-
-const allDepartments: DepartmentItem[] = [
-    // City Hall Top Offices
-    { name: "City Mayor's Office", icon: <Landmark size={24} />, description: "Executive direction and control over all city government operations." },
-    { name: "Sangguniang Panlungsod", icon: <Gavel size={24} />, description: "Legislative body of the city government." },
-
-    // Finance & Administration
-    { name: "City Accountant's Office", icon: <Calculator size={24} />, description: "In charge of the accounting and internal audit services of the city." },
-    { name: "City Administrator's Office", icon: <UserCog size={24} />, description: "Develops plans and strategies on management and administration-related programs." },
-    { name: "City Budget Office", icon: <PieChart size={24} />, description: "Responsible for the budget administration and management of the city." },
-    { name: "City Treasurer's Office", icon: <Banknote size={24} />, description: "Collection of taxes, fees, charges, and other impositions." },
-    { name: "Human Resource Office", icon: <UserCheck size={24} />, description: "Responsible for the recruitment, selection, and placement of personnel." },
-
-    // Services & Development
-    { name: "City Agriculturist's Office", icon: <Leaf size={24} />, description: "Promotion of agricultural growth and development." },
-    { name: "City Assessor's Office", icon: <Home size={24} />, description: "Appraisal and assessment of real properties for taxation purposes." },
-    { name: "City Economic Management", icon: <TrendingUp size={24} />, description: "Formulation of economic development plans and policies." },
-    { name: "City Engineer's Office", icon: <HardHat size={24} />, description: "Infrastructure development and public works engineering." },
-    { name: "Environment & Natural Resources", icon: <Trees size={24} />, description: "Protection and conservation of the city's natural resources." },
-
-    // Public Service
-    { name: "City General Services Office", icon: <Package size={24} />, description: "Management of supply and property, and general services." },
-    { name: "City Housing & Land Management", icon: <Home size={24} />, description: "Housing and land management programs for the city." },
-    { name: "City Internal Audit Services", icon: <ClipboardCheck size={24} />, description: "Internal audit services for effective local governance." },
-    { name: "City Legal Office", icon: <Scale size={24} />, description: "Legal assistance and support to the city government." },
-    { name: "City Planning & Development", icon: <Map size={24} />, description: "Formulation of comprehensive development plans." },
-    { name: "City Population Management", icon: <Users size={24} />, description: "Implementation of population management programs." },
-
-    // Social Services
-    { name: "Social Welfare & Development", icon: <HeartHandshake size={24} />, description: "Delivery of basic social welfare services." },
-    { name: "City Veterinarian's Office", icon: <Stethoscope size={24} />, description: "Veterinary services and animal welfare programs." },
-    { name: "City Health Office", icon: <Activity size={24} />, description: "Health services and medical assistance programs." },
-    { name: "Dr. Jorge P. Royeca Hospital", icon: <Building2 size={24} />, description: "City government-run tertiary hospital." },
-    { name: "Local Civil Registrar", icon: <FileText size={24} />, description: "Civil registration services for vital events." },
-    { name: "Public Safety Office", icon: <Shield size={24} />, description: "Ensures public safety and order in the city." },
-    { name: "Office of Building Officials", icon: <Building2 size={24} />, description: "Regulation of building construction and maintenance." },
-    { name: "Waste Management Office", icon: <Recycle size={24} />, description: "Solid waste management and disposal services." }
-];
 
 const mayorsOfficeDivisions = [
     "City Public Information Office",
@@ -137,49 +95,49 @@ const getCategoryStyles = (category: string) => {
     switch (category) {
         case 'finance':
             return {
-                bgLight: 'bg-blue-50',
-                bgDark: 'bg-blue-600',
-                textDark: 'text-blue-800',
-                border: 'border-blue-100',
-                shadow: 'shadow-blue-600/30',
-                hoverText: 'group-hover:text-blue-900',
-                corner: 'bg-blue-50',
-                borderHover: 'hover:border-blue-200'
+                bgLight: 'bg-green-50',
+                bgDark: 'bg-green-600',
+                textDark: 'text-green-800',
+                border: 'border-green-100',
+                shadow: 'shadow-green-600/30',
+                hoverText: 'group-hover:text-green-900',
+                corner: 'bg-green-50',
+                borderHover: 'hover:border-green-200'
             };
         case 'services':
             return {
-                bgLight: 'bg-blue-50',
-                bgDark: 'bg-blue-600',
-                textDark: 'text-blue-800',
-                border: 'border-blue-100',
-                shadow: 'shadow-blue-600/30',
-                hoverText: 'group-hover:text-blue-900',
-                corner: 'bg-blue-50',
-                borderHover: 'hover:border-blue-200'
+                bgLight: 'bg-teal-50',
+                bgDark: 'bg-teal-600',
+                textDark: 'text-teal-800',
+                border: 'border-teal-100',
+                shadow: 'shadow-teal-600/30',
+                hoverText: 'group-hover:text-teal-900',
+                corner: 'bg-teal-50',
+                borderHover: 'hover:border-teal-200'
             };
         case 'public':
             return {
-                bgLight: 'bg-blue-50',
-                bgDark: 'bg-blue-600',
-                textDark: 'text-blue-800',
-                border: 'border-blue-100',
-                shadow: 'shadow-blue-600/30',
-                hoverText: 'group-hover:text-blue-900',
-                corner: 'bg-blue-50',
-                borderHover: 'hover:border-blue-200'
+                bgLight: 'bg-orange-50',
+                bgDark: 'bg-orange-600',
+                textDark: 'text-orange-800',
+                border: 'border-orange-100',
+                shadow: 'shadow-orange-600/30',
+                hoverText: 'group-hover:text-orange-900',
+                corner: 'bg-orange-50',
+                borderHover: 'hover:border-orange-200'
             };
         case 'social':
             return {
-                bgLight: 'bg-blue-50',
-                bgDark: 'bg-blue-600',
-                textDark: 'text-blue-800',
-                border: 'border-blue-100',
-                shadow: 'shadow-blue-600/30',
-                hoverText: 'group-hover:text-blue-900',
-                corner: 'bg-blue-50',
-                borderHover: 'hover:border-blue-200'
+                bgLight: 'bg-rose-50',
+                bgDark: 'bg-rose-600',
+                textDark: 'text-rose-800',
+                border: 'border-rose-100',
+                shadow: 'shadow-rose-600/30',
+                hoverText: 'group-hover:text-rose-900',
+                corner: 'bg-rose-50',
+                borderHover: 'hover:border-rose-200'
             };
-        default: // executive and others - use gold for leadership
+        default: // executive and others - use gold/blue leadership mix
             return {
                 bgLight: 'bg-blue-50',
                 bgDark: 'bg-blue-600',
@@ -209,59 +167,60 @@ const Departments: React.FC = () => {
     });
 
     return (
-        <div className="min-h-screen font-sans pt-20 pb-20 relative">
-            {/* Full Page Background Image */}
-            <div className="fixed inset-0 z-0">
-                <img
-                    src="/city_plaza_bg.png"
-                    alt="General Santos City Plaza"
-                    className="w-full h-full object-cover object-center"
-                />
-                {/* Blue Tint Overlay - Approx 15-20% opacity as requested */}
-                <div className="absolute inset-0 bg-blue-900/20"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 via-blue-900/20 to-blue-900/50"></div>
+        <div className="min-h-screen font-sans pt-36 pb-20 bg-gray-50 relative">
+            {/* Background Watermark - Fixed */}
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
+                <div className="w-[800px] h-[800px] opacity-[0.15]">
+                    <img 
+                        src="/gensan_seal_large.jpg" 
+                        alt="Gensan Seal" 
+                        className="w-full h-full object-contain"
+                    />
+                </div>
             </div>
 
             {/* Header Section */}
             <div className="relative z-20 pt-24 pb-16 px-6">
                 <div className="container mx-auto max-w-7xl text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-md">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0038A8] mb-6 drop-shadow-md font-serif uppercase tracking-tight">
                         Departments
                     </h1>
-                    <p className="text-gray-100 text-lg max-w-2xl mx-auto mb-10 drop-shadow-sm">
+                     <div className="w-24 h-1.5 bg-gradient-to-r from-[#0038A8] to-yellow-500 mx-auto rounded-full mb-8"></div>
+                    <p className="text-slate-900 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
                         Explore the departments and offices of the City Government of General Santos.
                         Find services, contact information, and officials.
                     </p>
+                </div>
+            </div>
 
-                    {/* Search Bar */}
-                    <div className="max-w-2xl mx-auto relative">
-                        <div className="relative group">
-                            <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                            <input
-                                type="text"
-                                placeholder="Search departments..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-12 pr-6 py-4 bg-white/95 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg shadow-black/20 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400 transition-all"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Filter Dropdown */}
-                    <div className="flex justify-center mt-6 relative">
-                        <div className="relative">
+            {/* Sticky Search & Filter Container */}
+            <div className="sticky top-[138px] md:top-[171px] z-40 pb-12 px-4 pointer-events-none">
+                <div className="max-w-2xl mx-auto pointer-events-auto">
+                    <div className="relative group bg-white/95 backdrop-blur-md rounded-xl shadow-lg shadow-black/20 border border-white/20 focus-within:ring-2 focus-within:ring-blue-400/50 focus-within:border-blue-400 transition-all flex items-center">
+                        <Search className="absolute left-5 text-gray-400 pointer-events-none" size={20} />
+                        <input
+                            type="text"
+                            placeholder="Search departments..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full pl-12 pr-4 py-4 bg-transparent text-gray-700 placeholder-gray-400 focus:outline-none min-w-0"
+                        />
+                        
+                        <div className="h-8 w-px bg-gray-200 mx-2 shrink-0"></div>
+                        
+                        <div className="relative shrink-0 pr-2">
                             <button
                                 onClick={() => setShowFilterDropdown(!showFilterDropdown)}
-                                className="flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-blue-50 rounded-xl text-sm font-semibold text-gray-700 border-2 border-blue-200 shadow-lg shadow-blue-500/10 transition-all hover:border-blue-400"
+                                className="flex items-center gap-2 px-3 sm:px-4 py-2 hover:bg-blue-50 rounded-lg text-sm font-semibold text-gray-700 transition-all whitespace-nowrap"
                             >
                                 <Filter size={16} className="text-blue-600" />
-                                <span>{filterCategories.find(c => c.id === selectedCategory)?.label}</span>
+                                <span className="hidden sm:inline">{filterCategories.find(c => c.id === selectedCategory)?.label}</span>
                                 <ChevronDown size={16} className={`text-blue-600 transition-transform ${showFilterDropdown ? 'rotate-180' : ''}`} />
                             </button>
 
                             {/* Dropdown Menu */}
                             {showFilterDropdown && (
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-xl shadow-xl shadow-black/15 border border-gray-100 py-2 min-w-[200px] z-50 animate-fade-in-up">
+                                <div className="absolute top-full right-0 mt-2 bg-white rounded-xl shadow-xl shadow-black/15 border border-gray-100 py-2 min-w-[200px] z-50 animate-fade-in-up">
                                     {filterCategories.map((category) => (
                                         <button
                                             key={category.id}
@@ -287,7 +246,7 @@ const Departments: React.FC = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-6 max-w-7xl -mt-6 relative z-10 mb-20">
+            <div className="container mx-auto px-6 max-w-7xl relative z-10 mb-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
                     {/* Special Card for Mayor's Office - Only show when no search is active and category matches */}
@@ -388,11 +347,11 @@ const Departments: React.FC = () => {
 
                     {filteredDepts.length === 0 && (
                         <div className="col-span-full py-20 text-center">
-                            <div className="inline-block p-4 bg-white/10 backdrop-blur-md rounded-full mb-4 text-white/50">
+                            <div className="inline-block p-4 bg-blue-50 rounded-full mb-4 text-blue-400 border border-blue-100">
                                 <Search size={32} />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">No departments found</h3>
-                            <p className="text-blue-100">Try adjusting your search terms.</p>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">No departments found</h3>
+                            <p className="text-gray-600">Try adjusting your search terms.</p>
                         </div>
                     )}
                 </div>
