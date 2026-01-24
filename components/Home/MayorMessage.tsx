@@ -58,24 +58,71 @@ const MayorMessage: React.FC = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 max-w-6xl mx-auto">
           
-          {/* Image Section - Cropped to Torso */}
+          {/* Image Section - Royal Golden Frame */}
           <div className="w-full md:w-1/3 flex justify-center md:justify-end relative group">
-             {/* Decorative glow behind image */}
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-yellow-400/20 blur-3xl rounded-full transform scale-75 group-hover:bg-yellow-400/30 transition-colors duration-500"></div>
-             
-             {/* Cropped Container */}
-             <div className="relative z-10 w-64 h-64 md:w-80 md:h-80 rounded-[2.5rem] overflow-hidden border-4 border-white/20 shadow-2xl bg-white">
-               <img 
-                decoding="async" 
-                src="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png" 
-                srcSet="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png 749w, https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora-200x288.png 200w"
-                sizes="(max-width: 749px) 100vw, 749px"
-                title="Mayor Lorelie G. Pacquiao" 
-                alt="Mayor Lorelie G. Pacquiao" 
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
-               />
+             {/* Main Royal Frame Container */}
+             <div className="relative">
+               
+               {/* Outer ornate frame - thick golden border with gradient */}
+               <div className="absolute -inset-4 bg-gradient-to-br from-yellow-600 via-yellow-400 to-yellow-600 rounded-lg shadow-lg">
+                 {/* Inner groove effect */}
+                 <div className="absolute inset-[3px] bg-gradient-to-br from-yellow-700 via-yellow-500 to-yellow-700 rounded-lg"></div>
+                 <div className="absolute inset-[6px] bg-gradient-to-br from-yellow-500 via-yellow-300 to-yellow-500 rounded-lg"></div>
+                 <div className="absolute inset-[9px] bg-gradient-to-br from-yellow-600 via-yellow-400 to-yellow-600 rounded-md"></div>
+               </div>
+               
+               {/* Corner ornaments - decorative flourishes */}
+               {/* Top-left ornament */}
+               <div className="absolute -top-6 -left-6 w-8 h-8 z-20">
+                 <div className="w-full h-full bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-600 rounded-full shadow-md"></div>
+                 <div className="absolute inset-1 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
+                 <div className="absolute inset-2 bg-yellow-300 rounded-full"></div>
+               </div>
+               
+               {/* Top-right ornament */}
+               <div className="absolute -top-6 -right-6 w-8 h-8 z-20">
+                 <div className="w-full h-full bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-600 rounded-full shadow-md"></div>
+                 <div className="absolute inset-1 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
+                 <div className="absolute inset-2 bg-yellow-300 rounded-full"></div>
+               </div>
+               
+               {/* Bottom-left ornament */}
+               <div className="absolute -bottom-6 -left-6 w-8 h-8 z-20">
+                 <div className="w-full h-full bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-600 rounded-full shadow-md"></div>
+                 <div className="absolute inset-1 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
+                 <div className="absolute inset-2 bg-yellow-300 rounded-full"></div>
+               </div>
+               
+               {/* Bottom-right ornament */}
+               <div className="absolute -bottom-6 -right-6 w-8 h-8 z-20">
+                 <div className="w-full h-full bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-600 rounded-full shadow-md"></div>
+                 <div className="absolute inset-1 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
+                 <div className="absolute inset-2 bg-yellow-300 rounded-full"></div>
+               </div>
+               
+               {/* Side accent bars */}
+               {/* Top center */}
+               <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-16 h-3 bg-gradient-to-r from-yellow-600 via-yellow-300 to-yellow-600 rounded-full z-10"></div>
+               {/* Bottom center */}
+               <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-16 h-3 bg-gradient-to-r from-yellow-600 via-yellow-300 to-yellow-600 rounded-full z-10"></div>
+               
+               {/* Inner mat/border before photo */}
+               <div className="absolute -inset-1 bg-gradient-to-br from-amber-900 via-amber-800 to-amber-900 rounded-md z-10"></div>
+               
+               {/* Photo Container */}
+               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded overflow-hidden shadow-inner bg-white z-10">
+                 <img 
+                  decoding="async" 
+                  src="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png" 
+                  srcSet="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png 749w, https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora-200x288.png 200w"
+                  sizes="(max-width: 749px) 100vw, 749px"
+                  title="Mayor Lorelie G. Pacquiao" 
+                  alt="Mayor Lorelie G. Pacquiao" 
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
+                 />
+               </div>
              </div>
           </div>
 
