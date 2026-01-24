@@ -4,25 +4,25 @@ import { MapPin } from 'lucide-react';
 const LocationMap: React.FC = () => {
   return (
     <section className="relative z-10 bg-white">
-      {/* Full Width Map - Using coordinates-only embed to hide default marker */}
-      <div className="w-full h-[450px] md:h-[500px] lg:h-[600px] grayscale hover:grayscale-0 transition-all duration-700 relative z-10">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3964.666993189886!2d125.1720392759173!3d6.115011993871465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1709650000000!5m2!1sen!2sph" 
-          width="100%" 
-          height="100%" 
-          style={{ border: 0 }} 
-          allowFullScreen 
-          loading="lazy" 
+      {/* Full Width Map - Fully interactive and colorful */}
+      <div className="w-full h-[450px] md:h-[500px] lg:h-[600px] relative z-10">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3964.666993189886!2d125.1720392759173!3d6.115011993871465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1709650000000!5m2!1sen!2sph"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           title="General Santos City Hall Map"
         ></iframe>
-        
-        {/* Animated Map Pin Overlay */}
+
+        {/* Fixed Map Pin Overlay - Non-interactive */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="relative flex flex-col items-center">
             {/* Pulsing shadow/glow effect on ground */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-3 bg-black/25 rounded-full blur-md animate-pulse"></div>
-            
+
             {/* Bouncing pin with integrated label */}
             <div className="animate-bounce">
               {/* Name Label - connected to pin */}
@@ -33,7 +33,7 @@ const LocationMap: React.FC = () => {
                 {/* Connector line from label to pin */}
                 <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-red-600"></div>
               </div>
-              
+
               {/* Pin marker */}
               <div className="relative flex justify-center">
                 {/* Pin circle */}

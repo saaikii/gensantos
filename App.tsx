@@ -41,8 +41,10 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <Navbar onNavigate={navigateTo} currentPage={currentPage === 'news-detail' ? 'home' : currentPage} />
-      
+      {currentPage !== 'gad-database' && (
+        <Navbar onNavigate={navigateTo} currentPage={currentPage === 'news-detail' ? 'home' : currentPage} />
+      )}
+
       <main>
         {currentPage === 'home' && (
           <>
@@ -55,13 +57,13 @@ const App: React.FC = () => {
             <LocationMap />
           </>
         )}
-        
+
         {currentPage === 'tourism' && (
           <React.Suspense fallback={<PageSkeleton />}>
             <Tourism />
           </React.Suspense>
         )}
-        
+
         {currentPage === 'departments' && (
           <React.Suspense fallback={<DepartmentsSkeleton />}>
             <Departments />
@@ -76,7 +78,7 @@ const App: React.FC = () => {
 
         {currentPage === 'gad-database' && (
           <React.Suspense fallback={<PageSkeleton />}>
-            <GADDatabase />
+            <GADDatabase onBack={() => navigateTo('home')} />
           </React.Suspense>
         )}
 
@@ -88,15 +90,15 @@ const App: React.FC = () => {
 
         {currentPage === 'news-detail' && selectedNewsItem && (
           <React.Suspense fallback={<PageSkeleton />}>
-            <NewsDetail 
-              newsItem={selectedNewsItem} 
-              onBack={() => navigateTo('home')} 
+            <NewsDetail
+              newsItem={selectedNewsItem}
+              onBack={() => navigateTo('home')}
             />
           </React.Suspense>
         )}
       </main>
 
-      <Footer />
+      {currentPage !== 'gad-database' && <Footer />}
       <CityAssistant />
     </div>
   );

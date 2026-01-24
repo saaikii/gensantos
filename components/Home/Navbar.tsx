@@ -36,12 +36,17 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
     window.scrollTo(0, 0);
   };
 
-  const NavItem = ({ label, page, isExternal = false }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter', isExternal?: boolean }) => {
+  const NavItem = ({ label, page, isExternal = false, externalUrl }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter', isExternal?: boolean, externalUrl?: string }) => {
     const baseClasses = "hover:text-blue-700 transition-colors px-2 lg:px-4 py-2 block md:inline-block";
 
-    if (isExternal) {
+    if (isExternal || externalUrl) {
       return (
-        <a href="#" className={baseClasses}>
+        <a
+          href={externalUrl || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={baseClasses}
+        >
           {label}
         </a>
       )
@@ -50,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
       <a
         href="#"
         onClick={(e) => page && handleNavClick(page, e)}
-        className={`${baseClasses} ${currentPage === page ? 'text-blue-700 font-black' : ''}`}
+        className={`${baseClasses} ${currentPage === page ? 'text-blue-700 font-black' : ''} `}
       >
         {label}
       </a>
@@ -136,17 +141,17 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
 
               {/* Sticky Search Bar - Slides in next to Tourism */}
               <div className={`
-                  hidden md:flex items-center overflow-hidden transition-all duration-500 ease-in-out
+                  hidden md:flex items - center overflow - hidden transition - all duration - 500 ease -in -out
                   ${showSearch ? 'w-56 opacity-100 ml-4' : 'w-0 opacity-0 ml-0'}
-              `}>
-                  <div className="relative group w-full">
-                    <input 
-                      type="text" 
-                      placeholder="Search..." 
-                      className="bg-gray-100 border border-gray-200 rounded-full pl-9 pr-4 py-1.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:bg-white transition-all shadow-sm"
-                    />
-                    <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500" />
-                  </div>
+`}>
+                <div className="relative group w-full">
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className="bg-gray-100 border border-gray-200 rounded-full pl-9 pr-4 py-1.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:bg-white transition-all shadow-sm"
+                  />
+                  <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500" />
+                </div>
               </div>
 
             </div>
@@ -156,19 +161,19 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
         {/* Mobile Dropdown */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-xl">
-             {/* Mobile Sticky Search */}
-             {showSearch && (
-                <div className="p-4 border-b border-gray-100 bg-gray-50 animate-fade-in-up">
-                   <div className="relative">
-                      <input 
-                        type="text" 
-                        placeholder="Search services..." 
-                        className="w-full bg-white border border-gray-200 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
-                      />
-                      <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                   </div>
+            {/* Mobile Sticky Search */}
+            {showSearch && (
+              <div className="p-4 border-b border-gray-100 bg-gray-50 animate-fade-in-up">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search services..."
+                    className="w-full bg-white border border-gray-200 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                  />
+                  <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                 </div>
-              )}
+              </div>
+            )}
             <div className="flex flex-col p-4 space-y-1 divide-y divide-gray-100">
               <NavItem label="HOME" page="home" />
               <NavItem label="DEPARTMENTS" page="departments" />
