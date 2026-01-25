@@ -1,7 +1,7 @@
 import React from 'react';
 import { Database, FileText, BarChart3, Wrench, Users, BookOpen, ArrowLeft } from 'lucide-react';
-import Navbar from '../Home/Navbar';
-import Footer from '../Home/Footer';
+import Navbar from '../Layout/Navbar';
+import Footer from '../Layout/Footer';
 
 interface GADDatabaseProps {
     onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter') => void;
