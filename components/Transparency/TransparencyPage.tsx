@@ -67,8 +67,8 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
     <div className="min-h-screen bg-slate-50 font-sans pt-20">
       
       {/* Background Watermark - Fixed and Enlarged (Simulated) */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
-          <div className="w-[800px] h-[800px] opacity-[0.15]">
+      <div className="fixed top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
+          <div className="w-[600px] h-[600px] opacity-[0.15]">
                {/* Using the LGU Logo as watermark since we might not have the seal image handy, or use same as CC if available */}
               <img 
                   src="/gensan_seal_large.jpg" 

@@ -169,8 +169,8 @@ const Departments: React.FC = () => {
     return (
         <div className="min-h-screen font-sans pt-36 pb-20 bg-gray-50 relative">
             {/* Background Watermark - Fixed */}
-            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
-                <div className="w-[800px] h-[800px] opacity-[0.15]">
+            <div className="fixed top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
+                <div className="w-[600px] h-[600px] opacity-[0.15]">
                     <img 
                         src="/gensan_seal_large.jpg" 
                         alt="Gensan Seal" 
