@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
-import Navbar from './components/Home/Navbar';
+import Navbar from './components/Layout/Navbar';
 import Hero from './components/Home/Hero';
 import FeaturedBanners from './components/Home/FeaturedBanners';
-import News from './components/Home/News';
+import News from './components/News/News';
 import MayorMessage from './components/Home/MayorMessage';
 import CitizensGuides from './components/Home/CitizensGuides';
 import Highlights from './components/Home/Highlights';
 import LocationMap from './components/Home/LocationMap';
-import Footer from './components/Home/Footer';
-import CityAssistant from './components/Home/CityAssistant';
+import Footer from './components/Layout/Footer';
+import CityAssistant from './components/Layout/CityAssistant';
 
 import PageSkeleton from './components/Shared/PageSkeleton';
 import DepartmentsSkeleton from './components/Department/DepartmentsSkeleton';
-import CitizensCharterSkeleton from './components/Home/CitizensCharterSkeleton';
+import CitizensCharterSkeleton from './components/CitizensCharter/CitizensCharterSkeleton';
 
 // Lazy load heavy page components for performance and loading states
 const Departments = React.lazy(() => import('./components/Department/Departments'));
-const CitizensCharter = React.lazy(() => import('./components/Home/CitizensCharter'));
+const CitizensCharter = React.lazy(() => import('./components/CitizensCharter/CitizensCharter'));
 const GADDatabase = React.lazy(() => import('./components/GadDatabase/GADDatabase'));
 const Procurement = React.lazy(() => import('./components/Procurement/Procurement'));
-const Tourism = React.lazy(() => import('./components/Home/Tourism'));
-const NewsDetail = React.lazy(() => import('./components/Home/NewsDetail'));
-import GlobalSearchOverlay from './components/Home/GlobalSearchOverlay';
+const Tourism = React.lazy(() => import('./components/Tourism/Tourism'));
+const NewsDetail = React.lazy(() => import('./components/News/NewsDetail'));
+import GlobalSearchOverlay from './components/Layout/GlobalSearchOverlay';
 
 import { NewsItem } from './types';
 import { SearchResult } from './data/siteData';
