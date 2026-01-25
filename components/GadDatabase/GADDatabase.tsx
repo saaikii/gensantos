@@ -1,10 +1,11 @@
 import React from 'react';
 import { Database, FileText, BarChart3, Wrench, Users, BookOpen, ArrowLeft } from 'lucide-react';
 import Navbar from '../Layout/Navbar';
+import CPMONavbar from './CPMONavbar';
 import Footer from '../Layout/Footer';
 
 interface GADDatabaseProps {
-    onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter') => void;
+    onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home') => void;
 }
 
 const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
@@ -115,15 +116,14 @@ const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
 
     return (
         <div className="min-h-screen bg-gray-50 font-sans">
-            {/* Standard Site Navbar */}
-            <Navbar 
+            {/* Custom CPMO Navbar */}
+            <CPMONavbar 
                 onNavigate={onNavigate} 
-                currentPage="gad-database"
-                enableStickySearch={false} 
+                currentPage="gad-database" 
             />
             
             {/* Spacer for Fixed Navbar */}
-            <div className="h-[73px] md:h-[135px]"></div>
+            <div className="h-[135px] md:h-[135px]"></div>
 
             {/* Main Content Area */}
             <div className="bg-gradient-to-br from-gray-50 via-blue-50 to-yellow-50/20 min-h-[calc(100vh-140px)] py-12 md:py-20 relative overflow-hidden">
@@ -144,7 +144,7 @@ const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="container mx-auto px-4 md:px-6 relative z-10">
-
+                    
                     {/* Hero Section */}
                     <div className="text-center mb-16">
                         {/* Text Content */}

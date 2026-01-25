@@ -21,18 +21,19 @@ const GADDatabase = React.lazy(() => import('./components/GadDatabase/GADDatabas
 const Procurement = React.lazy(() => import('./components/Procurement/Procurement'));
 const Tourism = React.lazy(() => import('./components/Tourism/Tourism'));
 const NewsDetail = React.lazy(() => import('./components/News/NewsDetail'));
+const CPMOHome = React.lazy(() => import('./components/GadDatabase/CPMOHome'));
 import GlobalSearchOverlay from './components/Layout/GlobalSearchOverlay';
 
 import { NewsItem } from './types';
 import { SearchResult } from './data/siteData';
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'news-detail'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home' | 'news-detail'>('home');
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [globalSearchQuery, setGlobalSearchQuery] = useState('');
 
-  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter') => {
+  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home') => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
@@ -107,6 +108,12 @@ const App: React.FC = () => {
         {currentPage === 'citizens-charter' && (
           <React.Suspense fallback={<CitizensCharterSkeleton />}>
             <CitizensCharter />
+          </React.Suspense>
+        )}
+
+        {currentPage === 'cpmo-home' && (
+          <React.Suspense fallback={<PageSkeleton />}>
+            <CPMOHome onNavigate={navigateTo} />
           </React.Suspense>
         )}
 
