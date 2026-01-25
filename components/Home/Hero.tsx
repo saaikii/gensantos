@@ -183,7 +183,7 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
 
   return (
     <>
-    <section className="relative z-40 h-[85vh] min-h-[600px] flex items-center bg-slate-900 pt-36">
+    <section className="relative z-40 h-[100vh] min-h-[800px] flex items-center bg-slate-900 pt-36">
       {/* Background Slideshow */}
       <div className="absolute inset-0 z-0">
         {slides.map((s, index) => (
@@ -212,7 +212,7 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
 
       {/* Slide Content */}
       <div className={`relative z-10 container mx-auto px-6 transition-all duration-500 ${isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
-        <div className="max-w-2xl text-white">
+        <div className="max-w-4xl text-white">
           
           {/* Slide 1: Hero with Typewriter */}
           {currentSlide === 0 && (
@@ -347,7 +347,7 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
     </section>
 
     {/* Sticky Search Bar Container */}
-    <div className="sticky top-[150px] md:top-[171px] z-[40] -mt-8 px-6 transition-all duration-300 pointer-events-none">
+    <div className="sticky top-[150px] md:top-[171px] z-[40] mt-12 px-6 transition-all duration-300 pointer-events-none">
       <div className="container mx-auto">
         <div 
           className="mx-auto bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-2 flex items-center max-w-3xl border border-white/40 ring-4 ring-black/5 pointer-events-auto"

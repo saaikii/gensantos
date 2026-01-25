@@ -64,69 +64,22 @@ const MayorMessage: React.FC = () => {
 
           {/* Image Section - Royal Golden Frame */}
           <div className="w-full md:w-1/3 flex justify-center md:justify-end relative group">
-            {/* Main Royal Frame Container */}
-            <div className="relative">
+            {/* Photo Section - No Background Cutout */}
+            <div className="relative w-72 h-72 md:w-[400px] md:h-[400px] flex items-end justify-center z-10 transition-all duration-700 hover:scale-[1.05]">
+              {/* Subtle Glow behind the mayor */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-blue-400/30 blur-[100px] rounded-full -z-10 animate-pulse"></div>
 
-              {/* Outer ornate frame - thick golden border with gradient */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-yellow-600 via-yellow-400 to-yellow-600 rounded-lg shadow-lg">
-                {/* Inner groove effect */}
-                <div className="absolute inset-[3px] bg-gradient-to-br from-yellow-700 via-yellow-500 to-yellow-700 rounded-lg"></div>
-                <div className="absolute inset-[6px] bg-gradient-to-br from-yellow-500 via-yellow-300 to-yellow-500 rounded-lg"></div>
-                <div className="absolute inset-[9px] bg-gradient-to-br from-yellow-600 via-yellow-400 to-yellow-600 rounded-md"></div>
-              </div>
-
-              {/* Corner ornaments - decorative flourishes */}
-              {/* Top-left ornament */}
-              <div className="absolute -top-6 -left-6 w-8 h-8 z-20">
-                <div className="w-full h-full bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-600 rounded-full shadow-md"></div>
-                <div className="absolute inset-1 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
-                <div className="absolute inset-2 bg-yellow-300 rounded-full"></div>
-              </div>
-
-              {/* Top-right ornament */}
-              <div className="absolute -top-6 -right-6 w-8 h-8 z-20">
-                <div className="w-full h-full bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-600 rounded-full shadow-md"></div>
-                <div className="absolute inset-1 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
-                <div className="absolute inset-2 bg-yellow-300 rounded-full"></div>
-              </div>
-
-              {/* Bottom-left ornament */}
-              <div className="absolute -bottom-6 -left-6 w-8 h-8 z-20">
-                <div className="w-full h-full bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-600 rounded-full shadow-md"></div>
-                <div className="absolute inset-1 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
-                <div className="absolute inset-2 bg-yellow-300 rounded-full"></div>
-              </div>
-
-              {/* Bottom-right ornament */}
-              <div className="absolute -bottom-6 -right-6 w-8 h-8 z-20">
-                <div className="w-full h-full bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-600 rounded-full shadow-md"></div>
-                <div className="absolute inset-1 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
-                <div className="absolute inset-2 bg-yellow-300 rounded-full"></div>
-              </div>
-
-              {/* Side accent bars */}
-              {/* Top center */}
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-16 h-3 bg-gradient-to-r from-yellow-600 via-yellow-300 to-yellow-600 rounded-full z-10"></div>
-              {/* Bottom center */}
-              <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-16 h-3 bg-gradient-to-r from-yellow-600 via-yellow-300 to-yellow-600 rounded-full z-10"></div>
-
-              {/* Inner mat/border before photo */}
-              <div className="absolute -inset-1 bg-gradient-to-br from-amber-900 via-amber-800 to-amber-900 rounded-md z-10"></div>
-
-              {/* Photo Container */}
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded overflow-hidden shadow-inner bg-white z-10">
-                <img
-                  decoding="async"
-                  src="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png"
-                  srcSet="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png 749w, https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora-200x288.png 200w"
-                  sizes="(max-width: 749px) 100vw, 749px"
-                  title="Mayor Lorelie G. Pacquiao"
-                  alt="Mayor Lorelie G. Pacquiao"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
-                />
-              </div>
+              <img
+                decoding="async"
+                src="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png"
+                srcSet="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png 749w, https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora-200x288.png 200w"
+                sizes="(max-width: 749px) 100vw, 749px"
+                title="Mayor Lorelie G. Pacquiao"
+                alt="Mayor Lorelie G. Pacquiao"
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                className="max-h-full w-auto object-contain drop-shadow-[0_35px_60px_rgba(0,0,0,0.6)]"
+              />
             </div>
           </div>
 
