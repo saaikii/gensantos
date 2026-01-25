@@ -74,7 +74,7 @@ const TransparencyBoard: React.FC<TransparencyBoardProps> = ({ onNavigate }) => 
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 font-serif">
               Bids, Awards & <span className="text-blue-600 italic">Issuances</span>
             </h2>
-            <p className="text-lg text-slate-600 leading-relaxed">
+            <p className="text-lg text-black leading-relaxed">
               Access official city documents, bids and awards, and city memoranda directly. We believe in open and transparent governance.
             </p>
           </div>

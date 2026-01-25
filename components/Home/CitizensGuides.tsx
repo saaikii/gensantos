@@ -24,7 +24,7 @@ const CitizensGuides: React.FC = () => {
             Citizen's Guides
           </h2>
           <div className="w-24 h-1.5 bg-gradient-to-r from-[#0038A8] to-yellow-500 mx-auto rounded-full mb-8 animate-fade-in-up"></div>
-          <p className="text-slate-900 text-lg leading-relaxed animate-fade-in-up">
+          <p className="text-black text-lg leading-relaxed animate-fade-in-up">
             Comprehensive guides to help you navigate government services. Detailed steps, requirements, and procedures for a hassle-free experience.
           </p>
         </div>
