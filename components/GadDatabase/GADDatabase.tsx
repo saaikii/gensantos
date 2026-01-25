@@ -126,7 +126,7 @@ const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
             <div className="h-[135px] md:h-[135px]"></div>
 
             {/* Main Content Area */}
-            <div className="bg-gradient-to-br from-gray-50 via-blue-50 to-yellow-50/20 min-h-[calc(100vh-140px)] py-12 md:py-20 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-gray-50 via-purple-50 to-yellow-50/20 min-h-[calc(100vh-140px)] py-12 md:py-20 relative overflow-hidden">
                 {/* Decorative background elements */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
@@ -149,13 +149,13 @@ const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
                     <div className="text-center mb-16">
                         {/* Text Content */}
                         <div className="space-y-4">
-                            <span className="inline-block py-1 px-4 rounded-full bg-blue-50 text-[#0038A8] text-xs font-bold tracking-widest uppercase mb-2 border border-blue-200 shadow-sm">
+                            <span className="inline-block py-1 px-4 rounded-full bg-purple-50 text-[#4c1d95] text-xs font-bold tracking-widest uppercase mb-2 border border-purple-200 shadow-sm">
                                 Gender and Development Focal Office
                             </span>
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0038A8] tracking-tight uppercase drop-shadow-sm font-serif">
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#4c1d95] tracking-tight uppercase drop-shadow-sm font-serif">
                                 GAD Database
                             </h1>
-                            <div className="w-24 h-1.5 bg-gradient-to-r from-[#0038A8] to-yellow-500 mx-auto rounded-full"></div>
+                            <div className="w-24 h-1.5 bg-gradient-to-r from-[#4c1d95] to-yellow-500 mx-auto rounded-full"></div>
                             <p className="text-lg md:text-xl text-slate-900 max-w-2xl mx-auto leading-relaxed pt-2">
                                 Centralized repository for Gender and Development data, reports, and resources of General Santos City.
                             </p>

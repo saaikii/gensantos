@@ -47,7 +47,7 @@ const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
   return (
     <div className="fixed w-full z-50 flex flex-col shadow-lg font-sans">
       {/* Top Bar - Official Blue */}
-      <div className="bg-[#0038A8] text-white py-3 md:py-4 relative overflow-hidden">
+      <div className="bg-[#4c1d95] text-white py-3 md:py-4 relative overflow-hidden">
         {/* ... (keep existing content) */}
         {/* Background texture optional */}
         <div className="absolute inset-0 bg-blue-900/10 pointer-events-none"></div>
