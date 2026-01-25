@@ -32,6 +32,15 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
     }
   };
 
+  const getSkeletonStyles = (category: string) => {
+    switch (category) {
+      case 'Announcement': return { bg: 'bg-green-50', icon: <Megaphone size={80} className="text-green-900" /> };
+      case 'News': return { bg: 'bg-blue-50', icon: <Newspaper size={80} className="text-blue-900" /> };
+      case 'Activities': return { bg: 'bg-red-50', icon: <PartyPopper size={80} className="text-red-900" /> };
+      default: return { bg: 'bg-blue-50', icon: <Newspaper size={80} className="text-blue-900" /> };
+    }
+  };
+
   return (
     <section className="pt-8 pb-24 bg-gray-50">
       <div className="container mx-auto px-6">
@@ -95,13 +104,25 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
               onClick={() => onReadMore?.(news)}
               className="group cursor-pointer flex flex-col h-full bg-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-1"
             >
-              <div className="relative overflow-hidden aspect-[4/3]">
-                <img
-                  src={news.image}
-                  alt={news.name}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className={`absolute top-4 left-4 ${getTabColor(news.category)} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-md`}>
+              <div className={`relative overflow-hidden aspect-[4/3] ${getSkeletonStyles(news.category).bg} transition-colors duration-300`}>
+                {/* Faux Text Pattern */}
+                <div className="absolute inset-8 space-y-3 opacity-15 select-none pointer-events-none">
+                  <div className="w-1/3 h-3 bg-slate-900 rounded-full mb-6"></div>
+                  <div className="w-full h-2.5 bg-slate-400 rounded-full"></div>
+                  <div className="w-5/6 h-2.5 bg-slate-400 rounded-full"></div>
+                  <div className="w-4/5 h-2.5 bg-slate-400 rounded-full"></div>
+                  <div className="w-full h-2.5 bg-slate-400 rounded-full mt-6"></div>
+                  <div className="w-11/12 h-2.5 bg-slate-400 rounded-full"></div>
+                  <div className="w-full h-2.5 bg-slate-400 rounded-full mt-6"></div>
+                  <div className="w-3/4 h-2.5 bg-slate-400 rounded-full"></div>
+                </div>
+
+                {/* Center Icon/Watermark */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-all duration-500 transform group-hover:scale-110 group-hover:-rotate-6">
+                  {getSkeletonStyles(news.category).icon}
+                </div>
+
+                <div className={`absolute top-4 left-4 ${getTabColor(news.category)} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-md z-10`}>
                   {news.category}
                 </div>
               </div>
