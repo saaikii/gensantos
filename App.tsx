@@ -6,6 +6,7 @@ import News from './components/News/News';
 import MayorMessage from './components/Home/MayorMessage';
 import CitizensGuides from './components/Home/CitizensGuides';
 import Highlights from './components/Home/Highlights';
+import TransparencyBoard from './components/Home/TransparencyBoard';
 import LocationMap from './components/Home/LocationMap';
 import Footer from './components/Layout/Footer';
 import CityAssistant from './components/Layout/CityAssistant';
@@ -19,21 +20,22 @@ const Departments = React.lazy(() => import('./components/Department/Departments
 const CitizensCharter = React.lazy(() => import('./components/CitizensCharter/CitizensCharter'));
 const GADDatabase = React.lazy(() => import('./components/GadDatabase/GADDatabase'));
 const Procurement = React.lazy(() => import('./components/Procurement/Procurement'));
-const Tourism = React.lazy(() => import('./components/Tourism/Tourism'));
+// const Tourism = React.lazy(() => import('./components/Tourism/Tourism')); // Replaced by Transparency
 const NewsDetail = React.lazy(() => import('./components/News/NewsDetail'));
 const CPMOHome = React.lazy(() => import('./components/GadDatabase/CPMOHome'));
+const TransparencyPage = React.lazy(() => import('./components/Transparency/TransparencyPage'));
 import GlobalSearchOverlay from './components/Layout/GlobalSearchOverlay';
 
 import { NewsItem } from './types';
 import { SearchResult } from './data/siteData';
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home' | 'news-detail'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home' | 'news-detail' | 'transparency'>('home');
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [globalSearchQuery, setGlobalSearchQuery] = useState('');
 
-  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home') => {
+  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home' | 'transparency') => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
@@ -88,16 +90,13 @@ const App: React.FC = () => {
             </div>
             <MayorMessage />
             <CitizensGuides />
+            <TransparencyBoard onNavigate={navigateTo} />
             <Highlights />
             <LocationMap />
           </>
         )}
 
-        {currentPage === 'tourism' && (
-          <React.Suspense fallback={<PageSkeleton />}>
-            <Tourism />
-          </React.Suspense>
-        )}
+
 
         {currentPage === 'departments' && (
           <React.Suspense fallback={<DepartmentsSkeleton />}>
@@ -135,6 +134,11 @@ const App: React.FC = () => {
               newsItem={selectedNewsItem}
               onBack={() => navigateTo('home')}
             />
+          </React.Suspense>
+        )}
+        {currentPage === 'transparency' && (
+          <React.Suspense fallback={<PageSkeleton />}>
+            <TransparencyPage onNavigate={navigateTo} />
           </React.Suspense>
         )}
       </main>

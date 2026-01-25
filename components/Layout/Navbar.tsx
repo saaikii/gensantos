@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Search } from 'lucide-react';
 
 interface NavbarProps {
-  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter') => void;
-  currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter';
+  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'transparency') => void;
+  currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'transparency';
   enableStickySearch?: boolean;
 }
 
@@ -30,14 +30,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
     return () => window.removeEventListener('scroll', handleScroll);
   }, [currentPage, enableStickySearch]);
 
-  const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter', e: React.MouseEvent) => {
+  const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'transparency', e: React.MouseEvent) => {
     e.preventDefault();
     onNavigate(page);
     setMobileMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
-  const NavItem = ({ label, page, isExternal = false, externalUrl }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter', isExternal?: boolean, externalUrl?: string }) => {
+  const NavItem = ({ label, page, isExternal = false, externalUrl }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'transparency', isExternal?: boolean, externalUrl?: string }) => {
     const baseClasses = "hover:text-blue-700 transition-colors px-1 lg:px-3 py-2 block md:inline-block";
 
     if (isExternal || externalUrl) {
@@ -138,7 +138,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
               <Separator />
               <NavItem label="SCHEDULE OF MARKET VALUES (SMV)" isExternal />
               <Separator />
-              <NavItem label="TOURISM" page="tourism" />
+              <NavItem label="TRANSPARENCY" page="transparency" />
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
               <NavItem label="LGU EO" isExternal />
               <NavItem label="PROCUREMENT" page="procurement" />
               <NavItem label="SCHEDULE OF MARKET VALUES (SMV)" isExternal />
-              <NavItem label="TOURISM" page="tourism" />
+              <NavItem label="TRANSPARENCY" page="transparency" />
             </div>
           </div>
         )}
