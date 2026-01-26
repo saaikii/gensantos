@@ -7,9 +7,7 @@ const MayorMessage: React.FC = () => {
   const [displayedText, setDisplayedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
   const [isTyping, setIsTyping] = useState(true);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const indexRef = useRef(0);
-  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     // Blinking cursor effect
@@ -45,38 +43,28 @@ const MayorMessage: React.FC = () => {
     };
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!sectionRef.current) return;
-    const { clientX, clientY } = e;
-    const { left, top, width, height } = sectionRef.current.getBoundingClientRect();
-    
-    // Calculate mouse position relative to center of section
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
-    
-    // Sensitivity factor (higher = less movement)
-    const factor = 40;
-    
-    const x = (clientX - centerX) / factor;
-    const y = (clientY - centerY) / factor;
-
-    setMousePos({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    // Reset position smoothly when mouse leaves
-    setMousePos({ x: 0, y: 0 });
-  };
-
   return (
     <section 
-      ref={sectionRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="py-20 bg-gradient-to-r from-blue-900 to-blue-800 text-white relative overflow-hidden perspective-1000"
+      className="pt-20 pb-0 bg-gradient-to-r from-blue-900 to-blue-800 text-white relative overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+      {/* Texture: Noise Grain + Geometric Pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-50 mix-blend-overlay">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <filter id="noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+            <feColorMatrix type="saturate" values="0" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noise)" opacity="0.3" />
+          <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.5" opacity="0.2" />
+            <circle cx="0" cy="0" r="1.5" fill="white" opacity="0.4" />
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+          {/* Subtle large sweeping arcs for depth */}
+          <circle cx="10%" cy="10%" r="40%" fill="none" stroke="white" strokeWidth="1" opacity="0.1" />
+          <circle cx="90%" cy="90%" r="50%" fill="none" stroke="white" strokeWidth="1" opacity="0.08" />
+        </svg>
+      </div>
 
       {/* Ornate Stitched/Sewed Outline */}
       <div className="absolute inset-4 border-2 border-dashed border-white/10 rounded-[2rem] pointer-events-none z-0"></div>
@@ -85,44 +73,38 @@ const MayorMessage: React.FC = () => {
       {/* Corner Decorative Stitches */}
       <div className="absolute top-8 left-8 w-12 h-12 border-t-2 border-l-2 border-dashed border-yellow-400/30 rounded-tl-xl pointer-events-none z-0"></div>
       <div className="absolute top-8 right-8 w-12 h-12 border-t-2 border-r-2 border-dashed border-yellow-400/30 rounded-tr-xl pointer-events-none z-0"></div>
-      <div className="absolute bottom-8 left-8 w-12 h-12 border-b-2 border-l-2 border-dashed border-yellow-400/30 rounded-bl-xl pointer-events-none z-0"></div>
-      <div className="absolute bottom-8 right-8 w-12 h-12 border-b-2 border-r-2 border-dashed border-yellow-400/30 rounded-br-xl pointer-events-none z-0"></div>
+      <div className="absolute bottom-4 left-8 w-12 h-12 border-b-2 border-l-2 border-dashed border-yellow-400/30 rounded-bl-xl pointer-events-none z-0"></div>
+      <div className="absolute bottom-4 right-8 w-12 h-12 border-b-2 border-r-2 border-dashed border-yellow-400/30 rounded-br-xl pointer-events-none z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row items-end gap-10 md:gap-16 max-w-6xl mx-auto">
 
-          {/* Image Section - Royal Golden Frame with Parallax */}
-          <div className="w-full md:w-1/3 flex justify-center md:justify-end relative group perspective-1000">
-            {/* Photo Section - Animated Container */}
+          {/* Image Section - Standing at the bottom */}
+          <div className="w-full md:w-2/5 flex justify-center md:justify-end relative group">
+            {/* Photo Section - Static Container */}
             <div 
-              className="relative w-72 h-72 md:w-[400px] md:h-[400px] flex items-end justify-center z-10 transition-transform duration-100 ease-out"
-              style={{
-                transform: `rotateY(${mousePos.x}deg) rotateX(${-mousePos.y}deg) translateZ(20px)`
-              }}
+              className="relative w-full h-[400px] md:h-[550px] flex items-end justify-center z-10"
             >
-              {/* Subtle Glow behind the mayor - Simple restore */}
+              {/* Subtle Glow behind the mayor */}
               <div 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-blue-400/20 blur-[80px] rounded-full -z-10 transition-transform duration-100"
-                style={{ transform: `translate(-50%, -50%) translateX(${-mousePos.x * 2}px) translateY(${-mousePos.y * 2}px)` }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-blue-400/20 blur-[80px] rounded-full -z-10"
               ></div>
 
               <img
                 decoding="async"
                 src="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png"
-                srcSet="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png 749w, https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora-200x288.png 200w"
-                sizes="(max-width: 749px) 100vw, 749px"
-                title="Mayor Lorelie G. Pacquiao"
                 alt="Mayor Lorelie G. Pacquiao"
+                title="Mayor Lorelie G. Pacquiao"
                 loading="lazy"
                 referrerPolicy="no-referrer"
-                className="max-h-full w-auto object-contain drop-shadow-[0_35px_60px_rgba(0,0,0,0.6)]"
+                className="max-h-full w-auto object-contain drop-shadow-[20px_-10px_50px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           </div>
 
           {/* Text Content */}
           <div 
-            className="w-full md:w-2/3 text-center md:text-left"
+            className="w-full md:w-3/5 text-center md:text-left pb-20"
           >
             <div className="mb-6 text-yellow-400 flex justify-center md:justify-start">
               <Quote size={48} className="rotate-180" />

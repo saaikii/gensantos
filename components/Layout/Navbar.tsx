@@ -11,6 +11,41 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatDateTime = (date: Date) => {
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    const days = [
+      "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    ];
+    const weekday = days[date.getDay()];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    let hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const strHours = String(hours).padStart(2, '0');
+
+    return `${weekday}, ${month} ${day}, ${year} ${strHours}:${minutes}:${seconds} ${ampm}`;
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       // Show search bar when scrolled past 500px AND sticky search is enabled
@@ -83,25 +118,34 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative z-10">
           {/* Left Side: Seal + Text */}
           <div className="flex items-center gap-4 md:gap-6">
-            <img
-              fetchPriority="high"
-              decoding="async"
-              width="225"
-              height="225"
-              src="https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo.png"
-              srcSet="https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo.png 225w, https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo-150x150.png 150w, https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo-200x200.png 200w, https://gensantos.gov.ph/wp-content/uploads/2024/01/elementor/thumbs/cropped-lgulogo-qk2rlk8bw3t0uothsalp0o8i2z5s594wwq4q13rqaw.png 100w, https://gensantos.gov.ph/wp-content/uploads/2024/01/elementor/thumbs/cropped-lgulogo-qk2rlk8bl53wy6s26kdwhniwtn3vhbbzfrzfhr5fam.png 75w"
-              sizes="(max-width: 225px) 100vw, 225px"
-              referrerPolicy="no-referrer"
-              alt="GenSan Seal"
-              className="w-14 h-14 md:w-20 md:h-20 object-contain drop-shadow-md filter brightness-110"
-            />
+            <a
+              href="#"
+              onClick={(e) => handleNavClick('home', e)}
+              className="cursor-pointer transition-transform hover:scale-110 active:scale-95 duration-200"
+            >
+              <img
+                fetchPriority="high"
+                decoding="async"
+                width="225"
+                height="225"
+                src="https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo.png"
+                srcSet="https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo.png 225w, https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo-150x150.png 150w, https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo-200x200.png 200w, https://gensantos.gov.ph/wp-content/uploads/2024/01/elementor/thumbs/cropped-lgulogo-qk2rlk8bw3t0uothsalp0o8i2z5s594wwq4q13rqaw.png 100w, https://gensantos.gov.ph/wp-content/uploads/2024/01/elementor/thumbs/cropped-lgulogo-qk2rlk8bl53wy6s26kdwhniwtn3vhbbzfrzfhr5fam.png 75w"
+                sizes="(max-width: 225px) 100vw, 225px"
+                referrerPolicy="no-referrer"
+                alt="GenSan Seal"
+                className="w-14 h-14 md:w-20 md:h-20 object-contain drop-shadow-md filter brightness-110"
+              />
+            </a>
             <h1 className="text-base md:text-2xl leading-tight tracking-wide drop-shadow-md max-w-[220px] md:max-w-none text-white" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600, fontStyle: 'italic' }}>
               Official Website of the City Government of General Santos
             </h1>
           </div>
 
-          {/* Right Side: Slogan/Logo (Hidden on small screens) */}
-          <div className="hidden lg:flex flex-col items-end justify-center">
+          {/* Right Side: Slogan/Logo + Clock (Hidden on small screens) */}
+          <div className="hidden lg:flex items-center gap-6">
+            <div className="text-[11px] md:text-[13px] font-mono opacity-90 tracking-wider text-right">
+              {formatDateTime(currentTime)}
+            </div>
             <img
               decoding="async"
               width="479"
