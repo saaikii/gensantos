@@ -3,7 +3,7 @@ import { Calculator, Home, ArrowRight } from 'lucide-react';
 
 const CitizensGuides: React.FC = () => {
   return (
-    <section className="py-24 bg-blue-50 relative overflow-hidden">
+    <section className="py-24 bg-white relative overflow-hidden">
       {/* Background Seal Watermark */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-[0.15] pointer-events-none select-none">
         <img
