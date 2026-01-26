@@ -1,13 +1,22 @@
 import React from 'react';
 import CPMONavbar from './CPMONavbar';
 
-const GADDatabaseSkeleton: React.FC = () => {
-    return (
-        <div className="min-h-screen bg-gray-50 font-sans animate-pulse">
-             {/* Navbar Placeholder */}
-             <div className="h-[73px] md:h-[135px] bg-white border-b border-gray-200"></div>
+interface GADDatabaseSkeletonProps {
+    onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home') => void;
+}
 
-             <div className="min-h-[calc(100vh-140px)] py-12 md:py-20 relative overflow-hidden">
+const GADDatabaseSkeleton: React.FC<GADDatabaseSkeletonProps> = ({ onNavigate }) => {
+    return (
+        <div className="min-h-screen bg-gray-50 font-sans">
+             {/* Actual Navbar - Not Skeleton */}
+             <div className="relative z-50 pointer-events-none">
+                <CPMONavbar onNavigate={onNavigate} currentPage="gad-database" />
+             </div>
+             
+             {/* Spacer for Fixed Navbar */}
+             <div className="h-[73px] md:h-[135px]"></div>
+
+             <div className="min-h-[calc(100vh-140px)] py-12 md:py-20 relative overflow-hidden animate-pulse">
                 <div className="container mx-auto px-4 md:px-6 relative z-10">
                     {/* Hero Section Skeleton */}
                     <div className="text-center mb-16 space-y-4">

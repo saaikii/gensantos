@@ -43,7 +43,7 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
         }
     ];
 
-    if (isLoading) return <CPMOSkeleton />;
+    if (isLoading) return <CPMOSkeleton onNavigate={onNavigate} />;
 
     return (
         <div className="min-h-screen bg-gray-50 font-sans">

@@ -20,7 +20,7 @@ const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
         return () => clearTimeout(timer);
     }, []);
 
-    if (isLoading) return <GADDatabaseSkeleton />;
+    if (isLoading) return <GADDatabaseSkeleton onNavigate={onNavigate} />;
     const categories = [
         {
             id: 'gad-database',

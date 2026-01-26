@@ -8,7 +8,7 @@ interface TransparencyPageProps {
 }
 
 const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'bids' | 'memoranda'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'award' | 'invitation' | 'bulletin'>('all');
   const [isLoading, setIsLoading] = useState(true);
 
   // Simulated Loading Effect
@@ -23,51 +23,68 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
   const documents = [
     {
       id: 1,
-      type: 'bids',
-      title: 'ITB No. 2026-01-26',
-      subtitle: 'Procurement of Medical Equipment for Dr. Jorge P. Royeca Hospital',
-      date: 'January 26, 2026',
-      status: 'Open for Bidding',
-      statusColor: 'bg-blue-100 text-blue-700 border-blue-200',
-      fileSize: '2.4 MB',
-      format: 'PDF',
+      type: 'award',
+      title: 'MALLENGKE NOA SEPTEMBER 4 2025 (Page 1)',
+      subtitle: 'Notice of Award - September 4, 2025',
+      date: 'September 4, 2025',
+      status: 'Awarded',
+      statusColor: 'bg-green-100 text-green-700 border-green-200',
+      fileSize: 'IMAGE',
+      format: 'JPG',
       previewColor: 'bg-blue-50',
+      url: 'https://gensantos.gov.ph/wp-content/uploads/2025/10/MALLENGKE-NOA-SEPTEMBER-4-2025_page-0001.jpg'
+    },
+    {
+      id: 2,
+      type: 'award',
+      title: 'MALLENGKE NOA SEPTEMBER 4 2025 (Page 2)',
+      subtitle: 'Notice of Award - September 4, 2025',
+      date: 'September 4, 2025',
+      status: 'Awarded',
+      statusColor: 'bg-green-100 text-green-700 border-green-200',
+      fileSize: 'IMAGE',
+      format: 'JPG',
+      previewColor: 'bg-blue-50',
+      url: 'https://gensantos.gov.ph/wp-content/uploads/2025/10/MALLENGKE-NOA-SEPTEMBER-4-2025_page-0002.jpg'
     },
     {
       id: 3,
-      type: 'memoranda',
-      title: 'Memorandum Circular No. 2026-01',
-      subtitle: 'Guidelines on the Grant of Performance-Based Bonus (PBB) for FY 2026',
-      date: 'January 20, 2026',
-      status: 'For Compliance',
-      statusColor: 'bg-blue-100 text-blue-700 border-blue-200',
-      fileSize: '3.5 MB',
-      format: 'PDF',
+      type: 'award',
+      title: 'MALLENGKE NOA SEPTEMBER 4 2025 (Page 3)',
+      subtitle: 'Notice of Award - September 4, 2025',
+      date: 'September 4, 2025',
+      status: 'Awarded',
+      statusColor: 'bg-green-100 text-green-700 border-green-200',
+      fileSize: 'IMAGE',
+      format: 'JPG',
       previewColor: 'bg-blue-50',
+      url: 'https://gensantos.gov.ph/wp-content/uploads/2025/10/MALLENGKE-NOA-SEPTEMBER-4-2025_page-0003-1024x1024.jpg'
     },
     {
       id: 4,
-      type: 'bids',
-      title: 'Notice of Award',
-      subtitle: 'Construction of Multi-Purpose Building at Brgy. Calumpang',
-      date: 'January 15, 2026',
-      status: 'Awarded',
+      type: 'bulletin',
+      title: 'PBAC General Bulletin Livestreaming',
+      subtitle: 'PBAC General Bulletin - August 14, 2025',
+      date: 'August 14, 2025',
+      status: 'Bulletin',
       statusColor: 'bg-blue-100 text-blue-700 border-blue-200',
-      fileSize: '850 KB',
-      format: 'PDF',
+      fileSize: 'IMAGE',
+      format: 'JPG',
       previewColor: 'bg-blue-50',
+      url: 'https://gensantos.gov.ph/wp-content/uploads/2025/08/PBAC.-General-Bulletin.-Livestreaming.-2025-08-14_page-0001.jpg'
     },
     {
       id: 5,
-      type: 'bids',
-      title: 'ITB No. 2026-01-10',
-      subtitle: 'Supply and Delivery of IT Equipment for DepEd Gensan',
-      date: 'January 10, 2026',
-      status: 'Closed',
-      statusColor: 'bg-blue-100 text-blue-700 border-blue-200',
-      fileSize: '1.8 MB',
-      format: 'PDF',
+      type: 'invitation',
+      title: 'INV-PREBID',
+      subtitle: 'Invitation to Pre-Bid Conference',
+      date: 'July 2025',
+      status: 'Invitation',
+      statusColor: 'bg-orange-100 text-orange-700 border-orange-200',
+      fileSize: 'IMAGE',
+      format: 'JPG',
       previewColor: 'bg-blue-50',
+      url: 'https://gensantos.gov.ph/wp-content/uploads/2025/07/INV-PREBID_page-0001.jpg'
     }
   ];
 
@@ -112,7 +129,7 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12 sticky top-20 z-20 bg-slate-50/95 backdrop-blur-sm py-4 border-b border-slate-200">
           {/* Tab Navigation */}
           <div className="flex overflow-x-auto pb-0 gap-2 no-scrollbar w-full md:w-auto">
-            {['all', 'bids', 'memoranda'].map((tab) => (
+            {['all', 'award', 'invitation', 'bulletin'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab as any)}
@@ -121,7 +138,7 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
                     : 'bg-white text-slate-500 border border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                   }`}
               >
-                {tab === 'all' ? 'All Docs' : tab === 'bids' ? 'Bids & Awards' : 'Memoranda'}
+                {tab === 'all' ? 'All Docs' : tab === 'award' ? 'Notice of Award' : tab === 'invitation' ? 'Invitations' : 'Bulletins'}
               </button>
             ))}
           </div>
@@ -145,21 +162,30 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
             <div key={doc.id} className="group relative bg-white rounded-2xl p-2 shadow-sm border border-slate-200 hover:shadow-xl hover:border-blue-200 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
 
               {/* Preview */}
-              <div className={`relative h-56 rounded-xl ${doc.previewColor} overflow-hidden border border-slate-100 group-hover:border-blue-100 transition-colors`}>
+              <a 
+                href={doc.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`block relative h-56 rounded-xl ${doc.previewColor} overflow-hidden border border-slate-100 group-hover:border-blue-100 transition-colors cursor-pointer`}
+              >
                 <div className="absolute inset-4 space-y-2 opacity-20">
                   <div className="w-1/3 h-2 bg-slate-900 rounded-full mb-4"></div>
                   <div className="w-full h-1.5 bg-slate-400 rounded-full"></div>
                   <div className="w-5/6 h-1.5 bg-slate-400 rounded-full"></div>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity">
-                  {doc.type === 'bids' ? <Gavel size={64} /> : doc.type === 'orders' ? <Scale size={64} /> : <FileText size={64} />}
+                  {doc.type === 'award' ? <Gavel size={64} /> : doc.type === 'bulletin' ? <FileText size={64} /> : <Scale size={64} />}
                 </div>
-                <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/5 transition-colors flex items-center justify-center">
-                  <button className="bg-white text-slate-900 px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-wide opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-lg flex items-center gap-2">
-                    <Download size={14} /> Download
-                  </button>
+                {/* Image Preview if available */}
+                {doc.url && (doc.url.endsWith('.jpg') || doc.url.endsWith('.png')) && (
+                   <img src={doc.url} alt={doc.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                )}
+                <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors flex items-center justify-center">
+                  <span className="bg-white text-slate-900 px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-wide opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-lg flex items-center gap-2">
+                    <Eye size={14} /> View Document
+                  </span>
                 </div>
-              </div>
+              </a>
 
               {/* Content */}
               <div className="p-4 flex flex-col flex-grow">
