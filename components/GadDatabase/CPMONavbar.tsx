@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 interface CPMONavbarProps {
-  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home') => void;
+  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home') => void;
   currentPage: string;
 }
 
@@ -69,7 +69,7 @@ const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
 
           {/* Right Side: Slogan/Logo (Hidden on small screens) */}
           <div className="hidden lg:flex flex-col items-end justify-center">
-             {/* Using the same slogan image for consistency, or we could leave it blank if CPMO has no specific one */}
+            {/* Using the same slogan image for consistency, or we could leave it blank if CPMO has no specific one */}
             <img
               width="479"
               height="187"
@@ -103,7 +103,7 @@ const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
               <NavItem label="GAD DATABASE" page="gad-database" />
               <Separator />
               <NavItem label="ABOUT US" externalUrl="https://cpmo.gensantos.gov.ph/SDD_Page" />
-               <Separator />
+              <Separator />
               <NavItem label="LOGIN" externalUrl="https://cpmo.gensantos.gov.ph/SignInPage" />
             </div>
           </div>
@@ -113,7 +113,7 @@ const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-xl">
             <div className="flex flex-col p-4 space-y-1 divide-y divide-gray-100">
-               <NavItem label="HOME" page="cpmo-home" />
+              <NavItem label="HOME" page="cpmo-home" />
               <NavItem label="GENSANTOS PORTAL" page="home" />
               <NavItem label="GAD DATABASE" page="gad-database" />
               <NavItem label="ABOUT US" externalUrl="https://cpmo.gensantos.gov.ph/SDD_Page" />

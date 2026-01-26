@@ -16,26 +16,25 @@ import DepartmentsSkeleton from './components/Department/DepartmentsSkeleton';
 import CitizensCharterSkeleton from './components/CitizensCharter/CitizensCharterSkeleton';
 
 // Lazy load heavy page components for performance and loading states
-const Departments = React.lazy(() => import('./components/Department/Departments'));
-const CitizensCharter = React.lazy(() => import('./components/CitizensCharter/CitizensCharter'));
-const GADDatabase = React.lazy(() => import('./components/GadDatabase/GADDatabase'));
-const Procurement = React.lazy(() => import('./components/Procurement/Procurement'));
+const Departments = React.lazy(() => import('./components/Department/Departments.tsx'));
+const CitizensCharter = React.lazy(() => import('./components/CitizensCharter/CitizensCharter.tsx'));
+const GADDatabase = React.lazy(() => import('./components/GadDatabase/GADDatabase.tsx'));
 // const Tourism = React.lazy(() => import('./components/Tourism/Tourism')); // Replaced by Transparency
-const NewsDetail = React.lazy(() => import('./components/News/NewsDetail'));
-const CPMOHome = React.lazy(() => import('./components/GadDatabase/CPMOHome'));
-const TransparencyPage = React.lazy(() => import('./components/Transparency/TransparencyPage'));
-import GlobalSearchOverlay from './components/Layout/GlobalSearchOverlay';
+const NewsDetail = React.lazy(() => import('./components/News/NewsDetail.tsx'));
+const CPMOHome = React.lazy(() => import('./components/GadDatabase/CPMOHome.tsx'));
+const TransparencyPage = React.lazy(() => import('./components/Transparency/TransparencyPage.tsx'));
+import GlobalSearchOverlay from './components/Layout/GlobalSearchOverlay.tsx';
 
-import { NewsItem } from './types';
-import { SearchResult } from './data/siteData';
+import { NewsItem } from './types.ts';
+import { SearchResult } from './data/siteData.ts';
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home' | 'news-detail' | 'transparency'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'news-detail' | 'transparency'>('home');
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [globalSearchQuery, setGlobalSearchQuery] = useState('');
 
-  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home' | 'transparency') => {
+  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'transparency') => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
@@ -53,7 +52,7 @@ const App: React.FC = () => {
 
   const handleNavigateToResult = (result: SearchResult) => {
     setIsSearchOpen(false);
-    
+
     if (result.type === 'department') {
       navigateTo('departments');
     } else if (result.type === 'service') {
@@ -70,12 +69,19 @@ const App: React.FC = () => {
     }
   };
 
+  // Helper to map app pages to navbar pages
+  const getNavbarPage = (page: typeof currentPage): 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency' => {
+    if (page === 'cpmo-home') return 'gad-database';
+    if (page === 'news-detail') return 'home';
+    return page;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {currentPage !== 'gad-database' && (
-        <Navbar 
-          onNavigate={navigateTo} 
-          currentPage={currentPage === 'news-detail' ? 'home' : currentPage} 
+        <Navbar
+          onNavigate={navigateTo}
+          currentPage={getNavbarPage(currentPage)}
           enableStickySearch={currentPage === 'home'}
         />
       )}
@@ -122,11 +128,9 @@ const App: React.FC = () => {
           </React.Suspense>
         )}
 
-        {currentPage === 'procurement' && (
-          <React.Suspense fallback={<PageSkeleton />}>
-            <Procurement />
-          </React.Suspense>
-        )}
+
+
+
 
         {currentPage === 'news-detail' && selectedNewsItem && (
           <React.Suspense fallback={<PageSkeleton />}>
@@ -146,8 +150,8 @@ const App: React.FC = () => {
       {currentPage !== 'gad-database' && <Footer />}
       <CityAssistant />
 
-      <GlobalSearchOverlay 
-        isOpen={isSearchOpen} 
+      <GlobalSearchOverlay
+        isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         initialQuery={globalSearchQuery}
         onNavigateToResult={handleNavigateToResult}

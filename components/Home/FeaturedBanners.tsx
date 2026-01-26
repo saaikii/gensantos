@@ -4,18 +4,14 @@ import { Eye, Target, ShieldCheck, Sparkles } from 'lucide-react';
 const FeaturedBanners: React.FC = () => {
   return (
     <section className="relative z-20 pt-24 pb-16 bg-gradient-to-b from-gray-50 via-white to-gray-50">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-yellow-100/30 rounded-full blur-3xl"></div>
-      </div>
+
 
       <div className="container mx-auto px-6 relative z-10">
 
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="inline-block py-1 px-4 rounded-full bg-blue-50 text-[#0038A8] text-xs font-bold tracking-widest uppercase mb-4 border border-blue-200 shadow-sm">
-             Official Government Principles
+            Official Government Principles
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0038A8] mb-6 uppercase tracking-tight drop-shadow-sm font-serif">
             Our Core Values
@@ -74,13 +70,13 @@ const FeaturedBanners: React.FC = () => {
               <div className="w-20 h-20 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <ShieldCheck size={40} className="text-red-600" />
               </div>
-              <h3 className="text-2xl font-black text-gray-900 uppercase tracking-widest mb-6 leading-none">Quality<br/><span className="text-lg text-red-600">Policy</span></h3>
+              <h3 className="text-2xl font-black text-gray-900 uppercase tracking-widest mb-6 leading-none">Quality<br /><span className="text-lg text-red-600">Policy</span></h3>
               <p className="text-gray-600 leading-relaxed text-sm">
                 We, the Local Government of General Santos City, aspire to be globally competitive while enhancing the quality of life of our citizen towards a sustainable future. We are committed to providing quality services to all members of our society. We shall continually strive to improve our city, our people and our services while we foster the rule of law and equal opportunity for all.
               </p>
             </div>
-             {/* Decorative Tab */}
-             <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-red-600 rounded-full"></div>
+            {/* Decorative Tab */}
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-red-600 rounded-full"></div>
           </div>
 
         </div>

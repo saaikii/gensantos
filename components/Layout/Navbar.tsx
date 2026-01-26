@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Search } from 'lucide-react';
 
 interface NavbarProps {
-  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'transparency') => void;
-  currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'transparency';
+  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency') => void;
+  currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency';
   enableStickySearch?: boolean;
 }
 
@@ -30,15 +30,23 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
     return () => window.removeEventListener('scroll', handleScroll);
   }, [currentPage, enableStickySearch]);
 
-  const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'transparency', e: React.MouseEvent) => {
+  const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency', e: React.MouseEvent) => {
     e.preventDefault();
     onNavigate(page);
     setMobileMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
-  const NavItem = ({ label, page, isExternal = false, externalUrl }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'transparency', isExternal?: boolean, externalUrl?: string }) => {
+  const NavItem = ({ label, page, isExternal = false, externalUrl, isDisabled = false }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency', isExternal?: boolean, externalUrl?: string, isDisabled?: boolean }) => {
     const baseClasses = "hover:text-blue-700 transition-colors px-1 lg:px-3 py-2 block md:inline-block";
+
+    if (isDisabled) {
+      return (
+        <span className="px-1 lg:px-3 py-2 block md:inline-block text-gray-400 cursor-not-allowed">
+          {label}
+        </span>
+      );
+    }
 
     if (isExternal || externalUrl) {
       return (
@@ -134,9 +142,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
               <Separator />
               <NavItem label="LGU EO" isExternal />
               <Separator />
-              <NavItem label="PROCUREMENT" page="procurement" />
+              <NavItem label="PROCUREMENT" isDisabled={true} />
               <Separator />
-              <NavItem label="SCHEDULE OF MARKET VALUES (SMV)" isExternal />
+              <NavItem label="SCHEDULE OF MARKET VALUES (SMV)" isDisabled={true} />
               <Separator />
               <NavItem label="TRANSPARENCY" page="transparency" />
             </div>
@@ -152,8 +160,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
               <NavItem label="CITIZEN'S CHARTER" page="citizens-charter" />
               <NavItem label="GAD DATABASE" page="gad-database" />
               <NavItem label="LGU EO" isExternal />
-              <NavItem label="PROCUREMENT" page="procurement" />
-              <NavItem label="SCHEDULE OF MARKET VALUES (SMV)" isExternal />
+              <NavItem label="PROCUREMENT" isDisabled={true} />
+              <NavItem label="SCHEDULE OF MARKET VALUES (SMV)" isDisabled={true} />
               <NavItem label="TRANSPARENCY" page="transparency" />
             </div>
           </div>

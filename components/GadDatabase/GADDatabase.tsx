@@ -5,7 +5,7 @@ import CPMONavbar from './CPMONavbar';
 import Footer from '../Layout/Footer';
 
 interface GADDatabaseProps {
-    onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home') => void;
+    onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home') => void;
 }
 
 const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
@@ -117,11 +117,11 @@ const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
     return (
         <div className="min-h-screen bg-gray-50 font-sans">
             {/* Custom CPMO Navbar */}
-            <CPMONavbar 
-                onNavigate={onNavigate} 
-                currentPage="gad-database" 
+            <CPMONavbar
+                onNavigate={onNavigate}
+                currentPage="gad-database"
             />
-            
+
             {/* Spacer for Fixed Navbar */}
             <div className="h-[135px] md:h-[135px]"></div>
 
@@ -131,20 +131,20 @@ const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
                     <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-100/40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4"></div>
-                    
+
                     {/* CPMO Watermark - Fixed Position */}
                     <div className="fixed top-48 right-[55%] w-[280px] h-[280px] md:w-[450px] md:h-[450px] opacity-[0.20] pointer-events-none">
-                         <img src="/assets/cpmo-logo.png" className="w-full h-full object-contain" alt="" />
+                        <img src="/assets/cpmo-logo.png" className="w-full h-full object-contain" alt="" />
                     </div>
 
                     {/* GAD Watermark - Fixed Position */}
                     <div className="fixed top-52 left-[55%] w-[280px] h-[280px] md:w-[450px] md:h-[450px] opacity-[0.20] pointer-events-none">
-                         <img src="/assets/gad-logo.png" className="w-full h-full object-contain" alt="" />
+                        <img src="/assets/gad-logo.png" className="w-full h-full object-contain" alt="" />
                     </div>
                 </div>
 
                 <div className="container mx-auto px-4 md:px-6 relative z-10">
-                    
+
                     {/* Hero Section */}
                     <div className="text-center mb-16">
                         {/* Text Content */}

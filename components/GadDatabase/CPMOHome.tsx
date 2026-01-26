@@ -4,7 +4,7 @@ import CPMONavbar from './CPMONavbar';
 
 
 interface CPMOHomeProps {
-    onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home') => void;
+    onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home') => void;
 }
 
 const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
@@ -35,7 +35,7 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
     return (
         <div className="min-h-screen bg-gray-50 font-sans">
             <CPMONavbar onNavigate={onNavigate} currentPage="cpmo-home" />
-            
+
             <div className="h-[73px] md:h-[135px]"></div>
 
             {/* Main Content Area with Background */}
@@ -44,15 +44,15 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
                     <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-100/40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4"></div>
-                    
+
                     {/* CPMO Watermark - Fixed Position */}
                     <div className="fixed top-48 right-[55%] w-[280px] h-[280px] md:w-[450px] md:h-[450px] opacity-[0.20] pointer-events-none">
-                         <img src="/assets/cpmo-logo.png" className="w-full h-full object-contain" alt="" />
+                        <img src="/assets/cpmo-logo.png" className="w-full h-full object-contain" alt="" />
                     </div>
 
                     {/* GAD Watermark - Fixed Position */}
                     <div className="fixed top-52 left-[55%] w-[280px] h-[280px] md:w-[450px] md:h-[450px] opacity-[0.20] pointer-events-none">
-                         <img src="/assets/gad-logo.png" className="w-full h-full object-contain" alt="" />
+                        <img src="/assets/gad-logo.png" className="w-full h-full object-contain" alt="" />
                     </div>
                 </div>
 
@@ -66,7 +66,7 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
                             <h2 className="text-3xl font-bold text-center text-[#4c1d95] mb-12 font-serif uppercase tracking-tight">
                                 Our Mission and Vision
                             </h2>
-                            
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 max-w-5xl mx-auto px-4">
                                 {/* Mission Card */}
                                 <div className="relative group mt-4">
@@ -107,8 +107,8 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
                         </div>
                     </div>
 
-                     {/* Advocacy and Activities Section */}
-                     <div className="py-8">
+                    {/* Advocacy and Activities Section */}
+                    <div className="py-8">
                         <div className="container mx-auto px-4 max-w-4xl">
                             <h2 className="text-2xl md:text-3xl font-bold text-center text-[#4c1d95] mb-12 font-serif uppercase tracking-tight">
                                 General Santos City GAD Advocacy and Activities
@@ -116,24 +116,24 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {[1, 2].map((i) => (
-                                     <div key={i} className="group bg-white rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-purple-50 overflow-hidden flex flex-col h-full">
+                                    <div key={i} className="group bg-white rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-purple-50 overflow-hidden flex flex-col h-full">
                                         {/* Card Image Area */}
                                         <div className="relative h-64 bg-gray-200 overflow-hidden">
                                             {/* Badge */}
                                             <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-purple-700 shadow-sm uppercase tracking-wider border border-white">
                                                 GAD Activity
                                             </div>
-                                            
+
                                             {/* Image Placeholder with Overlay */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-                                            
+
                                             {/* Mock Content for Image */}
                                             <div className="absolute inset-0 flex items-center justify-center text-white/50 font-bold text-4xl">
                                                 {/* In real implementation, use <img> here */}
                                                 IMAGE {i}
                                             </div>
                                         </div>
-                                        
+
                                         {/* Card Content */}
                                         <div className="p-8 flex flex-col flex-grow relative">
                                             {/* Date */}
@@ -144,14 +144,14 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
                                             </div>
 
                                             <h3 className="text-xl font-bold text-[#4c1d95] mb-4 leading-tight group-hover:text-purple-600 transition-colors">
-                                                {i === 1 ? 
+                                                {i === 1 ?
                                                     "CPMO Conducts Reproductive Health Seminar for San Isidro Residents" :
                                                     "Gender and Development Planning and Budgeting Workshop for CSOs"
                                                 }
                                             </h3>
 
                                             <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
-                                                 {i === 1 ? 
+                                                {i === 1 ?
                                                     "The City Population Management Office (CPMO) in coordination with the Barangay Council of San Isidro successfully conducted a comprehensive Reproductive Health Seminar focusing on family planning and maternal care." :
                                                     "A strategic planning session attended by various Civil Society Organizations (CSOs) and Non-Government Organizations (NGOs) to align budgeting goals with gender-responsive mandates."
                                                 }
@@ -164,11 +164,11 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
                                                 </button>
                                             </div>
                                         </div>
-                                     </div>
+                                    </div>
                                 ))}
                             </div>
                         </div>
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>
