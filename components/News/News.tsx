@@ -59,17 +59,17 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
       <div className="container mx-auto px-6">
 
         {/* Tab Header mimicking the image */}
-        <div className="grid grid-cols-1 md:grid-cols-3 mb-12 rounded-2xl overflow-hidden shadow-2xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 mb-12 rounded-2xl overflow-hidden shadow-2xl border-b-4 border-yellow-400">
           {/* Announcement Tab */}
           <button
             onClick={() => setActiveTab('Announcement')}
-            className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'Announcement' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-50 hover:brightness-75'}`}
+            className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'Announcement' ? 'flex-[1.5] brightness-110' : 'flex-1 brightness-50 hover:brightness-75'}`}
           >
-            <div className="absolute inset-0 bg-green-600 mix-blend-multiply z-10 opacity-90"></div>
-            <img src="https://picsum.photos/id/301/800/400" className="absolute inset-0 w-full h-full object-cover grayscale" alt="Announcement bg" />
-            <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-110">
+            <div className={`absolute inset-0 ${activeTab === 'Announcement' ? 'bg-green-700/80' : 'bg-green-900/90'} mix-blend-multiply z-10 transition-colors duration-500`}></div>
+            <img src="/images/news_announcement_tab_bg.jpg" className="absolute inset-0 w-full h-full object-cover" alt="Announcement bg" />
+            <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-105">
               <Megaphone className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-md" />
-              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg font-sans">Announcement</h3>
+              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg">Announcement</h3>
             </div>
             {activeTab === 'Announcement' && (
               <div className="absolute bottom-0 left-0 w-full h-1.5 bg-yellow-400 z-30 animate-fade-in-up"></div>
@@ -79,13 +79,13 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
           {/* News Tab */}
           <button
             onClick={() => setActiveTab('News')}
-            className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'News' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-50 hover:brightness-75'}`}
+            className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'News' ? 'flex-[1.5] brightness-110' : 'flex-1 brightness-50 hover:brightness-75'}`}
           >
-            <div className="absolute inset-0 bg-blue-600 mix-blend-multiply z-10 opacity-90"></div>
-            <img src="https://picsum.photos/id/1015/800/400" className="absolute inset-0 w-full h-full object-cover grayscale" alt="News bg" />
-            <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-110">
+            <div className={`absolute inset-0 ${activeTab === 'News' ? 'bg-blue-700/80' : 'bg-blue-900/90'} mix-blend-multiply z-10 transition-colors duration-500`}></div>
+            <img src="/images/news_tab_bg.png" className="absolute inset-0 w-full h-full object-cover" alt="News bg" />
+            <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-105">
               <Newspaper className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-md" />
-              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg font-sans">News</h3>
+              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg">News</h3>
             </div>
             {activeTab === 'News' && (
               <div className="absolute bottom-0 left-0 w-full h-1.5 bg-yellow-400 z-30 animate-fade-in-up"></div>
@@ -95,13 +95,13 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
           {/* Activities Tab */}
           <button
             onClick={() => setActiveTab('Activities')}
-            className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'Activities' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-50 hover:brightness-75'}`}
+            className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'Activities' ? 'flex-[1.5] brightness-110' : 'flex-1 brightness-50 hover:brightness-75'}`}
           >
-            <div className="absolute inset-0 bg-red-600 mix-blend-multiply z-10 opacity-90"></div>
-            <img src="https://picsum.photos/id/400/800/400" className="absolute inset-0 w-full h-full object-cover grayscale" alt="Activities bg" />
-            <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-110">
+            <div className={`absolute inset-0 ${activeTab === 'Activities' ? 'bg-red-700/80' : 'bg-black/80'} mix-blend-multiply z-10 transition-colors duration-500`}></div>
+            <img src="/images/activities_tab_bg.jpg" className="absolute inset-0 w-full h-full object-cover" alt="Activities bg" />
+            <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-105">
               <PartyPopper className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-md" />
-              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg font-sans">Activities</h3>
+              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg">Activities</h3>
             </div>
             {activeTab === 'Activities' && (
               <div className="absolute bottom-0 left-0 w-full h-1.5 bg-yellow-400 z-30 animate-fade-in-up"></div>
@@ -134,6 +134,14 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
                 <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-all duration-500 transform group-hover:scale-110 group-hover:-rotate-6">
                   {getSkeletonStyles(news.category).icon}
                 </div>
+
+                {news.image && (
+                  <img
+                    src={news.image}
+                    alt={news.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                )}
 
                 <div className={`absolute top-4 left-4 ${getTabColor(news.category)} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-md z-10`}>
                   {news.category}
