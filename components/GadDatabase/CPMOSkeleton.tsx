@@ -1,14 +1,22 @@
 import React from 'react';
-import { Target, Eye } from 'lucide-react';
 import CPMONavbar from './CPMONavbar';
 
-const CPMOSkeleton: React.FC = () => {
-    return (
-        <div className="min-h-screen bg-gray-50 font-sans animate-pulse">
-            {/* Navbar Skeleton Height Placeholder */}
-            <div className="h-[73px] md:h-[135px] bg-white border-b border-gray-200"></div>
+interface CPMOSkeletonProps {
+    onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home') => void;
+}
 
-            <div className="bg-gradient-to-br from-gray-50 via-purple-50 to-yellow-50/20 min-h-[calc(100vh-135px)] relative overflow-hidden">
+const CPMOSkeleton: React.FC<CPMOSkeletonProps> = ({ onNavigate }) => {
+    return (
+        <div className="min-h-screen bg-gray-50 font-sans">
+            {/* Actual Navbar - Not Skeleton */}
+            <div className="relative z-50 pointer-events-none">
+                <CPMONavbar onNavigate={onNavigate} currentPage="cpmo-home" />
+            </div>
+
+            {/* Navbar Spacer */}
+            <div className="h-[73px] md:h-[135px]"></div>
+
+            <div className="bg-gradient-to-br from-gray-50 via-purple-50 to-yellow-50/20 min-h-[calc(100vh-135px)] relative overflow-hidden animate-pulse">
                 <div className="relative z-10 pb-16 pt-16">
                     
                     {/* Mission & Vision Section Skeleton */}

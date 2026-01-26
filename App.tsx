@@ -78,7 +78,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      {currentPage !== 'gad-database' && (
+      {currentPage !== 'gad-database' && currentPage !== 'cpmo-home' && (
         <Navbar
           onNavigate={navigateTo}
           currentPage={getNavbarPage(currentPage)}
@@ -147,7 +147,7 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {currentPage !== 'gad-database' && <Footer />}
+      {currentPage !== 'gad-database' && currentPage !== 'cpmo-home' && <Footer />}
       <CityAssistant />
 
       <GlobalSearchOverlay
