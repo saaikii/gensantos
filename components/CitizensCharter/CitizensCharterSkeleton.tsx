@@ -1,46 +1,37 @@
 import React from 'react';
+import { BookOpen } from 'lucide-react';
 
 const CitizensCharterSkeleton: React.FC = () => {
     return (
-        <section className="py-24 bg-blue-50 relative overflow-hidden min-h-screen">
-            <div className="container mx-auto px-6 relative z-10">
-
+        <div className="min-h-screen bg-gray-50 pt-36 pb-16 font-sans relative">
+             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 {/* Header Skeleton */}
-                <div className="text-center mb-16 max-w-3xl mx-auto animate-pulse">
-                    <div className="h-4 w-48 bg-blue-200/50 mx-auto rounded mb-3"></div>
-                    <div className="h-12 w-3/4 bg-blue-200/50 mx-auto rounded mb-6"></div>
-                    <div className="h-2 w-24 bg-blue-200/50 mx-auto rounded-full mb-8"></div>
-                    <div className="space-y-2">
-                        <div className="h-4 w-full bg-blue-200/50 rounded"></div>
-                        <div className="h-4 w-5/6 bg-blue-200/50 mx-auto rounded"></div>
-                    </div>
+                <div className="text-center pt-24 pb-16 px-6 animate-pulse">
+                     <div className="h-10 md:h-14 bg-gray-200 rounded-lg w-3/4 mx-auto mb-6"></div>
+                     <div className="w-24 h-1.5 bg-gray-200 mx-auto rounded-full mb-8"></div>
+                     <div className="h-6 bg-gray-200 rounded w-1/2 mx-auto"></div>
                 </div>
 
-                {/* Cards Skeleton */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
-
-                    {/* Card 1 */}
-                    <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-xl border border-blue-50 flex flex-col items-start animate-pulse">
-                        <div className="w-16 h-16 bg-blue-100 rounded-2xl mb-8"></div>
-                        <div className="h-8 w-3/4 bg-gray-200 rounded mb-4"></div>
-                        <div className="h-4 w-full bg-gray-100 rounded mb-2"></div>
-                        <div className="h-4 w-5/6 bg-gray-100 rounded mb-8"></div>
-                        <div className="mt-auto h-4 w-32 bg-blue-100 rounded"></div>
-                    </div>
-
-                    {/* Card 2 */}
-                    <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-xl border border-blue-50 flex flex-col items-start animate-pulse">
-                        <div className="w-16 h-16 bg-blue-100 rounded-2xl mb-8"></div>
-                        <div className="h-8 w-3/4 bg-gray-200 rounded mb-4"></div>
-                        <div className="h-4 w-full bg-gray-100 rounded mb-2"></div>
-                        <div className="h-4 w-5/6 bg-gray-100 rounded mb-8"></div>
-                        <div className="mt-auto h-4 w-32 bg-blue-100 rounded"></div>
-                    </div>
-
+                {/* Search Bar Skeleton */}
+                <div className="max-w-2xl mx-auto px-4 mb-12 animate-pulse">
+                     <div className="h-16 bg-white rounded-xl shadow-lg border border-gray-100 w-full"></div>
                 </div>
 
-            </div>
-        </section>
+                {/* Content Grid Skeleton */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {[1, 2, 3, 4, 5, 6].map((i) => (
+                        <div key={i} className="bg-white rounded-[1.5rem] p-8 shadow-sm border border-gray-100 flex flex-col h-full animate-pulse">
+                             <div className="w-14 h-14 bg-gray-200 rounded-2xl mb-6"></div>
+                             <div className="flex-1 space-y-3">
+                                <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                                <div className="h-6 bg-gray-200 rounded w-1/2"></div>
+                             </div>
+                             <div className="h-4 w-24 bg-gray-200 rounded mt-8"></div>
+                        </div>
+                    ))}
+                </div>
+             </div>
+        </div>
     );
 };
 

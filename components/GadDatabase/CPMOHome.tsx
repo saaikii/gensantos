@@ -1,6 +1,7 @@
 import React from 'react';
 import { Target, Eye } from 'lucide-react';
 import CPMONavbar from './CPMONavbar';
+import CPMOSkeleton from './CPMOSkeleton';
 
 
 interface CPMOHomeProps {
@@ -8,6 +9,16 @@ interface CPMOHomeProps {
 }
 
 const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    // Simulated Loading Effect
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, []);
+
     // Placeholder posts data to mimic the screenshot
     const posts = [
         {
@@ -31,6 +42,8 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
             shares: 8
         }
     ];
+
+    if (isLoading) return <CPMOSkeleton />;
 
     return (
         <div className="min-h-screen bg-gray-50 font-sans">
@@ -138,7 +151,7 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
                                         <div className="p-8 flex flex-col flex-grow relative">
                                             {/* Date */}
                                             <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">
-                                                <span>August {12 + i}, 2024</span>
+                                                <span>January {24 + i}, 2026</span>
                                                 <span className="w-1 h-1 rounded-full bg-purple-300"></span>
                                                 <span>San Isidro, GSC</span>
                                             </div>

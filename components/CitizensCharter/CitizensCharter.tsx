@@ -8,9 +8,21 @@ import {
     Megaphone, UserCheck, Accessibility, Book
 } from 'lucide-react';
 import { services as charters } from '../../data/siteData';
+import CitizensCharterSkeleton from './CitizensCharterSkeleton';
 
 const CitizensCharter: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+
+    // Simulated Loading Effect
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (isLoading) return <CitizensCharterSkeleton />;
     const categoryOrder: Record<string, number> = {
         'executive': 1, // Blue
         'finance': 2,   // Green

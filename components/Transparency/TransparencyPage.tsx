@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FileText, ArrowRight, Download, Eye, Clock, ShieldCheck, Filter, Gavel, Scale, Search } from 'lucide-react';
 import Footer from '../Layout/Footer';
+import TransparencySkeleton from './TransparencySkeleton';
 
 interface TransparencyPageProps {
   onNavigate: (page: any) => void;
@@ -8,15 +9,24 @@ interface TransparencyPageProps {
 
 const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState<'all' | 'bids' | 'memoranda'>('all');
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulated Loading Effect
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+        setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Extended Mock Data for Full Page
   const documents = [
     {
       id: 1,
       type: 'bids',
-      title: 'ITB No. 2024-05-12',
+      title: 'ITB No. 2026-01-26',
       subtitle: 'Procurement of Medical Equipment for Dr. Jorge P. Royeca Hospital',
-      date: 'May 12, 2024',
+      date: 'January 26, 2026',
       status: 'Open for Bidding',
       statusColor: 'bg-blue-100 text-blue-700 border-blue-200',
       fileSize: '2.4 MB',
@@ -26,9 +36,9 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
     {
       id: 3,
       type: 'memoranda',
-      title: 'Memorandum Circular No. 2024-15',
-      subtitle: 'Guidelines on the Grant of Performance-Based Bonus (PBB) for FY 2024',
-      date: 'May 08, 2024',
+      title: 'Memorandum Circular No. 2026-01',
+      subtitle: 'Guidelines on the Grant of Performance-Based Bonus (PBB) for FY 2026',
+      date: 'January 20, 2026',
       status: 'For Compliance',
       statusColor: 'bg-blue-100 text-blue-700 border-blue-200',
       fileSize: '3.5 MB',
@@ -40,7 +50,7 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
       type: 'bids',
       title: 'Notice of Award',
       subtitle: 'Construction of Multi-Purpose Building at Brgy. Calumpang',
-      date: 'May 05, 2024',
+      date: 'January 15, 2026',
       status: 'Awarded',
       statusColor: 'bg-blue-100 text-blue-700 border-blue-200',
       fileSize: '850 KB',
@@ -50,9 +60,9 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
     {
       id: 5,
       type: 'bids',
-      title: 'ITB No. 2024-05-10',
+      title: 'ITB No. 2026-01-10',
       subtitle: 'Supply and Delivery of IT Equipment for DepEd Gensan',
-      date: 'May 04, 2024',
+      date: 'January 10, 2026',
       status: 'Closed',
       statusColor: 'bg-blue-100 text-blue-700 border-blue-200',
       fileSize: '1.8 MB',
@@ -62,6 +72,8 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
   ];
 
   const filteredDocs = activeTab === 'all' ? documents : documents.filter(d => d.type === activeTab);
+
+  if (isLoading) return <TransparencySkeleton />;
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans pt-20">

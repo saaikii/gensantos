@@ -8,10 +8,16 @@ import {
     Filter
 } from 'lucide-react';
 import { departments as allDepartments } from '../../data/siteData';
+import DepartmentsSkeleton from './DepartmentsSkeleton';
 
 
 const mayorsOfficeDivisions = [
     "City Public Information Office",
+// ... (lines 13-153 remain same, skipping for brevity but assuming they are preserved if not targeted) 
+// To allow simple integration, I will target the imports and the component start separately if needed, 
+// but here I can match the top block. Better to do it in two chunks to be safe.
+// Chunk 1: Import
+
     "Integrated Barangay Affairs",
     "Bids and Awards Committee",
     "Indigenous Cultural Communities",
@@ -152,11 +158,20 @@ const getCategoryStyles = (category: string) => {
 };
 
 const Departments: React.FC = () => {
+    const [isLoading, setIsLoading] = useState(true);
     const [selectedDept, setSelectedDept] = useState<DepartmentDetails | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [showAllDivisions, setShowAllDivisions] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+
+    // Simulated Loading Effect
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, []);
 
     const filteredDepts = allDepartments.filter(dept => {
         const matchesSearch = dept.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -165,6 +180,8 @@ const Departments: React.FC = () => {
             departmentCategoryMap[dept.name] === selectedCategory;
         return matchesSearch && matchesCategory;
     });
+
+    if (isLoading) return <DepartmentsSkeleton />;
 
     return (
         <div className="min-h-screen font-sans pt-36 pb-20 bg-gray-50 relative">

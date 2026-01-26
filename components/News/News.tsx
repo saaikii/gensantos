@@ -3,6 +3,8 @@ import { ArrowRight, CalendarDays, Megaphone, Newspaper, PartyPopper } from 'luc
 import { newsItems as allItems } from '../../data/siteData';
 
 
+import NewsSkeleton from './NewsSkeleton';
+
 // ... (data array remains same)
 
 interface NewsProps {
@@ -11,6 +13,15 @@ interface NewsProps {
 
 const News: React.FC<NewsProps> = ({ onReadMore }) => {
   const [activeTab, setActiveTab] = useState<'Announcement' | 'News' | 'Activities'>('News');
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulated Loading Effect
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+        setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const filteredItems = allItems.filter(item => item.category === activeTab);
 
@@ -40,6 +51,8 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
       default: return { bg: 'bg-blue-50', icon: <Newspaper size={80} className="text-blue-900" /> };
     }
   };
+
+  if (isLoading) return <NewsSkeleton />;
 
   return (
     <section className="pt-8 pb-24 bg-gray-50">

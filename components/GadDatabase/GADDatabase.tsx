@@ -3,12 +3,24 @@ import { Database, FileText, BarChart3, Wrench, Users, BookOpen, ArrowLeft } fro
 import Navbar from '../Layout/Navbar';
 import CPMONavbar from './CPMONavbar';
 import Footer from '../Layout/Footer';
+import GADDatabaseSkeleton from './GADDatabaseSkeleton';
 
 interface GADDatabaseProps {
     onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home') => void;
 }
 
 const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    // Simulated Loading Effect
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (isLoading) return <GADDatabaseSkeleton />;
     const categories = [
         {
             id: 'gad-database',
