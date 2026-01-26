@@ -26,29 +26,19 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
   const filteredItems = allItems.filter(item => item.category === activeTab);
 
   const getTabColor = (tab: string) => {
-    switch (tab) {
-      case 'Announcement': return 'bg-green-600';
-      case 'News': return 'bg-blue-600';
-      case 'Activities': return 'bg-red-600';
-      default: return 'bg-blue-600';
-    }
+    return 'bg-slate-900';
   };
 
   const getTextColor = (tab: string) => {
-    switch (tab) {
-      case 'Announcement': return 'text-green-600';
-      case 'News': return 'text-blue-600';
-      case 'Activities': return 'text-red-600';
-      default: return 'text-blue-600';
-    }
+    return 'text-blue-600';
   };
 
   const getSkeletonStyles = (category: string) => {
     switch (category) {
-      case 'Announcement': return { bg: 'bg-green-50', icon: <Megaphone size={80} className="text-green-900" /> };
-      case 'News': return { bg: 'bg-blue-50', icon: <Newspaper size={80} className="text-blue-900" /> };
-      case 'Activities': return { bg: 'bg-red-50', icon: <PartyPopper size={80} className="text-red-900" /> };
-      default: return { bg: 'bg-blue-50', icon: <Newspaper size={80} className="text-blue-900" /> };
+      case 'Announcement': return { bg: 'bg-gray-100', icon: <Megaphone size={80} className="text-gray-300" /> };
+      case 'News': return { bg: 'bg-gray-100', icon: <Newspaper size={80} className="text-gray-300" /> };
+      case 'Activities': return { bg: 'bg-gray-100', icon: <PartyPopper size={80} className="text-gray-300" /> };
+      default: return { bg: 'bg-gray-100', icon: <Newspaper size={80} className="text-gray-300" /> };
     }
   };
 
@@ -65,12 +55,15 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
             onClick={() => setActiveTab('Announcement')}
             className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'Announcement' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-75 hover:brightness-90'}`}
           >
-            <div className={`absolute inset-0 bg-green-600 z-10 transition-opacity duration-300 ${activeTab === 'Announcement' ? 'opacity-100' : 'opacity-90'}`}></div>
-            {/* Image Removed as per request */}
+            <img 
+              src="/images/announcement_bg_new.jpg" 
+              className={`absolute inset-0 w-full h-full object-cover object-[center_75%] transition-all duration-500 ${activeTab === 'Announcement' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`} 
+              alt="Announcement bg" 
+            />
             
             <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-110">
-              <Megaphone className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-md" />
-              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg font-sans">Announcement</h3>
+              <Megaphone className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
+              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase font-sans drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Announcement</h3>
             </div>
             {activeTab === 'Announcement' && (
               <div className="absolute bottom-0 left-0 w-full h-1.5 bg-yellow-400 z-30 animate-fade-in-up"></div>
@@ -82,12 +75,15 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
             onClick={() => setActiveTab('News')}
             className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'News' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-75 hover:brightness-90'}`}
           >
-            <div className={`absolute inset-0 bg-blue-600 z-10 transition-opacity duration-300 ${activeTab === 'News' ? 'opacity-100' : 'opacity-90'}`}></div>
-            {/* Image Removed as per request */}
+            <img 
+              src="/images/news_tab_bg_new.jpg" 
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${activeTab === 'News' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`} 
+              alt="News bg" 
+            />
 
             <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-110">
-              <Newspaper className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-md" />
-              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg font-sans">News</h3>
+              <Newspaper className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
+              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase font-sans drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">News</h3>
             </div>
             {activeTab === 'News' && (
               <div className="absolute bottom-0 left-0 w-full h-1.5 bg-yellow-400 z-30 animate-fade-in-up"></div>
@@ -99,12 +95,15 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
             onClick={() => setActiveTab('Activities')}
             className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'Activities' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-75 hover:brightness-90'}`}
           >
-            <div className={`absolute inset-0 bg-red-600 z-10 transition-opacity duration-300 ${activeTab === 'Activities' ? 'opacity-100' : 'opacity-90'}`}></div>
-            {/* Image Removed as per request */}
+            <img 
+              src="/images/kalilangan_festival.png" 
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${activeTab === 'Activities' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`} 
+              alt="Activities bg" 
+            />
             
             <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-110">
-              <PartyPopper className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-md" />
-              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg font-sans">Activities</h3>
+              <PartyPopper className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
+              <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase font-sans drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Activities</h3>
             </div>
             {activeTab === 'Activities' && (
               <div className="absolute bottom-0 left-0 w-full h-1.5 bg-yellow-400 z-30 animate-fade-in-up"></div>
@@ -166,7 +165,7 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
         </div>
 
         <div className="mt-12 text-center">
-          <a href="#" className={`inline-flex items-center gap-2 ${getTabColor(activeTab)} text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all`}>
+          <a href="#" className={`inline-flex items-center gap-2 bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all`}>
             View All {activeTab} <ArrowRight size={20} />
           </a>
         </div>
