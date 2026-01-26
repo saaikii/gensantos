@@ -94,7 +94,7 @@ const Highlights: React.FC = () => {
             </div>
 
             {/* Floating Badge */}
-            <div className="absolute -bottom-8 -right-8 md:-right-12 bg-white p-2 rounded-3xl shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-300 ring-4 ring-blue-50/50">
+            <div className="absolute -top-8 -right-8 md:-right-12 bg-white p-2 rounded-3xl shadow-xl transform rotate-12 hover:rotate-0 transition-transform duration-300 ring-4 ring-blue-50/50">
               <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-4 md:p-6 flex items-center gap-4 text-white">
                 <div className="text-4xl filter drop-shadow-md">🐟</div>
                 <div className="text-left">
