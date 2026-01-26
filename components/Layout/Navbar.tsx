@@ -140,7 +140,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
               <Separator />
               <NavItem label="GAD DATABASE" page="gad-database" />
               <Separator />
-              <NavItem label="LGU EO" isExternal />
+              <NavItem label="LGU EO" isDisabled={true} />
               <Separator />
               <NavItem label="PROCUREMENT" isDisabled={true} />
               <Separator />
@@ -159,7 +159,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
               <NavItem label="DEPARTMENTS" page="departments" />
               <NavItem label="CITIZEN'S CHARTER" page="citizens-charter" />
               <NavItem label="GAD DATABASE" page="gad-database" />
-              <NavItem label="LGU EO" isExternal />
+              <NavItem label="LGU EO" isDisabled={true} />
               <NavItem label="PROCUREMENT" isDisabled={true} />
               <NavItem label="SCHEDULE OF MARKET VALUES (SMV)" isDisabled={true} />
               <NavItem label="TRANSPARENCY" page="transparency" />
