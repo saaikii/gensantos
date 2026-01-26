@@ -40,7 +40,7 @@ const slides = [
   },
   {
     id: 4,
-    image: '/emergency_bg.png',
+    image: '/emergency_hotline_v2.jpg',
     alt: 'Emergency Services',
     type: 'emergency',
     position: 'object-center',
