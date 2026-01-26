@@ -1,7 +1,7 @@
 import React from 'react';
-import { Target, Eye, ThumbsUp, MessageCircle, Share2 } from 'lucide-react';
+import { Target, Eye } from 'lucide-react';
 import CPMONavbar from './CPMONavbar';
-import Footer from '../Layout/Footer';
+
 
 interface CPMOHomeProps {
     onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home') => void;
@@ -34,141 +34,143 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
 
     return (
         <div className="min-h-screen bg-gray-50 font-sans">
-            <CPMONavbar onNavigate={onNavigate} currentPage="home" />
+            <CPMONavbar onNavigate={onNavigate} currentPage="cpmo-home" />
             
             <div className="h-[73px] md:h-[135px]"></div>
 
-            {/* Header / Logos Section */}
-            <div className="bg-white py-8 md:py-12 border-b border-gray-200">
-                <div className="container mx-auto px-4 flex flex-col items-center justify-center gap-6">
-                    <div className="flex flex-wrap justify-center items-center gap-4 md:gap-12">
-                        {/* CPMO Logo Placeholder */}
-                        <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-blue-100 flex items-center justify-center border-4 border-blue-900/10 shadow-lg">
-                             <img src="/assets/cpmo-logo.png" alt="CPMO Logo" className="w-full h-full object-contain p-2" onError={(e) => (e.currentTarget.src = 'https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo.png')} />
-                        </div>
-                        
-                        {/* GAD Logo / Title Area */}
-                        <div className="text-center">
-                             <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 tracking-tight font-serif mb-2">
-                                I <span className="text-pink-500">♀</span> GAD
-                             </h1>
-                             <p className="text-sm md:text-base text-gray-500 tracking-[0.2em] font-bold uppercase">
-                                Gender and Development
-                             </p>
-                             <div className="w-full h-px bg-gray-300 my-2"></div>
-                             <p className="text-xs md:text-sm text-gray-400 tracking-widest uppercase">
-                                Focal Office
-                             </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Mission & Vision Section */}
-            <div className="py-16 bg-gradient-to-b from-gray-50 to-white">
-                <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold text-center text-gray-800 mb-12 font-serif">
-                        Our Mission and Vision
-                    </h2>
+            {/* Main Content Area with Background */}
+            <div className="bg-gradient-to-br from-gray-50 via-purple-50 to-yellow-50/20 min-h-[calc(100vh-135px)] relative overflow-hidden">
+                {/* Decorative background elements (Matched with GAD Database) */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-100/40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4"></div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                        {/* Mission Card */}
-                        <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-300">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
-                            <div className="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                                <Target size={32} />
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 text-center mb-4">Mission</h3>
-                            <p className="text-gray-600 text-center leading-relaxed">
-                                To improve the quality of life specifically the poor and the marginalized / disadvantaged groups through the provision of appropriate and gender-responsive approaches in family planning, responsible parenthood and adolescent health.
-                            </p>
-                        </div>
+                    {/* CPMO Watermark - Fixed Position */}
+                    <div className="fixed top-48 right-[55%] w-[280px] h-[280px] md:w-[450px] md:h-[450px] opacity-[0.20] pointer-events-none">
+                         <img src="/assets/cpmo-logo.png" className="w-full h-full object-contain" alt="" />
+                    </div>
 
-                        {/* Vision Card */}
-                        <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-300">
-                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
-                             <div className="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                                <Eye size={32} />
+                    {/* GAD Watermark - Fixed Position */}
+                    <div className="fixed top-52 left-[55%] w-[280px] h-[280px] md:w-[450px] md:h-[450px] opacity-[0.20] pointer-events-none">
+                         <img src="/assets/gad-logo.png" className="w-full h-full object-contain" alt="" />
+                    </div>
+                </div>
+
+                <div className="relative z-10 pb-16">
+                    {/* Header / Logos Section */}
+
+
+                    {/* Mission & Vision Section */}
+                    <div className="py-16">
+                        <div className="container mx-auto px-4">
+                            <h2 className="text-3xl font-bold text-center text-[#4c1d95] mb-12 font-serif uppercase tracking-tight">
+                                Our Mission and Vision
+                            </h2>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 max-w-5xl mx-auto px-4">
+                                {/* Mission Card */}
+                                <div className="relative group mt-4">
+                                    {/* The 'Cup' Background - Purple */}
+                                    <div className="absolute -bottom-4 -left-4 -right-4 h-48 bg-purple-600 rounded-b-[3rem] transform group-hover:scale-y-105 group-hover:translate-y-1 transition-transform duration-300 -z-10 shadow-xl shadow-purple-600/30"></div>
+                                    {/* Main Card */}
+                                    <div className="relative bg-white rounded-[2rem] p-8 pb-12 shadow-2xl h-full flex flex-col items-center text-center border-t border-purple-50">
+                                        <div className="w-20 h-20 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                            <Target size={40} className="text-purple-600" />
+                                        </div>
+                                        <h3 className="text-2xl font-black text-[#4c1d95] uppercase tracking-widest mb-6">Mission</h3>
+                                        <p className="text-slate-600 leading-relaxed text-sm">
+                                            To improve the quality of life specifically the poor and the marginalized / disadvantaged groups through the provision of appropriate and gender-responsive approaches in family planning, responsible parenthood and adolescent health.
+                                        </p>
+                                    </div>
+                                    {/* Decorative Tab */}
+                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-purple-600 rounded-full"></div>
+                                </div>
+
+                                {/* Vision Card */}
+                                <div className="relative group mt-4">
+                                    {/* The 'Cup' Background - Pink */}
+                                    <div className="absolute -bottom-4 -left-4 -right-4 h-48 bg-pink-500 rounded-b-[3rem] transform group-hover:scale-y-105 group-hover:translate-y-1 transition-transform duration-300 -z-10 shadow-xl shadow-pink-500/30"></div>
+                                    {/* Main Card */}
+                                    <div className="relative bg-white rounded-[2rem] p-8 pb-12 shadow-2xl h-full flex flex-col items-center text-center border-t border-pink-50">
+                                        <div className="w-20 h-20 bg-pink-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                            <Eye size={40} className="text-pink-500" />
+                                        </div>
+                                        <h3 className="text-2xl font-black text-[#4c1d95] uppercase tracking-widest mb-6">Vision</h3>
+                                        <p className="text-slate-600 leading-relaxed text-sm">
+                                            "An empowered and people working together for a better quality of life for everyone, living in a peaceful, harmonious, and healthy environment."
+                                        </p>
+                                    </div>
+                                    {/* Decorative Tab */}
+                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-pink-500 rounded-full"></div>
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold text-gray-900 text-center mb-4">Vision</h3>
-                            <p className="text-gray-600 text-center leading-relaxed">
-                                "An empowered and people working together for a better quality of life for everyone, living in a peaceful, harmonious, and healthy environment."
-                            </p>
                         </div>
                     </div>
+
+                     {/* Advocacy and Activities Section */}
+                     <div className="py-8">
+                        <div className="container mx-auto px-4 max-w-4xl">
+                            <h2 className="text-2xl md:text-3xl font-bold text-center text-[#4c1d95] mb-12 font-serif uppercase tracking-tight">
+                                General Santos City GAD Advocacy and Activities
+                            </h2>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {[1, 2].map((i) => (
+                                     <div key={i} className="group bg-white rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-purple-50 overflow-hidden flex flex-col h-full">
+                                        {/* Card Image Area */}
+                                        <div className="relative h-64 bg-gray-200 overflow-hidden">
+                                            {/* Badge */}
+                                            <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-purple-700 shadow-sm uppercase tracking-wider border border-white">
+                                                GAD Activity
+                                            </div>
+                                            
+                                            {/* Image Placeholder with Overlay */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                                            
+                                            {/* Mock Content for Image */}
+                                            <div className="absolute inset-0 flex items-center justify-center text-white/50 font-bold text-4xl">
+                                                {/* In real implementation, use <img> here */}
+                                                IMAGE {i}
+                                            </div>
+                                        </div>
+                                        
+                                        {/* Card Content */}
+                                        <div className="p-8 flex flex-col flex-grow relative">
+                                            {/* Date */}
+                                            <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">
+                                                <span>August {12 + i}, 2024</span>
+                                                <span className="w-1 h-1 rounded-full bg-purple-300"></span>
+                                                <span>San Isidro, GSC</span>
+                                            </div>
+
+                                            <h3 className="text-xl font-bold text-[#4c1d95] mb-4 leading-tight group-hover:text-purple-600 transition-colors">
+                                                {i === 1 ? 
+                                                    "CPMO Conducts Reproductive Health Seminar for San Isidro Residents" :
+                                                    "Gender and Development Planning and Budgeting Workshop for CSOs"
+                                                }
+                                            </h3>
+
+                                            <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                                                 {i === 1 ? 
+                                                    "The City Population Management Office (CPMO) in coordination with the Barangay Council of San Isidro successfully conducted a comprehensive Reproductive Health Seminar focusing on family planning and maternal care." :
+                                                    "A strategic planning session attended by various Civil Society Organizations (CSOs) and Non-Government Organizations (NGOs) to align budgeting goals with gender-responsive mandates."
+                                                }
+                                            </p>
+
+                                            {/* Read More Button */}
+                                            <div className="mt-auto pt-6 border-t border-purple-50 flex items-center justify-between">
+                                                <button className="flex items-center gap-2 text-[#4c1d95] font-bold text-sm uppercase tracking-wide group-hover:gap-3 transition-all">
+                                                    Read Full Story <Target size={16} className="rotate-45" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                     </div>
+                                ))}
+                            </div>
+                        </div>
+                     </div>
                 </div>
             </div>
-
-             {/* Advocacy and Activities Section */}
-             <div className="py-16 bg-gray-50">
-                <div className="container mx-auto px-4 max-w-4xl">
-                    <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12 font-serif">
-                        General Santos City GAD Advocacy and Activities
-                    </h2>
-
-                    <div className="space-y-8">
-                        {/* Use placeholders for the "Feed" look */}
-                        {[1, 2].map((i) => (
-                             <div key={i} className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
-                                {/* Post Header */}
-                                <div className="p-4 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center overflow-hidden">
-                                        <img src="https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo.png" alt="Avatar" className="w-full h-full object-cover" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-gray-900 text-sm">LGU GENSAN - GAD Local Office</h4>
-                                        <p className="text-xs text-gray-500">Yesterday at 10:00 AM</p>
-                                    </div>
-                                    <button className="ml-auto text-blue-600 text-sm font-semibold">Like Page</button>
-                                </div>
-                                
-                                {/* Post Content */}
-                                <div className="px-4 pb-3">
-                                    <p className="text-gray-800 text-sm leading-relaxed mb-3">
-                                        {i === 1 ? 
-                                            "LOOK: The City Population Management Office (CPMO) in coordination with the Barangay Council of San Isidro conducted a Reproductive Health Seminar..." :
-                                            "HAPPENING NOW: Gender and Development (GAD) Planning and Budgeting Workshop for CSOs and NGOS."
-                                        } <span className="text-gray-500 cursor-pointer">See more</span>
-                                    </p>
-                                </div>
-                                
-                                {/* Post Image Grid (Mockup) */}
-                                <div className="bg-gray-100 h-96 flex flex-wrap gap-0.5">
-                                    <div className="flex-1 h-full bg-gray-300 relative">
-                                        {/* Mock Image Placeholder */}
-                                         <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                                            IMAGE {i}A
-                                         </div>
-                                    </div>
-                                    <div className="flex-1 h-full flex flex-col gap-0.5">
-                                         <div className="flex-1 bg-gray-300 relative">
-                                             <div className="absolute inset-0 flex items-center justify-center text-gray-500">IMAGE {i}B</div>
-                                         </div>
-                                         <div className="flex-1 bg-gray-300 relative">
-                                             <div className="absolute inset-0 flex items-center justify-center text-gray-500">IMAGE {i}C</div>
-                                         </div>
-                                    </div>
-                                </div>
-
-                                {/* Post Stats */}
-                                <div className="px-4 py-2 border-t border-gray-100 flex justify-between text-xs text-gray-500">
-                                    <span>👍 ❤️ 245</span>
-                                    <span>23 Comments 12 Shares</span>
-                                </div>
-
-                                {/* Actions */}
-                                <div className="px-4 py-2 border-t border-gray-100 flex justify-between">
-                                    <button className="flex items-center gap-2 text-gray-600 hover:bg-gray-50 px-4 py-1 rounded-md transition-colors text-sm font-medium"><ThumbsUp size={16} /> Like</button>
-                                    <button className="flex items-center gap-2 text-gray-600 hover:bg-gray-50 px-4 py-1 rounded-md transition-colors text-sm font-medium"><MessageCircle size={16} /> Comment</button>
-                                    <button className="flex items-center gap-2 text-gray-600 hover:bg-gray-50 px-4 py-1 rounded-md transition-colors text-sm font-medium"><Share2 size={16} /> Share</button>
-                                </div>
-                             </div>
-                        ))}
-                    </div>
-                </div>
-             </div>
-
-             <Footer />
         </div>
     );
 };
