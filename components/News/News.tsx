@@ -186,7 +186,7 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
         </div>
 
         <div className="mt-12 text-center">
-          <a href="#" className={`inline-flex items-center gap-2 bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all`}>
+          <a href="#" className="inline-flex items-center gap-2 bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all uppercase tracking-widest text-sm">
             View All {activeTab} <ArrowRight size={20} />
           </a>
         </div>

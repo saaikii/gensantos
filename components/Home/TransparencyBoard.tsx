@@ -213,8 +213,8 @@ const TransparencyBoard: React.FC<TransparencyBoardProps> = ({ onNavigate }) => 
         <div className="text-center mt-12">
           <button
             onClick={() => onNavigate && onNavigate('transparency')}
-            className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors text-sm uppercase tracking-widest border-b-2 border-transparent hover:border-blue-600 pb-1">
-            View All Documents <ArrowRight size={16} />
+            className="inline-flex items-center gap-2 bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all uppercase tracking-widest text-sm">
+            View All Documents <ArrowRight size={20} />
           </button>
         </div>
 

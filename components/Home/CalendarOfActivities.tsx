@@ -257,7 +257,7 @@ const CalendarOfActivities: React.FC<CalendarProps> = ({ onNavigate }) => {
                     <div className="mt-10 text-center">
                         <button 
                             onClick={() => onNavigate?.('full-calendar')}
-                            className="inline-flex items-center gap-2 text-blue-600 font-bold uppercase tracking-widest hover:gap-3 transition-all"
+                            className="inline-flex items-center gap-2 bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all uppercase tracking-widest text-sm"
                         >
                             View Full Calendar <ArrowRight size={20} />
                         </button>
