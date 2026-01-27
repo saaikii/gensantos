@@ -132,7 +132,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
         {/* Background texture optional */}
         <div className="absolute inset-0 bg-blue-900/10 pointer-events-none"></div>
 
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative z-10">
+        <div className="w-full px-12 md:px-32 flex justify-between items-center relative z-10">
           {/* Left Side: Seal + Text */}
           <div className="flex items-center gap-4 md:gap-6">
             <a
