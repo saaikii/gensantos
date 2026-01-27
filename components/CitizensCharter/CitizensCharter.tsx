@@ -9,10 +9,21 @@ import {
 } from 'lucide-react';
 import { services as charters } from '../../data/siteData';
 import CitizensCharterSkeleton from './CitizensCharterSkeleton';
+import LoadingOverlay from '../Shared/LoadingOverlay';
 
 const CitizensCharter: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [loadingCharterId, setLoadingCharterId] = useState<number | string | null>(null);
+
+    const handleCharterClick = (e: React.MouseEvent, link: string, id: number | string) => {
+        e.preventDefault();
+        setLoadingCharterId(id);
+        setTimeout(() => {
+            window.open(link, '_blank', 'noopener,noreferrer');
+            setLoadingCharterId(null);
+        }, 500);
+    };
 
     // Simulated Loading Effect
     React.useEffect(() => {
@@ -40,50 +51,18 @@ const CitizensCharter: React.FC = () => {
             return (categoryOrder[catA] || 99) - (categoryOrder[catB] || 99);
         });
 
-    const getCategoryStyles = (category: string) => {
-        switch (category) {
-            case 'finance':
-                return {
-                    bgLight: 'bg-green-50',
-                    bgDark: 'bg-green-600',
-                    textDark: 'text-green-800',
-                    shadow: 'shadow-green-600/30',
-                    hoverText: 'group-hover:text-green-900',
-                    corner: 'bg-green-50',
-                    borderHover: 'hover:border-green-200'
-                };
-            case 'services':
-                return {
-                    bgLight: 'bg-orange-50',
-                    bgDark: 'bg-orange-600',
-                    textDark: 'text-orange-800',
-                    shadow: 'shadow-orange-600/30',
-                    hoverText: 'group-hover:text-orange-900',
-                    corner: 'bg-orange-50',
-                    borderHover: 'hover:border-orange-200'
-                };
-            case 'social':
-                return {
-                    bgLight: 'bg-red-50',
-                    bgDark: 'bg-red-600',
-                    textDark: 'text-red-800',
-                    shadow: 'shadow-red-600/30',
-                    hoverText: 'group-hover:text-red-900',
-                    corner: 'bg-red-50',
-                    borderHover: 'hover:border-red-200'
-                };
-            default: // executive
-                return {
-                    bgLight: 'bg-blue-50',
-                    bgDark: 'bg-blue-600',
-                    textDark: 'text-blue-800',
-                    shadow: 'shadow-blue-600/30',
-                    hoverText: 'group-hover:text-blue-900',
-                    corner: 'bg-blue-50',
-                    borderHover: 'hover:border-blue-200'
-                };
-        }
+const getCategoryStyles = (category: string) => {
+    // Standardize all charter cards to Blue Theme
+    return {
+        bgLight: 'bg-blue-50',
+        bgDark: 'bg-blue-600',
+        textDark: 'text-blue-800',
+        shadow: 'shadow-blue-600/30',
+        hoverText: 'group-hover:text-blue-900',
+        corner: 'bg-blue-50',
+        borderHover: 'hover:border-blue-200'
     };
+};
 
     return (
         <div className="min-h-screen bg-gray-50 pt-36 pb-16 font-sans relative">
@@ -141,8 +120,10 @@ const CitizensCharter: React.FC = () => {
                                         href="https://drive.google.com/file/d/1j8U-6rOaIYLuyIGpM4QjN3Wvu_6xWUnl/view?usp=sharing"
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={(e) => handleCharterClick(e, "https://drive.google.com/file/d/1j8U-6rOaIYLuyIGpM4QjN3Wvu_6xWUnl/view?usp=sharing", 'banner')}
                                         className="block group relative bg-white border border-blue-50 rounded-2xl p-8 md:p-10 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                                     >
+                                        {loadingCharterId === 'banner' && <LoadingOverlay />}
                                         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50/50 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
 
                                         <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
@@ -175,8 +156,10 @@ const CitizensCharter: React.FC = () => {
                                             href={charter.link}
                                             target="_blank"
                                             rel="noopener noreferrer"
+                                            onClick={(e) => handleCharterClick(e, charter.link, index)}
                                             className={`group relative bg-white rounded-[1.5rem] p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 ${styles.borderHover} hover:-translate-y-2 cursor-pointer flex flex-col overflow-hidden`}
                                         >
+                                            {loadingCharterId === index && <LoadingOverlay />}
                                             {/* Decorative corner accent */}
                                             <div className={`absolute top-0 right-0 w-24 h-24 ${styles.corner} rounded-bl-[80px] -mr-3 -mt-3 transition-transform group-hover:scale-110`}></div>
 

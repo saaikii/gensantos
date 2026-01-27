@@ -10,6 +10,7 @@ import {
 import { departments as allDepartments } from '../../data/siteData';
 import { DepartmentDetails } from '../../types';
 import DepartmentsSkeleton from './DepartmentsSkeleton';
+import LoadingOverlay from '../Shared/LoadingOverlay';
 
 
 const mayorsOfficeDivisions = [
@@ -144,64 +145,17 @@ const departmentCategoryMap: Record<string, string> = {
 
 const getCategoryStyles = (category: string) => {
     // Unified blue icons with government blue/gold text colors only
-    // Blue for most departments, gold for executive/leadership roles
-    switch (category) {
-        case 'finance':
-            return {
-                bgLight: 'bg-green-50',
-                bgDark: 'bg-green-600',
-                textDark: 'text-green-800',
-                border: 'border-green-100',
-                shadow: 'shadow-green-600/30',
-                hoverText: 'group-hover:text-green-900',
-                corner: 'bg-green-50',
-                borderHover: 'hover:border-green-200'
-            };
-        case 'services':
-            return {
-                bgLight: 'bg-teal-50',
-                bgDark: 'bg-teal-600',
-                textDark: 'text-teal-800',
-                border: 'border-teal-100',
-                shadow: 'shadow-teal-600/30',
-                hoverText: 'group-hover:text-teal-900',
-                corner: 'bg-teal-50',
-                borderHover: 'hover:border-teal-200'
-            };
-        case 'public':
-            return {
-                bgLight: 'bg-orange-50',
-                bgDark: 'bg-orange-600',
-                textDark: 'text-orange-800',
-                border: 'border-orange-100',
-                shadow: 'shadow-orange-600/30',
-                hoverText: 'group-hover:text-orange-900',
-                corner: 'bg-orange-50',
-                borderHover: 'hover:border-orange-200'
-            };
-        case 'social':
-            return {
-                bgLight: 'bg-rose-50',
-                bgDark: 'bg-rose-600',
-                textDark: 'text-rose-800',
-                border: 'border-rose-100',
-                shadow: 'shadow-rose-600/30',
-                hoverText: 'group-hover:text-rose-900',
-                corner: 'bg-rose-50',
-                borderHover: 'hover:border-rose-200'
-            };
-        default: // executive and others - use gold/blue leadership mix
-            return {
-                bgLight: 'bg-blue-50',
-                bgDark: 'bg-blue-600',
-                textDark: 'text-blue-800',
-                border: 'border-blue-100',
-                shadow: 'shadow-blue-600/30',
-                hoverText: 'group-hover:text-blue-900',
-                corner: 'bg-blue-50',
-                borderHover: 'hover:border-blue-200'
-            };
-    }
+    // All departments now use the standard blue theme as requested
+    return {
+        bgLight: 'bg-blue-50',
+        bgDark: 'bg-blue-600',
+        textDark: 'text-blue-800',
+        border: 'border-blue-100',
+        shadow: 'shadow-blue-600/30',
+        hoverText: 'group-hover:text-blue-900',
+        corner: 'bg-blue-50',
+        borderHover: 'hover:border-blue-200'
+    };
 };
 
 interface DepartmentsProps {
@@ -214,6 +168,16 @@ const Departments: React.FC<DepartmentsProps> = ({ onDepartmentSelect }) => {
     const [showAllDivisions, setShowAllDivisions] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+    const [loadingDept, setLoadingDept] = useState<string | null>(null);
+
+    const handleDepartmentClick = (dept: DepartmentDetails) => {
+        setLoadingDept(dept.name);
+        setTimeout(() => {
+            onDepartmentSelect(dept);
+            // Reset loading state after navigation (though usually unmounted/hidden)
+            setLoadingDept(null);
+        }, 500);
+    };
 
     // Define category priority for color sorting
     const categoryPriority: Record<string, number> = {
@@ -394,11 +358,12 @@ const Departments: React.FC<DepartmentsProps> = ({ onDepartmentSelect }) => {
 
 
                             <button
-                                onClick={() => onDepartmentSelect(getDepartmentData("City Mayor's Office"))}
+                                onClick={() => handleDepartmentClick(getDepartmentData("City Mayor's Office"))}
                                 className="mt-8 flex items-center gap-2 text-blue-700 font-bold uppercase tracking-wide text-sm group-hover:gap-3 transition-all hover:text-blue-800"
                             >
                                 View Details <ArrowRight size={18} />
                             </button>
+                            {loadingDept === "City Mayor's Office" && <LoadingOverlay />}
                         </div>
                     )}
 
@@ -410,7 +375,7 @@ const Departments: React.FC<DepartmentsProps> = ({ onDepartmentSelect }) => {
                         return (
                             <div
                                 key={idx}
-                                onClick={() => onDepartmentSelect(getDepartmentData(dept.name))}
+                                onClick={() => handleDepartmentClick(getDepartmentData(dept.name))}
                                 className={`group relative bg-white rounded-[1.5rem] p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 ${styles.borderHover} hover:-translate-y-2 cursor-pointer h-full flex flex-col overflow-hidden`}
                             >
                                 {/* Decorative corner accent */}
@@ -433,6 +398,8 @@ const Departments: React.FC<DepartmentsProps> = ({ onDepartmentSelect }) => {
                                 <div className={`mt-auto flex items-center gap-2 ${styles.textDark} font-bold uppercase tracking-wide text-sm group-hover:gap-3 transition-all`}>
                                     View Details <ArrowRight size={18} />
                                 </div>
+                                
+                                {loadingDept === dept.name && <LoadingOverlay />}
                             </div>
                         );
                     })}

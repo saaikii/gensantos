@@ -5,6 +5,7 @@ import { newsItems as allItems } from '../../data/siteData';
 
 
 import NewsSkeleton from './NewsSkeleton';
+import LoadingOverlay from '../Shared/LoadingOverlay';
 
 // ... (data array remains same)
 
@@ -15,6 +16,16 @@ interface NewsProps {
 const News: React.FC<NewsProps> = ({ onReadMore }) => {
   const [activeTab, setActiveTab] = useState<'Announcement' | 'News' | 'Activities'>('News');
   const [isLoading, setIsLoading] = useState(true);
+  const [loadingNewsId, setLoadingNewsId] = useState<number | null>(null);
+
+  const handleNewsClick = (news: any) => {
+    setLoadingNewsId(news.id);
+    setTimeout(() => {
+        onReadMore?.(news);
+        // Usually unmounted, but good practice to reset if we stay on page
+        // setLoadingNewsId(null); 
+    }, 500);
+  };
 
   // Simulated Loading Effect
   React.useEffect(() => {
@@ -124,9 +135,10 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
                 delay={index * 100} // Manual stagger
               >
                 <article
-                  onClick={() => onReadMore?.(news)}
-                  className="group cursor-pointer flex flex-col h-full bg-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-1"
+                  onClick={() => handleNewsClick(news)}
+                  className="group cursor-pointer flex flex-col h-full bg-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-1 relative"
                 >
+                  {loadingNewsId === news.id && <LoadingOverlay />}
                   <div className={`relative overflow-hidden aspect-[4/3] ${getSkeletonStyles(news.category).bg} transition-colors duration-300`}>
                     {/* Faux Text Pattern */}
                     <div className="absolute inset-8 space-y-3 opacity-15 select-none pointer-events-none">

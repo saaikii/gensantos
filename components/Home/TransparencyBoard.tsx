@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FileText, ArrowRight, Download, Eye, Clock, ShieldCheck, Filter, Gavel, Scale } from 'lucide-react';
 import ScrollReveal from '../Shared/ScrollReveal';
+import LoadingOverlay from '../Shared/LoadingOverlay';
 
 interface TransparencyBoardProps {
   onNavigate?: (page: any) => void;
@@ -8,6 +9,16 @@ interface TransparencyBoardProps {
 
 const TransparencyBoard: React.FC<TransparencyBoardProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState<'all' | 'award' | 'invitation' | 'bulletin'>('all');
+  const [loadingDocId, setLoadingDocId] = useState<number | null>(null);
+
+  const handleDocClick = (e: React.MouseEvent, link: string, id: number) => {
+      e.preventDefault();
+      setLoadingDocId(id);
+      setTimeout(() => {
+          window.open(link, '_blank', 'noopener,noreferrer');
+          setLoadingDocId(null);
+      }, 500);
+  };
 
   // Mock Data for Documents
   const documents = [
@@ -135,8 +146,11 @@ const TransparencyBoard: React.FC<TransparencyBoardProps> = ({ onNavigate }) => 
                     href={doc.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => handleDocClick(e, doc.url, doc.id)}
                     className={`block relative h-48 rounded-xl ${doc.previewColor} overflow-hidden border border-slate-100 group-hover:border-blue-100 transition-colors cursor-pointer`}
                   >
+                    {loadingDocId === doc.id && <LoadingOverlay />}
+                    {/* Faux Text Pattern */}
                     {/* Faux Text Pattern */}
                     <div className="absolute inset-4 space-y-2 opacity-20">
                       <div className="w-1/3 h-2 bg-slate-900 rounded-full mb-4"></div>

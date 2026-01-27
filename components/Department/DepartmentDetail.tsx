@@ -146,7 +146,7 @@ const DepartmentDetail: React.FC<DepartmentDetailProps> = ({ department, onBack 
 
                     {/* Sidebar Contact Info */}
                     <div className="lg:col-span-1">
-                        <div className="sticky top-40 space-y-4">
+                        <div className="sticky top-44 space-y-4">
                             <div className="bg-white rounded-2xl shadow-lg p-5 border border-gray-100">
                                 <h3 className="text-base font-bold text-gray-900 mb-4 pb-3 border-b border-gray-100">
                                     Contact Information
