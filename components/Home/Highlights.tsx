@@ -1,5 +1,6 @@
 import React from 'react';
 import { TrendingUp, Users, Award, Building2, ArrowRight } from 'lucide-react';
+import ScrollReveal from '../Shared/ScrollReveal';
 
 const Highlights: React.FC = () => {
   return (
@@ -23,7 +24,7 @@ const Highlights: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
           {/* Text Content */}
-          <div className="animate-fade-in-up">
+          <ScrollReveal className="animate-fade-in-up">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100/50 text-blue-600 border border-blue-200 text-xs font-bold uppercase tracking-wider mb-8">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
               Discover GenSan
@@ -41,10 +42,10 @@ const Highlights: React.FC = () => {
             <button className="group bg-blue-600 text-white font-bold py-4 px-10 rounded-full hover:bg-blue-700 transition-all transform hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-600/20 flex items-center gap-2">
               Invest in GenSan <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
-          </div>
+          </ScrollReveal>
 
           {/* Stats / Visuals */}
-          <div className="relative animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+          <ScrollReveal delay={200} className="relative">
             {/* Main Card */}
             <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl border border-slate-100 relative overflow-hidden group hover:shadow-3xl transition-shadow duration-500">
               {/* Decorative Pattern */}
@@ -103,7 +104,7 @@ const Highlights: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
       </div>
