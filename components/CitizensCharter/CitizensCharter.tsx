@@ -124,7 +124,7 @@ const getCategoryStyles = (category: string) => {
                                         className="block group relative bg-white border border-blue-50 rounded-2xl p-8 md:p-10 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                                     >
                                         {loadingCharterId === 'banner' && <LoadingOverlay />}
-                                        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50/50 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+                                        {/* Blob removed */}
 
                                         <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                                             <div className="flex items-center gap-6">
