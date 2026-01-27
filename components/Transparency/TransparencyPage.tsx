@@ -14,7 +14,7 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
   // Simulated Loading Effect
   React.useEffect(() => {
     const timer = setTimeout(() => {
-        setIsLoading(false);
+      setIsLoading(false);
     }, 500);
     return () => clearTimeout(timer);
   }, []);
@@ -134,8 +134,8 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
                 key={tab}
                 onClick={() => setActiveTab(tab as any)}
                 className={`px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide transition-all whitespace-nowrap ${activeTab === tab
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                    : 'bg-white text-slate-500 border border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
+                  : 'bg-white text-slate-500 border border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                   }`}
               >
                 {tab === 'all' ? 'All Docs' : tab === 'award' ? 'Notice of Award' : tab === 'invitation' ? 'Invitations' : 'Bulletins'}
@@ -162,9 +162,9 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
             <div key={doc.id} className="group relative bg-white rounded-2xl p-2 shadow-sm border border-slate-200 hover:shadow-xl hover:border-blue-200 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
 
               {/* Preview */}
-              <a 
-                href={doc.url} 
-                target="_blank" 
+              <a
+                href={doc.url}
+                target="_blank"
                 rel="noopener noreferrer"
                 className={`block relative h-56 rounded-xl ${doc.previewColor} overflow-hidden border border-slate-100 group-hover:border-blue-100 transition-colors cursor-pointer`}
               >
@@ -178,7 +178,7 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
                 </div>
                 {/* Image Preview if available */}
                 {doc.url && (doc.url.endsWith('.jpg') || doc.url.endsWith('.png')) && (
-                   <img src={doc.url} alt={doc.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                  <img src={doc.url} alt={doc.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                 )}
                 <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors flex items-center justify-center">
                   <span className="bg-white text-slate-900 px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-wide opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-lg flex items-center gap-2">

@@ -17,6 +17,7 @@ import CitizensCharterSkeleton from './components/CitizensCharter/CitizensCharte
 
 // Lazy load heavy page components for performance and loading states
 const Departments = React.lazy(() => import('./components/Department/Departments.tsx'));
+const DepartmentDetail = React.lazy(() => import('./components/Department/DepartmentDetail.tsx'));
 const CitizensCharter = React.lazy(() => import('./components/CitizensCharter/CitizensCharter.tsx'));
 const GADDatabase = React.lazy(() => import('./components/GadDatabase/GADDatabase.tsx'));
 // const Tourism = React.lazy(() => import('./components/Tourism/Tourism')); // Replaced by Transparency
@@ -25,23 +26,43 @@ const CPMOHome = React.lazy(() => import('./components/GadDatabase/CPMOHome.tsx'
 const TransparencyPage = React.lazy(() => import('./components/Transparency/TransparencyPage.tsx'));
 import GlobalSearchOverlay from './components/Layout/GlobalSearchOverlay.tsx';
 
-import { NewsItem } from './types.ts';
+import { NewsItem, DepartmentDetails } from './types.ts';
 import { SearchResult } from './data/siteData.ts';
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'news-detail' | 'transparency'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'news-detail' | 'transparency'>('home');
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null);
+  const [selectedDepartment, setSelectedDepartment] = useState<DepartmentDetails | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [globalSearchQuery, setGlobalSearchQuery] = useState('');
+  const [homeScrollPosition, setHomeScrollPosition] = useState(0);
 
-  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'transparency') => {
+  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'transparency') => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
 
   const handleReadNews = (news: NewsItem) => {
+    setHomeScrollPosition(window.scrollY);
     setSelectedNewsItem(news);
     setCurrentPage('news-detail');
+    window.scrollTo(0, 0);
+  };
+
+  const backFromNews = () => {
+    setCurrentPage('home');
+    // Use a small timeout to allow the homepage to render before scrolling
+    setTimeout(() => {
+      window.scrollTo({
+        top: homeScrollPosition,
+        behavior: 'instant'
+      });
+    }, 0);
+  };
+
+  const handleDepartmentSelect = (dept: DepartmentDetails) => {
+    setSelectedDepartment(dept);
+    setCurrentPage('department-detail');
     window.scrollTo(0, 0);
   };
 
@@ -73,6 +94,7 @@ const App: React.FC = () => {
   const getNavbarPage = (page: typeof currentPage): 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency' => {
     if (page === 'cpmo-home') return 'gad-database';
     if (page === 'news-detail') return 'home';
+    if (page === 'department-detail') return 'departments';
     return page;
   };
 
@@ -106,7 +128,16 @@ const App: React.FC = () => {
 
         {currentPage === 'departments' && (
           <React.Suspense fallback={<DepartmentsSkeleton />}>
-            <Departments />
+            <Departments onDepartmentSelect={handleDepartmentSelect} />
+          </React.Suspense>
+        )}
+
+        {currentPage === 'department-detail' && selectedDepartment && (
+          <React.Suspense fallback={<PageSkeleton />}>
+            <DepartmentDetail
+              department={selectedDepartment}
+              onBack={() => navigateTo('departments')}
+            />
           </React.Suspense>
         )}
 
@@ -136,7 +167,7 @@ const App: React.FC = () => {
           <React.Suspense fallback={<PageSkeleton />}>
             <NewsDetail
               newsItem={selectedNewsItem}
-              onBack={() => navigateTo('home')}
+              onBack={backFromNews}
             />
           </React.Suspense>
         )}
