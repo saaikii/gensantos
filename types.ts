@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface NewsItem {
-  id: number;
+  id: string | number;
   title: string;
   category: string;
   date: string;
