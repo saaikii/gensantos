@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Search } from 'lucide-react';
 
 interface NavbarProps {
-  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency') => void;
-  currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency';
+  onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency' | 'full-calendar') => void;
+  currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency' | 'full-calendar';
   enableStickySearch?: boolean;
   disableTransparency?: boolean;
 }
@@ -74,14 +74,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
 
   const isTransparent = !disableTransparency && !isScrolled && currentPage === 'home';
 
-  const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency', e: React.MouseEvent) => {
+  const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency' | 'full-calendar', e: React.MouseEvent) => {
     e.preventDefault();
     onNavigate(page);
     setMobileMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
-  const NavItem = ({ label, page, isExternal = false, externalUrl, isDisabled = false }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency', isExternal?: boolean, externalUrl?: string, isDisabled?: boolean }) => {
+  const NavItem = ({ label, page, isExternal = false, externalUrl, isDisabled = false }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency' | 'full-calendar', isExternal?: boolean, externalUrl?: string, isDisabled?: boolean }) => {
     const isActive = currentPage === page;
     
     // Stable base classes to prevent layout shift

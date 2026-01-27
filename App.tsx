@@ -5,7 +5,7 @@ import FeaturedBanners from './components/Home/FeaturedBanners';
 import News from './components/News/News';
 import MayorMessage from './components/Home/MayorMessage';
 import CitizensGuides from './components/Home/CitizensGuides';
-import Highlights from './components/Home/Highlights';
+import CalendarOfActivities from './components/Home/CalendarOfActivities';
 import TransparencyBoard from './components/Home/TransparencyBoard';
 import LocationMap from './components/Home/LocationMap';
 import Footer from './components/Layout/Footer';
@@ -24,20 +24,21 @@ const GADDatabase = React.lazy(() => import('./components/GadDatabase/GADDatabas
 const NewsDetail = React.lazy(() => import('./components/News/NewsDetail.tsx'));
 const CPMOHome = React.lazy(() => import('./components/GadDatabase/CPMOHome.tsx'));
 const TransparencyPage = React.lazy(() => import('./components/Transparency/TransparencyPage.tsx'));
+const FullCalendarPage = React.lazy(() => import('./components/Home/FullCalendarPage.tsx'));
 import GlobalSearchOverlay from './components/Layout/GlobalSearchOverlay.tsx';
 
 import { NewsItem, DepartmentDetails } from './types.ts';
 import { SearchResult } from './data/siteData.ts';
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'news-detail' | 'transparency'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'news-detail' | 'transparency' | 'full-calendar'>('home');
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null);
   const [selectedDepartment, setSelectedDepartment] = useState<DepartmentDetails | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [globalSearchQuery, setGlobalSearchQuery] = useState('');
   const [homeScrollPosition, setHomeScrollPosition] = useState(0);
 
-  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'transparency') => {
+  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'transparency' | 'full-calendar') => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
@@ -117,10 +118,12 @@ const App: React.FC = () => {
             <div id="news-section">
               <News onReadMore={handleReadNews} />
             </div>
+            <div id="calendar-section">
+                <CalendarOfActivities onNavigate={navigateTo} />
+            </div>
             <MayorMessage />
             <CitizensGuides />
             <TransparencyBoard onNavigate={navigateTo} />
-            <Highlights />
             <LocationMap />
           </>
         )}
@@ -177,9 +180,22 @@ const App: React.FC = () => {
             <TransparencyPage onNavigate={navigateTo} />
           </React.Suspense>
         )}
+
+        {currentPage === 'full-calendar' && (
+          <React.Suspense fallback={<PageSkeleton />}>
+            <FullCalendarPage 
+                onNavigate={navigateTo}
+                onBack={() => {
+                navigateTo('home');
+                setTimeout(() => {
+                    document.getElementById('calendar-section')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }} />
+          </React.Suspense>
+        )}
       </main>
 
-      {currentPage !== 'gad-database' && currentPage !== 'cpmo-home' && <Footer />}
+      {currentPage !== 'gad-database' && currentPage !== 'cpmo-home' && currentPage !== 'full-calendar' && <Footer />}
       <CityAssistant />
 
       <GlobalSearchOverlay
