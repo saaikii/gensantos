@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    X, User, MapPin, Phone, Mail, Clock, Building2, ChevronRight, ChevronDown, ArrowRight,
+    Building2, ChevronRight, ChevronDown, ArrowRight,
     Calculator, UserCog, Leaf, Home, PieChart, TrendingUp, HardHat, Trees, Package,
     ClipboardCheck, Scale, Map, Users, HeartHandshake, Banknote, Stethoscope, Activity,
     UserCheck, FileText, Shield, Gavel, Recycle, Landmark, Megaphone,
@@ -8,15 +8,16 @@ import {
     Filter
 } from 'lucide-react';
 import { departments as allDepartments } from '../../data/siteData';
+import { DepartmentDetails } from '../../types';
 import DepartmentsSkeleton from './DepartmentsSkeleton';
 
 
 const mayorsOfficeDivisions = [
     "City Public Information Office",
-// ... (lines 13-153 remain same, skipping for brevity but assuming they are preserved if not targeted) 
-// To allow simple integration, I will target the imports and the component start separately if needed, 
-// but here I can match the top block. Better to do it in two chunks to be safe.
-// Chunk 1: Import
+    // ... (lines 13-153 remain same, skipping for brevity but assuming they are preserved if not targeted) 
+    // To allow simple integration, I will target the imports and the component start separately if needed, 
+    // but here I can match the top block. Better to do it in two chunks to be safe.
+    // Chunk 1: Import
 
     "Integrated Barangay Affairs",
     "Bids and Awards Committee",
@@ -31,28 +32,72 @@ const mayorsOfficeDivisions = [
     "People's Law Enforcement Board"
 ];
 
-interface DepartmentDetails {
-    name: string;
-    head: string;
-    location: string;
-    contact: string;
-    email: string;
-    hours: string;
-    description: string;
-}
+
 
 const getDepartmentData = (name: string): DepartmentDetails => {
     const isMayorsOffice = name.includes("Mayor's Office");
+    const isYADO = name.includes("Youth Affairs Development Office");
+    const isICTD = name.includes("Information and Communications Technology Division");
 
-    return {
+    const deptFromData = allDepartments.find(d => d.name === name);
+
+    const baseData: DepartmentDetails = {
         name: name,
         head: isMayorsOffice ? "Hon. Lorelie G. Pacquiao" : "Engr. Juan Dela Cruz, MPA",
         location: isMayorsOffice ? "3rd Floor, City Hall Main Bldg." : "City Hall Compound, C.P. Garcia Ave.",
         contact: isMayorsOffice ? "(083) 552-2024" : "(083) 552-1234",
         email: isMayorsOffice ? "mayorsoffice@gensantos.gov.ph" : "department.head@gensantos.gov.ph",
         hours: "Monday - Friday: 8:00 AM - 5:00 PM",
-        description: `The ${name} is committed to providing excellent public service and ensuring the welfare of the General Santos City community.`
+        description: (isYADO || isICTD) ? (deptFromData?.description || "") : `The ${name} is committed to providing excellent public service and ensuring the welfare of the General Santos City community.`
     };
+
+    if (isYADO) {
+        return {
+            ...baseData,
+            activities: [
+                {
+                    title: "General Santos Youth Festival",
+                    image: "/DepartmentPhotos/GSYF 1.jpg",
+                    description: "A vibrant celebration showcasing the creativity, talent, and unity of the youth through arts, music, and cultural exhibitions."
+                },
+                {
+                    title: "Youth Productivity & Capacity Building",
+                    image: "/DepartmentPhotos/YPCM 1.jpg",
+                    description: "Workshops and training sessions designed to enhance technical skills and prepare the youth for employment and entrepreneurship."
+                },
+                {
+                    title: "Youth Parliament",
+                    image: "/DepartmentPhotos/PARLIA 1.jpg",
+                    description: "An immersive program that educates young people about local governance and legislative processes through simulation and leadership exercises."
+                }
+            ]
+        };
+    }
+
+    if (isICTD) {
+        return {
+            ...baseData,
+            activities: [
+                {
+                    title: "Digital Transformation Summit",
+                    image: "/images/news_lgu_oversight.png",
+                    description: "A gathering of tech experts and city officials to discuss the roadmap for GenSan's transition to a smart, digital city."
+                },
+                {
+                    title: "City-wide Free Wi-Fi Rollout",
+                    image: "/images/activities_tab_bg.jpg",
+                    description: "Expansion of free public Wi-Fi access to key parks, plazas, and community centers across the city."
+                },
+                {
+                    title: "ICT Cybersecurity Training",
+                    image: "/images/news_good_governance.jpg",
+                    description: "Periodic security workshops for government employees to ensure data protection and secure online transactions."
+                }
+            ]
+        };
+    }
+
+    return baseData;
 };
 
 // Filter categories for departments
@@ -92,7 +137,9 @@ const departmentCategoryMap: Record<string, string> = {
     "Local Civil Registrar": "social",
     "Public Safety Office": "social",
     "Office of Building Officials": "social",
-    "Waste Management Office": "social"
+    "Waste Management Office": "social",
+    "Youth Affairs Development Office": "social",
+    "Information and Communications Technology Division": "services"
 };
 
 const getCategoryStyles = (category: string) => {
@@ -157,13 +204,25 @@ const getCategoryStyles = (category: string) => {
     }
 };
 
-const Departments: React.FC = () => {
+interface DepartmentsProps {
+    onDepartmentSelect: (dept: DepartmentDetails) => void;
+}
+
+const Departments: React.FC<DepartmentsProps> = ({ onDepartmentSelect }) => {
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedDept, setSelectedDept] = useState<DepartmentDetails | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [showAllDivisions, setShowAllDivisions] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+
+    // Define category priority for color sorting
+    const categoryPriority: Record<string, number> = {
+        'services': 1,  // Teal
+        'finance': 2,   // Green
+        'public': 3,    // Orange
+        'social': 4,    // Rose
+        'executive': 5  // Blue
+    };
 
     // Simulated Loading Effect
     React.useEffect(() => {
@@ -173,13 +232,29 @@ const Departments: React.FC = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    const filteredDepts = allDepartments.filter(dept => {
-        const matchesSearch = dept.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            dept.description.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = selectedCategory === 'all' ||
-            departmentCategoryMap[dept.name] === selectedCategory;
-        return matchesSearch && matchesCategory;
-    });
+    const filteredDepts = allDepartments
+        .filter(dept => {
+            const matchesSearch = dept.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                dept.description.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesCategory = selectedCategory === 'all' ||
+                departmentCategoryMap[dept.name] === selectedCategory;
+            return matchesSearch && matchesCategory;
+        })
+        .sort((a, b) => {
+            // Pin "Sangguniang Panlungsod" to the very top
+            if (a.name === "Sangguniang Panlungsod") return -1;
+            if (b.name === "Sangguniang Panlungsod") return 1;
+
+            const priorityA = categoryPriority[departmentCategoryMap[a.name] || 'executive'];
+            const priorityB = categoryPriority[departmentCategoryMap[b.name] || 'executive'];
+
+            if (priorityA !== priorityB) {
+                return priorityA - priorityB;
+            }
+
+            // Secondary sort by name for consistent order within same color
+            return a.name.localeCompare(b.name);
+        });
 
     if (isLoading) return <DepartmentsSkeleton />;
 
@@ -188,9 +263,9 @@ const Departments: React.FC = () => {
             {/* Background Watermark - Fixed */}
             <div className="fixed top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
                 <div className="w-[600px] h-[600px] opacity-[0.15]">
-                    <img 
-                        src="/gensan_seal_large.jpg" 
-                        alt="Gensan Seal" 
+                    <img
+                        src="/gensan_seal_large.jpg"
+                        alt="Gensan Seal"
                         className="w-full h-full object-contain"
                     />
                 </div>
@@ -202,7 +277,7 @@ const Departments: React.FC = () => {
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0038A8] mb-6 drop-shadow-md font-serif uppercase tracking-tight">
                         Departments
                     </h1>
-                     <div className="w-24 h-1.5 bg-gradient-to-r from-[#0038A8] to-yellow-500 mx-auto rounded-full mb-8"></div>
+                    <div className="w-24 h-1.5 bg-gradient-to-r from-[#0038A8] to-yellow-500 mx-auto rounded-full mb-8"></div>
                     <p className="text-slate-900 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
                         Explore the departments and offices of the City Government of General Santos.
                         Find services, contact information, and officials.
@@ -222,9 +297,9 @@ const Departments: React.FC = () => {
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full pl-12 pr-4 py-4 bg-transparent text-gray-700 placeholder-gray-400 focus:outline-none min-w-0"
                         />
-                        
+
                         <div className="h-8 w-px bg-gray-200 mx-2 shrink-0"></div>
-                        
+
                         <div className="relative shrink-0 pr-2">
                             <button
                                 onClick={() => setShowFilterDropdown(!showFilterDropdown)}
@@ -319,7 +394,7 @@ const Departments: React.FC = () => {
 
 
                             <button
-                                onClick={() => setSelectedDept(getDepartmentData("City Mayor's Office"))}
+                                onClick={() => onDepartmentSelect(getDepartmentData("City Mayor's Office"))}
                                 className="mt-8 flex items-center gap-2 text-blue-700 font-bold uppercase tracking-wide text-sm group-hover:gap-3 transition-all hover:text-blue-800"
                             >
                                 View Details <ArrowRight size={18} />
@@ -335,7 +410,7 @@ const Departments: React.FC = () => {
                         return (
                             <div
                                 key={idx}
-                                onClick={() => setSelectedDept(getDepartmentData(dept.name))}
+                                onClick={() => onDepartmentSelect(getDepartmentData(dept.name))}
                                 className={`group relative bg-white rounded-[1.5rem] p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 ${styles.borderHover} hover:-translate-y-2 cursor-pointer h-full flex flex-col overflow-hidden`}
                             >
                                 {/* Decorative corner accent */}
@@ -374,106 +449,7 @@ const Departments: React.FC = () => {
                 </div>
             </div>
 
-            {/* Detail Modal */}
-            {selectedDept && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                    {/* Backdrop */}
-                    <div
-                        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
-                        onClick={() => setSelectedDept(null)}
-                    ></div>
 
-                    {/* Content */}
-                    <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in-up text-slate-800 border border-white/20">
-                        {/* ... Modal content ... */}
-
-                        {/* Header */}
-                        <div className="bg-white p-6 border-b border-gray-100 flex justify-between items-start">
-                            <div className="pr-8">
-                                <div className="flex items-center gap-2 text-blue-600 text-xs font-bold uppercase tracking-wider mb-2">
-                                    <Building2 size={14} /> Department Information
-                                </div>
-                                <h3 className="text-xl md:text-2xl font-bold leading-tight text-gray-900">{selectedDept.name}</h3>
-                            </div>
-                            <button onClick={() => setSelectedDept(null)} className="text-gray-400 hover:text-gray-700 transition-colors p-2 hover:bg-gray-100 rounded-full">
-                                <X size={20} />
-                            </button>
-                        </div>
-
-                        {/* Body */}
-                        <div className="p-6 md:p-8 space-y-6">
-                            <p className="text-sm text-gray-600 leading-relaxed bg-blue-50/50 p-4 rounded-lg border border-blue-100">
-                                {selectedDept.description}
-                            </p>
-
-                            <div className="space-y-5">
-                                <div className="flex items-start gap-4">
-                                    <div className="bg-gray-100 p-2.5 rounded-xl text-gray-600 shrink-0">
-                                        <User size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-0.5">Head of Office</p>
-                                        <p className="font-bold text-gray-900">{selectedDept.head}</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <div className="bg-gray-100 p-2.5 rounded-xl text-gray-600 shrink-0">
-                                        <MapPin size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-0.5">Location</p>
-                                        <p className="font-medium text-gray-800">{selectedDept.location}</p>
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                    <div className="flex items-start gap-3">
-                                        <div className="bg-gray-100 p-2 rounded-lg text-gray-600 shrink-0">
-                                            <Phone size={18} />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-0.5">Contact No.</p>
-                                            <p className="font-semibold text-gray-800 text-sm">{selectedDept.contact}</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-3">
-                                        <div className="bg-gray-100 p-2 rounded-lg text-gray-600 shrink-0">
-                                            <Clock size={18} />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-0.5">Office Hours</p>
-                                            <p className="font-semibold text-gray-800 text-sm ">{selectedDept.hours}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3 pt-2">
-                                    <div className="bg-gray-100 p-2 rounded-lg text-gray-600 shrink-0">
-                                        <Mail size={18} />
-                                    </div>
-                                    <div className="flex-1 overflow-hidden">
-                                        <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-0.5">Email Address</p>
-                                        <p className="font-semibold text-blue-600 hover:underline truncate cursor-pointer">
-                                            {selectedDept.email}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Footer */}
-                        <div className="bg-gray-50 p-4 border-t border-gray-100 flex justify-end">
-                            <button
-                                onClick={() => setSelectedDept(null)}
-                                className="px-6 py-2.5 bg-white border border-gray-200 hover:bg-gray-100 text-gray-700 font-semibold rounded-lg transition-colors text-sm shadow-sm"
-                            >
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

@@ -46,7 +46,9 @@ export const departments = [
   { id: 'dept-23', name: "Local Civil Registrar", icon: <FileText />, description: "Civil registration services for vital events.", type: 'department' as const, category: 'social' },
   { id: 'dept-24', name: "Public Safety Office", icon: <Shield />, description: "Ensures public safety and order in the city.", type: 'department' as const, category: 'social' },
   { id: 'dept-25', name: "Office of Building Officials", icon: <Building2 />, description: "Regulation of building construction and maintenance.", type: 'department' as const, category: 'social' },
-  { id: 'dept-26', name: "Waste Management Office", icon: <Recycle />, description: "Solid waste management and disposal services.", type: 'department' as const, category: 'social' }
+  { id: 'dept-26', name: "Waste Management Office", icon: <Recycle />, description: "Solid waste management and disposal services.", type: 'department' as const, category: 'social' },
+  { id: 'dept-27', name: "Youth Affairs Development Office", icon: <GraduationCap />, description: "The City Mayor’s Office – Youth Affairs Development Office (YADO) is a local government unit that plans and implements programs for youth development, empowerment, and protection under the City Mayor’s leadership.\n\nIt coordinates with schools, barangays, youth councils, and partner organizations to promote youth leadership, skills training, volunteerism, health and well-being, sports, arts, and livelihood opportunities, while also ensuring that youth concerns are included in city plans and policies through consultations and community engagement.", type: 'department' as const, category: 'social' },
+  { id: 'dept-28', name: "Information and Communications Technology Division", icon: <MonitorSmartphone />, description: "Manages and maintains the city government's ICT infrastructure and systems.", type: 'department' as const, category: 'services' }
 ];
 
 export const services = [

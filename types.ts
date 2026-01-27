@@ -42,3 +42,21 @@ export enum LoadingState {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR'
 }
+
+export interface DepartmentActivity {
+  title: string;
+  image: string;
+  description?: string;
+}
+
+export interface DepartmentDetails {
+  name: string;
+  head: string;
+  location: string;
+  contact: string;
+  email: string;
+  hours: string;
+  description: string;
+  image?: string; // Optional image for the department
+  activities?: DepartmentActivity[]; // Optional activities for the department
+}
