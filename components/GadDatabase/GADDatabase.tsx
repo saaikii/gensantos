@@ -4,6 +4,7 @@ import Navbar from '../Layout/Navbar';
 import CPMONavbar from './CPMONavbar';
 import Footer from '../Layout/Footer';
 import GADDatabaseSkeleton from './GADDatabaseSkeleton';
+import ScrollReveal from '../Shared/ScrollReveal';
 
 interface GADDatabaseProps {
     onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'cpmo-home') => void;
@@ -180,34 +181,35 @@ const GADDatabase: React.FC<GADDatabaseProps> = ({ onNavigate }) => {
                             const Icon = category.icon;
                             const styles = category.styles;
                             return (
-                                <a
-                                    key={category.id}
-                                    href={category.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`group relative bg-white rounded-[1.5rem] p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 ${styles.borderHover} hover:-translate-y-2 cursor-pointer h-full flex flex-col overflow-hidden`}
-                                >
-                                    {/* Decorative corner accent */}
-                                    <div className={`absolute top-0 right-0 w-24 h-24 ${styles.corner} rounded-bl-[80px] -mr-3 -mt-3 transition-transform group-hover:scale-110`}></div>
+                                <ScrollReveal key={category.id} delay={100} className="h-full" animation="fade-up" enableBounce duration={0.6}>
+                                    <a
+                                        href={category.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`group relative bg-white rounded-[1.5rem] p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 ${styles.borderHover} hover:-translate-y-2 cursor-pointer h-full flex flex-col overflow-hidden`}
+                                    >
+                                        {/* Decorative corner accent */}
+                                        <div className={`absolute top-0 right-0 w-24 h-24 ${styles.corner} rounded-bl-[80px] -mr-3 -mt-3 transition-transform group-hover:scale-110`}></div>
 
-                                    {/* Icon */}
-                                    <div className={`relative w-14 h-14 ${styles.bgDark} text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg ${styles.shadow} group-hover:rotate-6 transition-transform duration-300`}>
-                                        <Icon size={28} strokeWidth={2} />
-                                    </div>
+                                        {/* Icon */}
+                                        <div className={`relative w-14 h-14 ${styles.bgDark} text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg ${styles.shadow} group-hover:rotate-6 transition-transform duration-300`}>
+                                            <Icon size={28} strokeWidth={2} />
+                                        </div>
 
-                                    <h3 className={`text-xl font-bold text-gray-900 mb-3 ${styles.hoverText} transition-colors line-clamp-2`}>
-                                        {category.title}
-                                    </h3>
+                                        <h3 className={`text-xl font-bold text-gray-900 mb-3 ${styles.hoverText} transition-colors line-clamp-2`}>
+                                            {category.title}
+                                        </h3>
 
-                                    <p className="text-slate-500 leading-relaxed mb-6 line-clamp-3 flex-grow">
-                                        {category.description}
-                                    </p>
+                                        <p className="text-slate-500 leading-relaxed mb-6 line-clamp-3 flex-grow">
+                                            {category.description}
+                                        </p>
 
-                                    {/* Action link */}
-                                    <div className={`mt-auto flex items-center gap-2 ${styles.textDark} font-bold uppercase tracking-wide text-sm group-hover:gap-3 transition-all`}>
-                                        Open Database <ArrowLeft className="rotate-[135deg]" size={18} />
-                                    </div>
-                                </a>
+                                        {/* Action link */}
+                                        <div className={`mt-auto flex items-center gap-2 ${styles.textDark} font-bold uppercase tracking-wide text-sm group-hover:gap-3 transition-all`}>
+                                            Open Database <ArrowLeft className="rotate-[135deg]" size={18} />
+                                        </div>
+                                    </a>
+                                </ScrollReveal>
                             );
                         })}
                     </div>

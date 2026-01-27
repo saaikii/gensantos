@@ -17,7 +17,7 @@ const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
   };
 
   const NavItem = ({ label, page, isExternal = false, externalUrl }: { label: string, page?: 'home' | 'gad-database' | 'cpmo-home', isExternal?: boolean, externalUrl?: string }) => {
-    const baseClasses = "hover:text-[#4c1d95] transition-colors px-1 lg:px-3 py-2 block md:inline-block";
+    const baseClasses = "hover:text-[#4c1d95] px-1 lg:px-3 py-2 block md:inline-block font-bold border-b-2 border-transparent hover:border-purple-300";
 
     if (isExternal || externalUrl) {
       return (
@@ -35,7 +35,7 @@ const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
       <a
         href="#"
         onClick={(e) => page && handleNavClick(page, e)}
-        className={`${baseClasses} ${currentPage === page ? 'text-[#4c1d95] font-black' : ''} `}
+        className={`${baseClasses} ${currentPage === page ? 'text-[#4c1d95]' : ''} `}
       >
         {label}
       </a>
