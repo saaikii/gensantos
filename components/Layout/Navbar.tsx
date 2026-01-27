@@ -8,6 +8,9 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySearch = false }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
@@ -48,6 +51,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
 
   useEffect(() => {
     const handleScroll = () => {
+      // Toggle scrolled state for transparency
+      setIsScrolled(window.scrollY > 20);
+
       // Show search bar when scrolled past 500px AND sticky search is enabled
       if (window.scrollY > 500 && enableStickySearch) {
         setShowSearch(true);
@@ -65,6 +71,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
     return () => window.removeEventListener('scroll', handleScroll);
   }, [currentPage, enableStickySearch]);
 
+  const isTransparent = !isScrolled && currentPage === 'home';
+
   const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency', e: React.MouseEvent) => {
     e.preventDefault();
     onNavigate(page);
@@ -73,43 +81,51 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
   };
 
   const NavItem = ({ label, page, isExternal = false, externalUrl, isDisabled = false }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency', isExternal?: boolean, externalUrl?: string, isDisabled?: boolean }) => {
-    const baseClasses = "hover:text-blue-700 px-1 lg:px-3 py-2 block md:inline-block font-bold border-b-2 border-transparent hover:border-blue-300";
+    const isActive = currentPage === page;
+    
+    // Stable base classes to prevent layout shift
+    const baseClasses = "px-1 lg:px-3 py-2 block md:inline-block font-bold border-b-2 transition-none";
 
-    if (isDisabled) {
-      return (
-        <span className="px-1 lg:px-3 py-2 block md:inline-block text-gray-400 cursor-not-allowed font-bold border-b-2 border-transparent">
-          {label}
-        </span>
-      );
-    }
+    const getColors = () => {
+      if (isDisabled) return "text-gray-400 border-transparent cursor-not-allowed";
+      
+      if (isTransparent) {
+        if (isActive) return "text-blue-300 border-blue-400";
+        return "text-white border-transparent hover:text-blue-200 hover:border-blue-200/50";
+      } else {
+        if (isActive) return "text-blue-700 border-blue-300";
+        return "text-gray-700 border-transparent hover:text-blue-700 hover:border-blue-300";
+      }
+    };
 
-    if (isExternal || externalUrl) {
-      return (
-        <a
-          href={externalUrl || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={baseClasses}
-        >
-          {label}
-        </a>
-      )
-    }
-    return (
+    const linkContent = (isExternal || externalUrl) ? (
+      <a
+        href={externalUrl || "#"}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${baseClasses} ${getColors()}`}
+      >
+        {label}
+      </a>
+    ) : (
       <a
         href="#"
         onClick={(e) => page && handleNavClick(page, e)}
-        className={`${baseClasses} ${currentPage === page ? 'text-blue-700' : ''} `}
+        className={`${baseClasses} ${getColors()}`}
       >
         {label}
       </a>
     );
+
+    return linkContent;
   };
 
   const Separator = () => <span className="hidden md:block text-gray-300">|</span>;
 
   return (
-    <div className="fixed w-full z-50 flex flex-col shadow-lg font-sans">
+    <div
+      className={`fixed w-full z-[100] flex flex-col font-sans transition-[box-shadow] duration-500 ${isTransparent ? 'shadow-none' : 'shadow-lg'}`}
+    >
       {/* Top Bar - Official Blue */}
       <div className="bg-[#0038A8] text-white py-3 md:py-4 relative overflow-hidden">
         {/* Background texture optional */}
@@ -162,14 +178,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
       </div>
 
       {/* Main Navbar - White */}
-      <nav className="bg-white border-b-4 border-[#CE1126] md:border-b md:border-gray-200 text-gray-700 text-xs md:text-xs lg:text-sm font-bold uppercase tracking-wide relative">
+      <nav className={`border-b-4 md:border-b-2 ${isTransparent ? 'bg-transparent border-transparent' : 'bg-white border-[#CE1126] md:border-gray-200'} text-xs md:text-xs lg:text-sm font-bold uppercase tracking-wide relative`}>
         <div className="container mx-auto px-2 md:px-4">
           <div className="flex justify-between md:justify-center items-center h-14 md:h-12">
 
             {/* Mobile Menu Button & Brand (Visible only on Mobile) */}
             <div className="flex md:hidden w-full justify-between items-center">
-              <span className="text-blue-900 font-bold">Menu</span>
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-blue-900 p-2">
+              <span className={`font-bold transition-colors duration-500 ${isTransparent ? 'text-white' : 'text-blue-900'}`}>Menu</span>
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`p-2 transition-colors duration-500 ${isTransparent ? 'text-white' : 'text-blue-900'}`}>
                 {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>
@@ -197,7 +213,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
 
         {/* Mobile Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-xl">
+          <div className="md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-xl overflow-hidden animate-fade-in">
             <div className="flex flex-col p-4 space-y-1 divide-y divide-gray-100">
               <NavItem label="HOME" page="home" />
               <NavItem label="DEPARTMENTS" page="departments" />
