@@ -16,22 +16,22 @@ interface NewsProps {
 const News: React.FC<NewsProps> = ({ onReadMore }) => {
   const [activeTab, setActiveTab] = useState<'Announcement' | 'News' | 'Activities'>('News');
   const [isLoading, setIsLoading] = useState(true);
-  const [loadingNewsId, setLoadingNewsId] = useState<number | null>(null);
+  const [loadingNewsId, setLoadingNewsId] = useState<string | number | null>(null);
 
   const handleNewsClick = (news: any) => {
     setLoadingNewsId(news.id);
     setTimeout(() => {
-        onReadMore?.(news);
-        // Usually unmounted, but good practice to reset if we stay on page
-        // setLoadingNewsId(null); 
-    }, 500);
+      onReadMore?.(news);
+      // Usually unmounted, but good practice to reset if we stay on page
+      // setLoadingNewsId(null); 
+    }, 200);
   };
 
   // Simulated Loading Effect
   React.useEffect(() => {
     const timer = setTimeout(() => {
-        setIsLoading(false);
-    }, 500);
+      setIsLoading(false);
+    }, 200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -68,12 +68,12 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
               onClick={() => setActiveTab('Announcement')}
               className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'Announcement' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-75 hover:brightness-90'}`}
             >
-              <img 
-                src="/images/announcement_bg_new.jpg" 
-                className={`absolute inset-0 w-full h-full object-cover object-[center_75%] transition-all duration-500 ${activeTab === 'Announcement' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`} 
-                alt="Announcement bg" 
+              <img
+                src="/images/announcement_bg_new.jpg"
+                className={`absolute inset-0 w-full h-full object-cover object-[center_75%] transition-all duration-500 ${activeTab === 'Announcement' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`}
+                alt="Announcement bg"
               />
-              
+
               <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-110">
                 <Megaphone className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
                 <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase font-sans drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Announcement</h3>
@@ -88,10 +88,10 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
               onClick={() => setActiveTab('News')}
               className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'News' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-75 hover:brightness-90'}`}
             >
-              <img 
-                src="/images/news_tab_bg_new.jpg" 
-                className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${activeTab === 'News' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`} 
-                alt="News bg" 
+              <img
+                src="/images/news_tab_bg_new.jpg"
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${activeTab === 'News' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`}
+                alt="News bg"
               />
 
               <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-110">
@@ -108,12 +108,12 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
               onClick={() => setActiveTab('Activities')}
               className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'Activities' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-75 hover:brightness-90'}`}
             >
-              <img 
-                src="/images/kalilangan_festival.png" 
-                className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${activeTab === 'Activities' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`} 
-                alt="Activities bg" 
+              <img
+                src="/images/kalilangan_festival.png"
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${activeTab === 'Activities' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`}
+                alt="Activities bg"
               />
-              
+
               <div className="relative z-20 flex flex-col items-center transform transition-transform duration-300 group-hover:scale-110">
                 <PartyPopper className="text-white w-8 h-8 md:w-10 md:h-10 mb-2 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
                 <h3 className="text-white font-black text-2xl md:text-3xl tracking-widest uppercase font-sans drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Activities</h3>
@@ -128,61 +128,61 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
         {/* Content Grid */}
         {/* Content Grid */}
         <div key={activeTab} className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {filteredItems.map((news, index) => (
-              <ScrollReveal 
-                key={news.id} 
-                className="h-full" 
-                delay={index * 100} // Manual stagger
+          {filteredItems.map((news, index) => (
+            <ScrollReveal
+              key={news.id}
+              className="h-full"
+              delay={index * 100} // Manual stagger
+            >
+              <article
+                onClick={() => handleNewsClick(news)}
+                className="group cursor-pointer flex flex-col h-full bg-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-1 relative"
               >
-                <article
-                  onClick={() => handleNewsClick(news)}
-                  className="group cursor-pointer flex flex-col h-full bg-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-1 relative"
-                >
-                  {loadingNewsId === news.id && <LoadingOverlay />}
-                  <div className={`relative overflow-hidden aspect-[4/3] ${getSkeletonStyles(news.category).bg} transition-colors duration-300`}>
-                    {/* Faux Text Pattern */}
-                    <div className="absolute inset-8 space-y-3 opacity-15 select-none pointer-events-none">
-                      <div className="w-1/3 h-3 bg-slate-900 rounded-full mb-6"></div>
-                      <div className="w-full h-2.5 bg-slate-400 rounded-full"></div>
-                      <div className="w-5/6 h-2.5 bg-slate-400 rounded-full"></div>
-                      <div className="w-4/5 h-2.5 bg-slate-400 rounded-full"></div>
-                      <div className="w-full h-2.5 bg-slate-400 rounded-full mt-6"></div>
-                      <div className="w-11/12 h-2.5 bg-slate-400 rounded-full"></div>
-                      <div className="w-full h-2.5 bg-slate-400 rounded-full mt-6"></div>
-                      <div className="w-3/4 h-2.5 bg-slate-400 rounded-full"></div>
+                {loadingNewsId === news.id && <LoadingOverlay />}
+                <div className="relative overflow-hidden aspect-[4/3] bg-gray-100 transition-colors duration-300">
+                  {news.image ? (
+                    <>
+                      <img
+                        src={news.image}
+                        alt={news.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </>
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 bg-gray-50 group-hover:bg-gray-100 transition-colors">
+                      <div className="opacity-10 group-hover:opacity-20 transition-all duration-500 transform group-hover:scale-110 group-hover:-rotate-6">
+                        {getSkeletonStyles(news.category).icon}
+                      </div>
                     </div>
+                  )}
 
-                    {/* Center Icon/Watermark */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-all duration-500 transform group-hover:scale-110 group-hover:-rotate-6">
-                      {getSkeletonStyles(news.category).icon}
-                    </div>
+                  <div className={`absolute top-4 left-4 ${getTabColor(news.category)} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-md z-10`}>
+                    {news.category}
+                  </div>
+                </div>
 
-                    <div className={`absolute top-4 left-4 ${getTabColor(news.category)} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-md z-10`}>
-                      {news.category}
-                    </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-2 text-gray-400 text-xs font-medium mb-3 uppercase tracking-wide">
+                    <CalendarDays size={14} />
+                    <span>{news.date}</span>
                   </div>
 
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center gap-2 text-gray-400 text-xs font-medium mb-3 uppercase tracking-wide">
-                      <CalendarDays size={14} />
-                      <span>{news.date}</span>
-                    </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
+                    {news.title}
+                  </h3>
 
-                    <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
-                      {news.name}
-                    </h3>
+                  <p className="text-gray-500 mb-6 line-clamp-3 flex-1 text-sm leading-relaxed">
+                    {news.summary}
+                  </p>
 
-                    <p className="text-gray-500 mb-6 line-clamp-3 flex-1 text-sm leading-relaxed">
-                      {news.description}
-                    </p>
-
-                    <div className={`flex items-center gap-2 ${getTextColor(activeTab)} font-bold text-sm mt-auto group-hover:gap-3 transition-all`}>
-                      Read More <ArrowRight size={16} />
-                    </div>
+                  <div className={`flex items-center gap-2 ${getTextColor(activeTab)} font-bold text-sm mt-auto group-hover:gap-3 transition-all`}>
+                    Read More <ArrowRight size={16} />
                   </div>
-                </article>
-              </ScrollReveal>
-            ))}
+                </div>
+              </article>
+            </ScrollReveal>
+          ))}
         </div>
 
         <div className="mt-12 text-center">
