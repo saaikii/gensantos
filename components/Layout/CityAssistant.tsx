@@ -77,7 +77,7 @@ const CityAssistant: React.FC = () => {
       {/* Floating Action Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 transition-all duration-500 shadow-2xl flex items-center justify-center group ${
+        className={`fixed bottom-6 right-6 z-[100] transition-all duration-500 shadow-2xl flex items-center justify-center group ${
           isOpen 
             ? 'w-14 h-14 bg-white text-gray-800 hover:bg-gray-100 rounded-full hover:scale-110 active:scale-95' 
             : 'px-6 py-4 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-full hover:scale-105 hover:-translate-y-1'
@@ -101,11 +101,11 @@ const CityAssistant: React.FC = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-4 md:right-8 z-50 w-[90vw] md:w-[400px] bg-white rounded-3xl shadow-2xl border border-white/50 flex flex-col overflow-hidden animate-fade-in-up origin-bottom-right font-sans ring-1 ring-black/5" style={{ height: '600px', maxHeight: '80vh' }}>
+        <div className="fixed bottom-24 right-4 md:right-8 z-[100] w-[90vw] md:w-[400px] bg-white rounded-3xl shadow-2xl border border-white/50 flex flex-col overflow-hidden animate-fade-in-up origin-bottom-right font-sans ring-1 ring-black/5" style={{ height: '600px', maxHeight: '80vh' }}>
           
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 p-5 text-white flex items-center justify-between shadow-lg relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 opacity-10">
+          <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 p-5 text-white flex items-center justify-between shadow-lg relative overflow-hidden shrink-0">
+            <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
               <Sparkles size={100} />
             </div>
             
@@ -117,7 +117,7 @@ const CityAssistant: React.FC = () => {
                 <div className="absolute -bottom-1 -right-1 bg-green-500 w-3.5 h-3.5 rounded-full border-2 border-blue-600"></div>
               </div>
               <div>
-                <h3 className="font-bold text-lg tracking-tight">GenSan Assistant</h3>
+                <h3 className="font-bold text-lg tracking-tight leading-none mb-1">GenSan Assistant</h3>
                 <div className="flex items-center gap-1.5 opacity-90">
                   <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse"></span>
                   <p className="text-xs font-medium text-blue-50">Powered by Gemini AI</p>
@@ -126,7 +126,8 @@ const CityAssistant: React.FC = () => {
             </div>
             <button 
               onClick={() => setIsOpen(false)}
-              className="bg-white/10 hover:bg-white/20 p-2 rounded-xl transition-colors backdrop-blur-md"
+              className="relative z-20 bg-white/10 hover:bg-white/20 p-2 rounded-xl transition-all duration-300 hover:rotate-90 backdrop-blur-md"
+              aria-label="Close chat"
             >
               <X size={18} />
             </button>
