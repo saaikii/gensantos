@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Phone, Ambulance, Shield, Flame, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Phone, Ambulance, Shield, Flame, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
 // Slide data configuration
 const slides = [
@@ -74,8 +74,12 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
   const [animationPhase, setAnimationPhase] = useState(0);
   const [hasTyped, setHasTyped] = useState(false);
 
+  const [isPaused, setIsPaused] = useState(false);
+
   // Auto-advance slideshow
   useEffect(() => {
+    if (isPaused) return;
+
     const interval = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
@@ -85,7 +89,7 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
     }, 8000); // Change slide every 8 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   // Typewriter effect for first slide (only runs once)
   useEffect(() => {
@@ -321,19 +325,31 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
           </svg>
         </button>
 
-        {/* Dots - Bottom Center, above search bar */}
-        <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              className={`transition-all duration-300 ${index === currentSlide
-                  ? 'w-6 h-2 bg-yellow-400 rounded-full'
-                  : 'w-2.5 h-2.5 rounded-full border-2 border-white/60 hover:border-white bg-transparent'
-                }`}
-            />
-          ))}
+        {/* Dots & Controls - Bottom Center, above search bar */}
+        <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4">
+          <div className="flex items-center gap-2.5">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`transition-all duration-300 ${index === currentSlide
+                    ? 'w-6 h-2 bg-yellow-400 rounded-full'
+                    : 'w-2.5 h-2.5 rounded-full border-2 border-white/60 hover:border-white bg-transparent'
+                  }`}
+              />
+            ))}
+          </div>
+
+          <div className="w-px h-4 bg-white/30"></div>
+
+          <button
+            onClick={() => setIsPaused(!isPaused)}
+            className="text-white hover:text-yellow-400 transition-colors focus:outline-none flex items-center justify-center w-5 h-5"
+            aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
+          >
+            {isPaused ? <Play size={14} fill="currentColor" /> : <Pause size={14} fill="currentColor" />}
+          </button>
         </div>
 
         <style>{`

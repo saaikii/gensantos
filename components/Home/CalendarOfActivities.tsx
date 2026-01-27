@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar as CalendarIcon, MapPin, Clock, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import ScrollReveal from '../Shared/ScrollReveal';
+import WeatherWidget from './WeatherWidget';
 
 type Event = {
   id: number;
@@ -189,6 +190,7 @@ const CalendarOfActivities: React.FC<CalendarProps> = ({ onNavigate }) => {
                                 {renderCalendarDays()}
                              </div>
 
+                
                              {/* Legend */}
                              <div className="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-3 text-xs font-medium text-slate-500 justify-center">
                                 <div className="flex items-center gap-1.5">
@@ -207,7 +209,9 @@ const CalendarOfActivities: React.FC<CalendarProps> = ({ onNavigate }) => {
                         </div>
                     </ScrollReveal>
 
-                {/* Live Hourglass Countdown removed to leave empty space */}
+                    {/* Weather Widget */}
+                    <WeatherWidget />
+
                 </div>
                 <ScrollReveal delay={200} className="lg:col-span-8">
                     <div className="space-y-6">
