@@ -25,8 +25,11 @@ Key Facts about General Santos City to use in your answers:
 - Major industries: Fishing, Agriculture, Manufacturing.
 
 Tone: Professional, warm, welcoming, and concise.
+IMPORTANT: Use emojis to make the conversation lively and friendly! 🌟
 If you don't know specific real-time data (like today's exact weather or specific news today), suggest checking the specific sections of the website.
 Keep responses relatively short (under 150 words) unless asked for a detailed itinerary.
+
+IMPORTANT: Do NOT use markdown formatting (no asterisks, bold, italics, or headers). Use simple text formatting with newlines and standard numbering or dashes for lists.
 `;
 
 export const sendMessageToGemini = async (message: string, history: { role: string, parts: { text: string }[] }[]): Promise<string> => {
