@@ -73,11 +73,11 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
   };
 
   const NavItem = ({ label, page, isExternal = false, externalUrl, isDisabled = false }: { label: string, page?: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency', isExternal?: boolean, externalUrl?: string, isDisabled?: boolean }) => {
-    const baseClasses = "hover:text-blue-700 transition-colors px-1 lg:px-3 py-2 block md:inline-block";
+    const baseClasses = "hover:text-blue-700 px-1 lg:px-3 py-2 block md:inline-block font-bold border-b-2 border-transparent hover:border-blue-300";
 
     if (isDisabled) {
       return (
-        <span className="px-1 lg:px-3 py-2 block md:inline-block text-gray-400 cursor-not-allowed">
+        <span className="px-1 lg:px-3 py-2 block md:inline-block text-gray-400 cursor-not-allowed font-bold border-b-2 border-transparent">
           {label}
         </span>
       );
@@ -99,7 +99,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
       <a
         href="#"
         onClick={(e) => page && handleNavClick(page, e)}
-        className={`${baseClasses} ${currentPage === page ? 'text-blue-700 font-black' : ''} `}
+        className={`${baseClasses} ${currentPage === page ? 'text-blue-700' : ''} `}
       >
         {label}
       </a>

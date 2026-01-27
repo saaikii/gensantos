@@ -2,6 +2,7 @@ import React from 'react';
 import { Target, Eye } from 'lucide-react';
 import CPMONavbar from './CPMONavbar';
 import CPMOSkeleton from './CPMOSkeleton';
+import ScrollReveal from '../Shared/ScrollReveal';
 
 
 interface CPMOHomeProps {
@@ -82,40 +83,44 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 max-w-5xl mx-auto px-4">
                                 {/* Mission Card */}
-                                <div className="relative group mt-4">
-                                    {/* The 'Cup' Background - Purple */}
-                                    <div className="absolute -bottom-4 -left-4 -right-4 h-48 bg-purple-600 rounded-b-[3rem] transform group-hover:scale-y-105 group-hover:translate-y-1 transition-transform duration-300 -z-10 shadow-xl shadow-purple-600/30"></div>
-                                    {/* Main Card */}
-                                    <div className="relative bg-white rounded-[2rem] p-8 pb-12 shadow-2xl h-full flex flex-col items-center text-center border-t border-purple-50">
-                                        <div className="w-20 h-20 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                            <Target size={40} className="text-purple-600" />
+                                <ScrollReveal delay={100} className="h-full" animation="fade-up" enableBounce duration={0.8}>
+                                    <div className="relative group mt-4 h-full">
+                                        {/* The 'Cup' Background - Purple */}
+                                        <div className="absolute -bottom-4 -left-4 -right-4 h-48 bg-purple-600 rounded-b-[3rem] transform group-hover:scale-y-105 group-hover:translate-y-1 transition-transform duration-300 -z-10 shadow-xl shadow-purple-600/30"></div>
+                                        {/* Main Card */}
+                                        <div className="relative bg-white rounded-[2rem] p-8 pb-12 shadow-2xl h-full flex flex-col items-center text-center border-t border-purple-50">
+                                            <div className="w-20 h-20 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                <Target size={40} className="text-purple-600" />
+                                            </div>
+                                            <h3 className="text-2xl font-black text-[#4c1d95] uppercase tracking-widest mb-6">Mission</h3>
+                                            <p className="text-slate-600 leading-relaxed text-sm">
+                                                To improve the quality of life specifically the poor and the marginalized / disadvantaged groups through the provision of appropriate and gender-responsive approaches in family planning, responsible parenthood and adolescent health.
+                                            </p>
                                         </div>
-                                        <h3 className="text-2xl font-black text-[#4c1d95] uppercase tracking-widest mb-6">Mission</h3>
-                                        <p className="text-slate-600 leading-relaxed text-sm">
-                                            To improve the quality of life specifically the poor and the marginalized / disadvantaged groups through the provision of appropriate and gender-responsive approaches in family planning, responsible parenthood and adolescent health.
-                                        </p>
+                                        {/* Decorative Tab */}
+                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-purple-600 rounded-full"></div>
                                     </div>
-                                    {/* Decorative Tab */}
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-purple-600 rounded-full"></div>
-                                </div>
+                                </ScrollReveal>
 
                                 {/* Vision Card */}
-                                <div className="relative group mt-4">
-                                    {/* The 'Cup' Background - Pink */}
-                                    <div className="absolute -bottom-4 -left-4 -right-4 h-48 bg-pink-500 rounded-b-[3rem] transform group-hover:scale-y-105 group-hover:translate-y-1 transition-transform duration-300 -z-10 shadow-xl shadow-pink-500/30"></div>
-                                    {/* Main Card */}
-                                    <div className="relative bg-white rounded-[2rem] p-8 pb-12 shadow-2xl h-full flex flex-col items-center text-center border-t border-pink-50">
-                                        <div className="w-20 h-20 bg-pink-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                            <Eye size={40} className="text-pink-500" />
+                                <ScrollReveal delay={200} className="h-full" animation="fade-down" enableBounce duration={0.8}>
+                                    <div className="relative group mt-4 h-full">
+                                        {/* The 'Cup' Background - Pink */}
+                                        <div className="absolute -bottom-4 -left-4 -right-4 h-48 bg-pink-500 rounded-b-[3rem] transform group-hover:scale-y-105 group-hover:translate-y-1 transition-transform duration-300 -z-10 shadow-xl shadow-pink-500/30"></div>
+                                        {/* Main Card */}
+                                        <div className="relative bg-white rounded-[2rem] p-8 pb-12 shadow-2xl h-full flex flex-col items-center text-center border-t border-pink-50">
+                                            <div className="w-20 h-20 bg-pink-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                <Eye size={40} className="text-pink-500" />
+                                            </div>
+                                            <h3 className="text-2xl font-black text-[#4c1d95] uppercase tracking-widest mb-6">Vision</h3>
+                                            <p className="text-slate-600 leading-relaxed text-sm">
+                                                "An empowered and people working together for a better quality of life for everyone, living in a peaceful, harmonious, and healthy environment."
+                                            </p>
                                         </div>
-                                        <h3 className="text-2xl font-black text-[#4c1d95] uppercase tracking-widest mb-6">Vision</h3>
-                                        <p className="text-slate-600 leading-relaxed text-sm">
-                                            "An empowered and people working together for a better quality of life for everyone, living in a peaceful, harmonious, and healthy environment."
-                                        </p>
+                                        {/* Decorative Tab */}
+                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-pink-500 rounded-full"></div>
                                     </div>
-                                    {/* Decorative Tab */}
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-pink-500 rounded-full"></div>
-                                </div>
+                                </ScrollReveal>
                             </div>
                         </div>
                     </div>
@@ -128,56 +133,58 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
                             </h2>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {[1, 2].map((i) => (
-                                    <div key={i} className="group bg-white rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-purple-50 overflow-hidden flex flex-col h-full">
-                                        {/* Card Image Area */}
-                                        <div className="relative h-64 bg-gray-200 overflow-hidden">
-                                            {/* Badge */}
-                                            <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-purple-700 shadow-sm uppercase tracking-wider border border-white">
-                                                GAD Activity
+                                {[1, 2].map((i, index) => (
+                                    <ScrollReveal key={i} delay={index * 150} className="h-full" animation="fade-up" enableBounce>
+                                        <div className="group bg-white rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-purple-50 overflow-hidden flex flex-col h-full">
+                                            {/* Card Image Area */}
+                                            <div className="relative h-64 bg-gray-200 overflow-hidden">
+                                                {/* Badge */}
+                                                <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-purple-700 shadow-sm uppercase tracking-wider border border-white">
+                                                    GAD Activity
+                                                </div>
+
+                                                {/* Image Placeholder with Overlay */}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+
+                                                {/* Mock Content for Image */}
+                                                <div className="absolute inset-0 flex items-center justify-center text-white/50 font-bold text-4xl">
+                                                    {/* In real implementation, use <img> here */}
+                                                    IMAGE {i}
+                                                </div>
                                             </div>
 
-                                            {/* Image Placeholder with Overlay */}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                                            {/* Card Content */}
+                                            <div className="p-8 flex flex-col flex-grow relative">
+                                                {/* Date */}
+                                                <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">
+                                                    <span>January {24 + i}, 2026</span>
+                                                    <span className="w-1 h-1 rounded-full bg-purple-300"></span>
+                                                    <span>San Isidro, GSC</span>
+                                                </div>
 
-                                            {/* Mock Content for Image */}
-                                            <div className="absolute inset-0 flex items-center justify-center text-white/50 font-bold text-4xl">
-                                                {/* In real implementation, use <img> here */}
-                                                IMAGE {i}
+                                                <h3 className="text-xl font-bold text-[#4c1d95] mb-4 leading-tight group-hover:text-purple-600 transition-colors">
+                                                    {i === 1 ?
+                                                        "CPMO Conducts Reproductive Health Seminar for San Isidro Residents" :
+                                                        "Gender and Development Planning and Budgeting Workshop for CSOs"
+                                                    }
+                                                </h3>
+
+                                                <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                                                    {i === 1 ?
+                                                        "The City Population Management Office (CPMO) in coordination with the Barangay Council of San Isidro successfully conducted a comprehensive Reproductive Health Seminar focusing on family planning and maternal care." :
+                                                        "A strategic planning session attended by various Civil Society Organizations (CSOs) and Non-Government Organizations (NGOs) to align budgeting goals with gender-responsive mandates."
+                                                    }
+                                                </p>
+
+                                                {/* Read More Button */}
+                                                <div className="mt-auto pt-6 border-t border-purple-50 flex items-center justify-between">
+                                                    <button className="flex items-center gap-2 text-[#4c1d95] font-bold text-sm uppercase tracking-wide group-hover:gap-3 transition-all">
+                                                        Read Full Story <Target size={16} className="rotate-45" />
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        {/* Card Content */}
-                                        <div className="p-8 flex flex-col flex-grow relative">
-                                            {/* Date */}
-                                            <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">
-                                                <span>January {24 + i}, 2026</span>
-                                                <span className="w-1 h-1 rounded-full bg-purple-300"></span>
-                                                <span>San Isidro, GSC</span>
-                                            </div>
-
-                                            <h3 className="text-xl font-bold text-[#4c1d95] mb-4 leading-tight group-hover:text-purple-600 transition-colors">
-                                                {i === 1 ?
-                                                    "CPMO Conducts Reproductive Health Seminar for San Isidro Residents" :
-                                                    "Gender and Development Planning and Budgeting Workshop for CSOs"
-                                                }
-                                            </h3>
-
-                                            <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
-                                                {i === 1 ?
-                                                    "The City Population Management Office (CPMO) in coordination with the Barangay Council of San Isidro successfully conducted a comprehensive Reproductive Health Seminar focusing on family planning and maternal care." :
-                                                    "A strategic planning session attended by various Civil Society Organizations (CSOs) and Non-Government Organizations (NGOs) to align budgeting goals with gender-responsive mandates."
-                                                }
-                                            </p>
-
-                                            {/* Read More Button */}
-                                            <div className="mt-auto pt-6 border-t border-purple-50 flex items-center justify-between">
-                                                <button className="flex items-center gap-2 text-[#4c1d95] font-bold text-sm uppercase tracking-wide group-hover:gap-3 transition-all">
-                                                    Read Full Story <Target size={16} className="rotate-45" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </ScrollReveal>
                                 ))}
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Quote } from 'lucide-react';
+import ScrollReveal from '../Shared/ScrollReveal';
 
 const MayorMessage: React.FC = () => {
   const fullMessage = "Digitalization in governance opens new avenues for transparency, efficiency, and citizen engagement. It empowers us to create more responsive, accessible, and effective public services. Let's embrace this digital revolution for a more progressive governance.";
@@ -81,50 +82,54 @@ const MayorMessage: React.FC = () => {
 
           {/* Image Section - Standing at the bottom */}
           <div className="w-full md:w-2/5 flex justify-center md:justify-end relative group">
-            {/* Photo Section - Static Container */}
-            <div 
-              className="relative w-full h-[400px] md:h-[550px] flex items-end justify-center z-10"
-            >
-              {/* Subtle Glow behind the mayor */}
+            <ScrollReveal animation="fade-up" delay={200} className="w-full h-full flex justify-center md:justify-end">
+              {/* Photo Section - Static Container */}
               <div 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-blue-400/20 blur-[80px] rounded-full -z-10"
-              ></div>
+                className="relative w-full h-[400px] md:h-[550px] flex items-end justify-center z-10"
+              >
+                {/* Subtle Glow behind the mayor */}
+                <div 
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-blue-400/20 blur-[80px] rounded-full -z-10"
+                ></div>
 
-              <img
-                decoding="async"
-                src="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png"
-                alt="Mayor Lorelie G. Pacquiao"
-                title="Mayor Lorelie G. Pacquiao"
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="max-h-full w-auto object-contain drop-shadow-[20px_-10px_50px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
+                <img
+                  decoding="async"
+                  src="https://gensantos.gov.ph/wp-content/uploads/2024/01/mayora.png"
+                  alt="Mayor Lorelie G. Pacquiao"
+                  title="Mayor Lorelie G. Pacquiao"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  className="max-h-full w-auto object-contain drop-shadow-[20px_-10px_50px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Text Content */}
           <div 
             className="w-full md:w-3/5 text-center md:text-left pb-20"
           >
-            <div className="mb-6 text-yellow-400 flex justify-center md:justify-start">
-              <Quote size={48} className="rotate-180" />
-            </div>
-            <h2 className="text-2xl md:text-4xl font-bold leading-relaxed mb-6 font-serif">
-              "Message of the Mayor"
-            </h2>
-            <p className="text-lg md:text-xl text-blue-100 leading-relaxed font-light italic mb-8 min-h-[120px] md:min-h-[100px]">
-              {displayedText}
-              <span
-                className={`inline-block ml-1 text-yellow-400 font-normal transition-opacity duration-100 ${showCursor ? 'opacity-100' : 'opacity-0'
-                  }`}
-              >
-                |
-              </span>
-            </p>
-            <div className="border-t border-white/10 pt-6 inline-block md:block">
-              <p className="font-bold text-2xl text-white">Lorelie G. Pacquiao</p>
-              <p className="text-sm text-yellow-400 font-bold uppercase tracking-widest mt-1">City Mayor</p>
-            </div>
+            <ScrollReveal animation="fade-up">
+              <div className="mb-6 text-yellow-400 flex justify-center md:justify-start">
+                <Quote size={48} className="rotate-180" />
+              </div>
+              <h2 className="text-2xl md:text-4xl font-bold leading-relaxed mb-6 font-serif">
+                "Message of the Mayor"
+              </h2>
+              <p className="text-lg md:text-xl text-blue-100 leading-relaxed font-light italic mb-8 min-h-[120px] md:min-h-[100px]">
+                {displayedText}
+                <span
+                  className={`inline-block ml-1 text-yellow-400 font-normal transition-opacity duration-100 ${showCursor ? 'opacity-100' : 'opacity-0'
+                    }`}
+                >
+                  |
+                </span>
+              </p>
+              <div className="border-t border-white/10 pt-6 inline-block md:block">
+                <p className="font-bold text-2xl text-white">Lorelie G. Pacquiao</p>
+                <p className="text-sm text-yellow-400 font-bold uppercase tracking-widest mt-1">City Mayor</p>
+              </div>
+            </ScrollReveal>
           </div>
 
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 interface CPMONavbarProps {
@@ -8,6 +8,40 @@ interface CPMONavbarProps {
 
 const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatDateTime = (date: Date) => {
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    const days = [
+      "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    ];
+    const weekday = days[date.getDay()];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    let hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const strHours = String(hours).padStart(2, '0');
+
+    return `${weekday}, ${month} ${day}, ${year} ${strHours}:${minutes}:${seconds} ${ampm}`;
+  };
 
   const handleNavClick = (page: 'home' | 'gad-database' | 'cpmo-home', e: React.MouseEvent) => {
     e.preventDefault();
@@ -17,7 +51,7 @@ const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
   };
 
   const NavItem = ({ label, page, isExternal = false, externalUrl }: { label: string, page?: 'home' | 'gad-database' | 'cpmo-home', isExternal?: boolean, externalUrl?: string }) => {
-    const baseClasses = "hover:text-[#4c1d95] transition-colors px-1 lg:px-3 py-2 block md:inline-block";
+    const baseClasses = "hover:text-[#4c1d95] px-1 lg:px-3 py-2 block md:inline-block font-bold border-b-2 border-transparent hover:border-purple-300";
 
     if (isExternal || externalUrl) {
       return (
@@ -35,7 +69,7 @@ const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
       <a
         href="#"
         onClick={(e) => page && handleNavClick(page, e)}
-        className={`${baseClasses} ${currentPage === page ? 'text-[#4c1d95] font-black' : ''} `}
+        className={`${baseClasses} ${currentPage === page ? 'text-[#4c1d95]' : ''} `}
       >
         {label}
       </a>
@@ -63,13 +97,15 @@ const CPMONavbar: React.FC<CPMONavbarProps> = ({ onNavigate, currentPage }) => {
               className="w-14 h-14 md:w-20 md:h-20 object-contain drop-shadow-md filter brightness-110"
             />
             <h1 className="text-base md:text-2xl leading-tight tracking-wide drop-shadow-md text-white max-w-[300px] md:max-w-none" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600, fontStyle: 'italic' }}>
-              Official Website of CPMO (City Population Management Office) LGU GENSAN
+              Official Website of CPMO (City Population Management Office) <br /> LGU GENSAN
             </h1>
           </div>
 
-          {/* Right Side: Slogan/Logo (Hidden on small screens) */}
-          <div className="hidden lg:flex flex-col items-end justify-center">
-            {/* Using the same slogan image for consistency, or we could leave it blank if CPMO has no specific one */}
+          {/* Right Side: Slogan/Logo + Clock (Hidden on small screens) */}
+          <div className="hidden lg:flex items-center gap-6">
+            <div className="text-[11px] md:text-[13px] font-mono opacity-90 tracking-wider text-right whitespace-nowrap">
+              {formatDateTime(currentTime)}
+            </div>
             <img
               width="479"
               height="187"
