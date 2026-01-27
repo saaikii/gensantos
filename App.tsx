@@ -105,6 +105,7 @@ const App: React.FC = () => {
           onNavigate={navigateTo}
           currentPage={getNavbarPage(currentPage)}
           enableStickySearch={currentPage === 'home'}
+          disableTransparency={currentPage === 'news-detail'}
         />
       )}
 

@@ -5,9 +5,10 @@ interface NavbarProps {
   onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency') => void;
   currentPage: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency';
   enableStickySearch?: boolean;
+  disableTransparency?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySearch = false }) => {
+const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySearch = false, disableTransparency = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
 
@@ -71,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
     return () => window.removeEventListener('scroll', handleScroll);
   }, [currentPage, enableStickySearch]);
 
-  const isTransparent = !isScrolled && currentPage === 'home';
+  const isTransparent = !disableTransparency && !isScrolled && currentPage === 'home';
 
   const handleNavClick = (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency', e: React.MouseEvent) => {
     e.preventDefault();
