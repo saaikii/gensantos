@@ -91,10 +91,10 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
       if (isDisabled) return "text-gray-400 border-transparent cursor-not-allowed";
       
       if (isTransparent) {
-        if (isActive) return "text-blue-300 border-blue-400";
+        if (isActive) return "text-blue-300 border-transparent";
         return "text-white border-transparent hover:text-blue-200 hover:border-blue-200/50";
       } else {
-        if (isActive) return "text-blue-700 border-blue-300";
+        if (isActive) return "text-blue-700 border-transparent";
         return "text-gray-700 border-transparent hover:text-blue-700 hover:border-blue-300";
       }
     };
