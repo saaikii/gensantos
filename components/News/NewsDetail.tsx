@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, User, Mail, Globe, MessageSquare, Send, CalendarDays, Megaphone, Newspaper, PartyPopper } from 'lucide-react';
 import { NewsItem } from '../../types';
+import BackButton from '../Shared/BackButton';
 
 interface NewsDetailProps {
   newsItem: NewsItem;
@@ -57,13 +58,7 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ newsItem, onBack }) => {
           {/* Left Side - Sticky Back Button */}
           <aside className="lg:col-span-2">
             <div className="lg:sticky lg:top-48">
-              <button
-                onClick={onBack}
-                className="group flex items-center gap-2 bg-white hover:bg-blue-600 text-blue-600 hover:text-white px-5 py-2.5 rounded-full font-bold shadow-lg shadow-blue-600/5 transition-all hover:-translate-y-1 hover:shadow-blue-600/20 active:scale-95 border border-blue-100/50 w-fit"
-              >
-                <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-                <span>Back</span>
-              </button>
+              <BackButton onClick={onBack} />
             </div>
           </aside>
 
