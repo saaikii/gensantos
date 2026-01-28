@@ -92,10 +92,11 @@ const App: React.FC = () => {
   };
 
   // Helper to map app pages to navbar pages
-  const getNavbarPage = (page: typeof currentPage): 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency' => {
+  const getNavbarPage = (page: typeof currentPage): 'home' | 'tourism' | 'departments' | 'gad-database' | 'citizens-charter' | 'transparency' | 'full-calendar' => {
     if (page === 'cpmo-home') return 'gad-database';
     if (page === 'news-detail') return 'home';
     if (page === 'department-detail') return 'departments';
+    if (page === 'full-calendar') return 'home'; // Map full-calendar to home for navbar
     return page;
   };
 
@@ -119,7 +120,7 @@ const App: React.FC = () => {
               <News onReadMore={handleReadNews} />
             </div>
             <div id="calendar-section">
-                <CalendarOfActivities onNavigate={navigateTo} />
+              <CalendarOfActivities onNavigate={navigateTo} />
             </div>
             <MayorMessage />
             <CitizensGuides />
@@ -183,14 +184,14 @@ const App: React.FC = () => {
 
         {currentPage === 'full-calendar' && (
           <React.Suspense fallback={<PageSkeleton />}>
-            <FullCalendarPage 
-                onNavigate={navigateTo}
-                onBack={() => {
+            <FullCalendarPage
+              onNavigate={navigateTo}
+              onBack={() => {
                 navigateTo('home');
                 setTimeout(() => {
-                    document.getElementById('calendar-section')?.scrollIntoView({ behavior: 'smooth' });
+                  document.getElementById('calendar-section')?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
-            }} />
+              }} />
           </React.Suspense>
         )}
       </main>

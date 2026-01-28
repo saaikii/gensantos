@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Eye } from 'lucide-react';
+import { Target, Eye, ExternalLink } from 'lucide-react';
 import CPMONavbar from './CPMONavbar';
 import CPMOSkeleton from './CPMOSkeleton';
 import ScrollReveal from '../Shared/ScrollReveal';
@@ -127,61 +127,121 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
 
                     {/* Advocacy and Activities Section */}
                     <div className="py-8">
-                        <div className="container mx-auto px-4 max-w-4xl">
+                        <div className="container mx-auto px-4 max-w-7xl">
                             <h2 className="text-2xl md:text-3xl font-bold text-center text-[#4c1d95] mb-12 font-serif uppercase tracking-tight">
                                 General Santos City GAD Advocacy and Activities
                             </h2>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {[1, 2].map((i, index) => (
-                                    <ScrollReveal key={i} delay={index * 150} className="h-full" animation="fade-up" enableBounce>
-                                        <div className="group bg-white rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-purple-50 overflow-hidden flex flex-col h-full">
+                            {/* Real GAD Activities Data */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {[
+                                    {
+                                        id: 1,
+                                        date: 'AUGUST 29, 2023',
+                                        location: 'GENERAL SANTOS CITY',
+                                        title: 'DPWH Turns Over 15M-Worth CPMO Office Building',
+                                        description: 'The Department of Public Works and Highways (DPWH) officially turned over the newly constructed 15M-worth City Population and Management Office (CPMO) building at Dr. Jorge P. Royeca City Hospital (DJPRCH) Compound.',
+                                        facebookUrl: 'https://www.facebook.com/tatakpacquiao/posts/730842869087562',
+                                        image: '/gad_activity_1.jpg'
+                                    },
+                                    {
+                                        id: 2,
+                                        date: 'FEBRUARY 2, 2024',
+                                        location: 'CPMO OFFICE, GSC',
+                                        title: 'An Hour with City Mayor at CPMO',
+                                        description: 'Mayor Lorelie Pacquiao expressed her commitment to support the City Population and Management Office (CPMO) in their programs and initiatives during the "An Hour with City Mayor" session at the CPMO office.',
+                                        facebookUrl: 'https://www.facebook.com/tatakpacquiao/posts/827957779376070',
+                                        image: '/gad_activity_2.jpg'
+                                    },
+                                    {
+                                        id: 3,
+                                        date: 'OCTOBER 2024',
+                                        location: 'GENERAL SANTOS CITY',
+                                        title: 'PSA Conducts 2nd City Statistics Committee NSM Research Forum',
+                                        description: 'In celebration of the 35th National Statistics Month, the Philippine Statistics Authority (PSA) conducted the 2nd City Statistics Committee NSM Research Forum, highlighting the importance of data-driven decision making.',
+                                        facebookUrl: 'https://www.facebook.com/LGUGensanTATAKHENERAL/posts/122144813540307977',
+                                        image: '/gad_activity_3.png'
+                                    },
+                                    {
+                                        id: 4,
+                                        date: 'JULY 4, 2024',
+                                        location: 'BARANGAY LABANGAL',
+                                        title: 'ProjecTEEN to Launch in Barangay Labangal',
+                                        description: 'Aiming to help and empower teenage parents in the city by providing them with psychosocial support and other interventions, the Sunrise Organization of the Philippines, Inc. seeks to kick off the implementation of the ProjecTEEN program in Barangay Labangal.',
+                                        facebookUrl: 'https://www.facebook.com/LGUGensanTATAKHENERAL/posts/122124913010307977',
+                                        image: '/gad_activity_4.png'
+                                    },
+                                    {
+                                        id: 5,
+                                        date: 'JUNE 4, 2024',
+                                        location: 'ROBINSONS PLACE GENSAN',
+                                        title: 'CPMO Opens Men\'s Month Celebration at Robinsons Place',
+                                        description: 'The City Population Management Office (CPMO) successfully opened the city\'s month-long celebration of Men\'s Month with an opening ceremony on Monday, June 3, 2024, at the atrium of Robinsons Place GenSan, promoting gender equality and men\'s active participation in societal development.',
+                                        facebookUrl: 'https://www.facebook.com/LGUGensanTATAKHENERAL/posts/122117046116307977',
+                                        image: '/gad_activity_5.jpg'
+                                    },
+                                    {
+                                        id: 6,
+                                        date: 'MAY 29, 2024',
+                                        location: 'SM CITY GENSAN',
+                                        title: 'CPMO Unveils Programs for Men\'s Month and Pride Month',
+                                        description: 'The City Population Management Office (CPMO) has unveiled its programs for this year\'s Men\'s Month and Pride Month celebrations during the monthly press conference of the City Public Information Office. The theme "Itaguyod, positibong papel ng kalalakihan sa lipunan" highlights the importance of recognizing men\'s constructive contributions.',
+                                        facebookUrl: 'https://www.facebook.com/LGUGensanTATAKHENERAL/posts/122115456212307977',
+                                        image: '/gad_activity_6.png'
+                                    }
+                                ].map((activity, index) => (
+                                    <ScrollReveal key={activity.id} delay={index * 100} className="h-full" animation="fade-up" enableBounce>
+                                        <div
+                                            onClick={() => window.open(activity.facebookUrl, '_blank', 'noopener,noreferrer')}
+                                            className="group bg-white rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-purple-50 overflow-hidden flex flex-col h-full cursor-pointer"
+                                        >
                                             {/* Card Image Area */}
-                                            <div className="relative h-64 bg-gray-200 overflow-hidden">
+                                            <div className="relative h-64 bg-gradient-to-br from-purple-100 to-blue-50 overflow-hidden">
                                                 {/* Badge */}
-                                                <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-purple-700 shadow-sm uppercase tracking-wider border border-white">
+                                                <div className="absolute top-4 left-4 z-10 bg-purple-600 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg uppercase tracking-wide">
                                                     GAD Activity
                                                 </div>
 
-                                                {/* Image Placeholder with Overlay */}
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                                                {/* Actual Image or Fallback */}
+                                                {activity.image ? (
+                                                    <>
+                                                        <img
+                                                            src={activity.image}
+                                                            alt={activity.title}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                        {/* Image Overlay on Hover */}
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        {/* Gradient Fallback with Overlay */}
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                                                {/* Mock Content for Image */}
-                                                <div className="absolute inset-0 flex items-center justify-center text-white/50 font-bold text-4xl">
-                                                    {/* In real implementation, use <img> here */}
-                                                    IMAGE {i}
-                                                </div>
+                                                        {/* Icon Watermark */}
+                                                        <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity">
+                                                            <div className="text-9xl font-black text-purple-600">GAD</div>
+                                                        </div>
+                                                    </>
+                                                )}
                                             </div>
 
                                             {/* Card Content */}
                                             <div className="p-8 flex flex-col flex-grow relative">
                                                 {/* Date */}
-                                                <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">
-                                                    <span>January {24 + i}, 2026</span>
+                                                <div className="flex flex-wrap items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">
+                                                    <span className="text-purple-600">{activity.date}</span>
                                                     <span className="w-1 h-1 rounded-full bg-purple-300"></span>
-                                                    <span>San Isidro, GSC</span>
+                                                    <span>{activity.location}</span>
                                                 </div>
 
-                                                <h3 className="text-xl font-bold text-[#4c1d95] mb-4 leading-tight group-hover:text-purple-600 transition-colors">
-                                                    {i === 1 ?
-                                                        "CPMO Conducts Reproductive Health Seminar for San Isidro Residents" :
-                                                        "Gender and Development Planning and Budgeting Workshop for CSOs"
-                                                    }
+                                                <h3 className="text-xl font-bold text-[#4c1d95] mb-4 leading-tight group-hover:text-purple-600 transition-colors line-clamp-2">
+                                                    {activity.title}
                                                 </h3>
 
                                                 <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
-                                                    {i === 1 ?
-                                                        "The City Population Management Office (CPMO) in coordination with the Barangay Council of San Isidro successfully conducted a comprehensive Reproductive Health Seminar focusing on family planning and maternal care." :
-                                                        "A strategic planning session attended by various Civil Society Organizations (CSOs) and Non-Government Organizations (NGOs) to align budgeting goals with gender-responsive mandates."
-                                                    }
+                                                    {activity.description}
                                                 </p>
-
-                                                {/* Read More Button */}
-                                                <div className="mt-auto pt-6 border-t border-purple-50 flex items-center justify-between">
-                                                    <button className="flex items-center gap-2 text-[#4c1d95] font-bold text-sm uppercase tracking-wide group-hover:gap-3 transition-all">
-                                                        Read Full Story <Target size={16} className="rotate-45" />
-                                                    </button>
-                                                </div>
                                             </div>
                                         </div>
                                     </ScrollReveal>
