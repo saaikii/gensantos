@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, ArrowLeft, Scale } from 'lucide-react';
+import BackButton from '../Shared/BackButton';
 
 interface ProcurementNavbarProps {
     onNavigate: (page: 'home' | 'tourism' | 'departments' | 'gad-database' | 'procurement' | 'citizens-charter' | 'cpmo-home') => void;
@@ -39,13 +40,13 @@ const ProcurementNavbar: React.FC<ProcurementNavbarProps> = ({ onNavigate, curre
                     </div>
 
                     {/* Right Side: Back Button */}
-                    <button
-                        onClick={handleBackToMain}
-                        className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg transition-all border border-white/20 text-sm font-bold"
-                    >
-                        <ArrowLeft size={18} />
-                        Back to Main Site
-                    </button>
+                    {/* Right Side: Back Button */}
+                    <BackButton 
+                        onClick={handleBackToMain} 
+                        variant="glass" 
+                        label="Back to Main Site"
+                        className="hidden md:flex" 
+                    />
 
                     {/* Mobile Menu Button */}
                     <button

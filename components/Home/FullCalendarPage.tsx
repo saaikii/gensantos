@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Clock, MapPin, Search, Filter, ArrowLeft } from 'lucide-react';
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
+import BackButton from '../Shared/BackButton';
 
 // Mock Data (Expanded)
 const ALL_EVENTS = [
@@ -162,9 +163,7 @@ const FullCalendarPage: React.FC<FullCalendarPageProps> = ({ onBack, onNavigate 
             
             {/* Header */}
             <div className="mb-8">
-                <button onClick={onBack} className="flex items-center gap-2 text-slate-500 hover:text-blue-600 transition-colors mb-4 font-bold uppercase tracking-wide text-sm">
-                    <ArrowLeft size={16} /> Back
-                </button>
+                <BackButton onClick={onBack} variant="ghost" className="mb-4 text-sm" />
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 relative">
                     
                     {/* Title */}
