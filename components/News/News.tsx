@@ -109,7 +109,7 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
               className={`relative h-28 md:h-36 flex items-center justify-center overflow-hidden group transition-all duration-500 ease-in-out ${activeTab === 'Activities' ? 'flex-[1.5] brightness-100' : 'flex-1 brightness-75 hover:brightness-90'}`}
             >
               <img
-                src="/images/kalilangan_festival.png"
+                src="/zumba_oval_plaza.png"
                 className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${activeTab === 'Activities' ? 'grayscale-0 scale-100' : 'grayscale scale-110'}`}
                 alt="Activities bg"
               />
