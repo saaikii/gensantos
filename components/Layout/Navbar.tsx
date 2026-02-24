@@ -121,7 +121,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
     return linkContent;
   };
 
-  const Separator = () => <span className="hidden md:block text-gray-300">|</span>;
+  const Separator = () => <span className="hidden md:block text-gray-300" aria-hidden="true">|</span>;
 
   return (
     <div
@@ -139,6 +139,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
               href="#"
               onClick={(e) => handleNavClick('home', e)}
               className="cursor-pointer transition-transform hover:scale-110 active:scale-95 duration-200"
+              aria-label="Go to Homepage"
             >
               <img
                 fetchPriority="high"
@@ -186,7 +187,11 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, enableStickySe
             {/* Mobile Menu Button & Brand (Visible only on Mobile) */}
             <div className="flex md:hidden w-full justify-between items-center">
               <span className={`font-bold transition-colors duration-500 ${isTransparent ? 'text-white' : 'text-blue-900'}`}>Menu</span>
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`p-2 transition-colors duration-500 ${isTransparent ? 'text-white' : 'text-blue-900'}`}>
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+                aria-label="Toggle mobile menu"
+                className={`p-2 transition-colors duration-500 ${isTransparent ? 'text-white' : 'text-blue-900'}`}
+              >
                 {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>

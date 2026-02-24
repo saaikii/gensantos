@@ -117,7 +117,7 @@ const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate }) => {
           </h1>
           <div className="w-24 h-1.5 bg-gradient-to-r from-[#0038A8] to-yellow-500 mx-auto rounded-full mb-8"></div>
           <p className="text-slate-900 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Complete archive of Bids, Awards, and City Memoranda.
+            Complete archive of Bids, Awards, and General Bulletins.
             Promoting open governance and accountability.
           </p>
         </div>

@@ -373,10 +373,12 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
               value={localQuery}
               onChange={(e) => setLocalQuery(e.target.value)}
               onKeyDown={handleKeyDown}
+              aria-label="Search query"
               className="flex-1 bg-transparent border-none text-slate-800 placeholder-slate-400 px-3 py-2.5 focus:outline-none text-base min-w-0"
             />
             <button
               onClick={handleSearch}
+              aria-label="Submit search"
               className="shrink-0 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-2.5 px-5 md:px-6 rounded-lg transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 text-sm"
             >
               Search

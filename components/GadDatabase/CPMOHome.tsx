@@ -3,6 +3,7 @@ import { Target, Eye, ExternalLink } from 'lucide-react';
 import CPMONavbar from './CPMONavbar';
 import CPMOSkeleton from './CPMOSkeleton';
 import ScrollReveal from '../Shared/ScrollReveal';
+import EnvelopeCard from '../Shared/EnvelopeCard';
 
 
 interface CPMOHomeProps {
@@ -83,44 +84,22 @@ const CPMOHome: React.FC<CPMOHomeProps> = ({ onNavigate }) => {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 max-w-5xl mx-auto px-4">
                                 {/* Mission Card */}
-                                <ScrollReveal delay={100} className="h-full" animation="fade-up" enableBounce duration={0.8}>
-                                    <div className="relative group mt-4 h-full">
-                                        {/* The 'Cup' Background - Purple */}
-                                        <div className="absolute -bottom-4 -left-4 -right-4 h-48 bg-purple-600 rounded-b-[3rem] transform group-hover:scale-y-105 group-hover:translate-y-1 transition-transform duration-300 -z-10 shadow-xl shadow-purple-600/30"></div>
-                                        {/* Main Card */}
-                                        <div className="relative bg-white rounded-[2rem] p-8 pb-12 shadow-2xl h-full flex flex-col items-center text-center border-t border-purple-50">
-                                            <div className="w-20 h-20 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                                <Target size={40} className="text-purple-600" />
-                                            </div>
-                                            <h3 className="text-2xl font-black text-[#4c1d95] uppercase tracking-widest mb-6">Mission</h3>
-                                            <p className="text-slate-600 leading-relaxed text-sm">
-                                                To improve the quality of life specifically the poor and the marginalized / disadvantaged groups through the provision of appropriate and gender-responsive approaches in family planning, responsible parenthood and adolescent health.
-                                            </p>
-                                        </div>
-                                        {/* Decorative Tab */}
-                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-purple-600 rounded-full"></div>
-                                    </div>
-                                </ScrollReveal>
+                                <EnvelopeCard 
+                                    title="Mission" 
+                                    icon={<Target size={18} className="text-purple-800" />}
+                                    colorTheme="purple"
+                                    delay={100}
+                                    content="To improve the quality of life specifically the poor and the marginalized / disadvantaged groups through the provision of appropriate and gender-responsive approaches in family planning, responsible parenthood and adolescent health."
+                                />
 
                                 {/* Vision Card */}
-                                <ScrollReveal delay={200} className="h-full" animation="fade-down" enableBounce duration={0.8}>
-                                    <div className="relative group mt-4 h-full">
-                                        {/* The 'Cup' Background - Pink */}
-                                        <div className="absolute -bottom-4 -left-4 -right-4 h-48 bg-pink-500 rounded-b-[3rem] transform group-hover:scale-y-105 group-hover:translate-y-1 transition-transform duration-300 -z-10 shadow-xl shadow-pink-500/30"></div>
-                                        {/* Main Card */}
-                                        <div className="relative bg-white rounded-[2rem] p-8 pb-12 shadow-2xl h-full flex flex-col items-center text-center border-t border-pink-50">
-                                            <div className="w-20 h-20 bg-pink-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                                <Eye size={40} className="text-pink-500" />
-                                            </div>
-                                            <h3 className="text-2xl font-black text-[#4c1d95] uppercase tracking-widest mb-6">Vision</h3>
-                                            <p className="text-slate-600 leading-relaxed text-sm">
-                                                "An empowered and people working together for a better quality of life for everyone, living in a peaceful, harmonious, and healthy environment."
-                                            </p>
-                                        </div>
-                                        {/* Decorative Tab */}
-                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-pink-500 rounded-full"></div>
-                                    </div>
-                                </ScrollReveal>
+                                <EnvelopeCard 
+                                    title="Vision" 
+                                    icon={<Eye size={18} className="text-pink-700" />}
+                                    colorTheme="pink"
+                                    delay={200}
+                                    content="An empowered and people working together for a better quality of life for everyone, living in a peaceful, harmonious, and healthy environment."
+                                />
                             </div>
                         </div>
                     </div>

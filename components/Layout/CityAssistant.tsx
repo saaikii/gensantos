@@ -80,21 +80,23 @@ const CityAssistant: React.FC = () => {
         className={`fixed bottom-6 right-6 z-[100] transition-all duration-500 shadow-2xl flex items-center justify-center group ${
           isOpen 
             ? 'w-14 h-14 bg-white text-gray-800 hover:bg-gray-100 rounded-full hover:scale-110 active:scale-95' 
-            : 'px-6 py-4 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-full hover:scale-105 hover:-translate-y-1'
+            : 'h-14 p-4 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-full hover:scale-105 hover:-translate-y-1'
         }`}
       >
         {isOpen ? (
           <X size={24} />
         ) : (
-          <div className="flex items-center gap-3">
-            <div className="relative">
+          <div className="flex items-center">
+            <div className="relative shrink-0">
               <MessageSquare size={24} className="animate-pulse" />
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
               </span>
             </div>
-            <span className="font-bold text-base tracking-wide whitespace-nowrap">Ask GenSan Assistant</span>
+            <span className="font-bold text-base tracking-wide whitespace-nowrap max-w-0 opacity-0 group-hover:max-w-[200px] group-hover:opacity-100 group-hover:pl-3 transition-all duration-500 ease-in-out overflow-hidden">
+              Ask GenSan Assistant
+            </span>
           </div>
         )}
       </button>

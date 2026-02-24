@@ -25,20 +25,21 @@ const NewsDetail = React.lazy(() => import('./components/News/NewsDetail.tsx'));
 const CPMOHome = React.lazy(() => import('./components/GadDatabase/CPMOHome.tsx'));
 const TransparencyPage = React.lazy(() => import('./components/Transparency/TransparencyPage.tsx'));
 const FullCalendarPage = React.lazy(() => import('./components/Home/FullCalendarPage.tsx'));
+const RealPropertyTaxPage = React.lazy(() => import('./components/Services/RealPropertyTaxPage.tsx'));
 import GlobalSearchOverlay from './components/Layout/GlobalSearchOverlay.tsx';
 
 import { NewsItem, DepartmentDetails } from './types.ts';
 import { SearchResult } from './data/siteData.ts';
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'news-detail' | 'transparency' | 'full-calendar'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'news-detail' | 'transparency' | 'full-calendar' | 'real-property-tax'>('home');
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null);
   const [selectedDepartment, setSelectedDepartment] = useState<DepartmentDetails | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [globalSearchQuery, setGlobalSearchQuery] = useState('');
   const [homeScrollPosition, setHomeScrollPosition] = useState(0);
 
-  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'transparency' | 'full-calendar') => {
+  const navigateTo = (page: 'home' | 'tourism' | 'departments' | 'department-detail' | 'gad-database' | 'citizens-charter' | 'cpmo-home' | 'transparency' | 'full-calendar' | 'real-property-tax') => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
@@ -97,6 +98,7 @@ const App: React.FC = () => {
     if (page === 'news-detail') return 'home';
     if (page === 'department-detail') return 'departments';
     if (page === 'full-calendar') return 'home'; // Map full-calendar to home for navbar
+    if (page === 'real-property-tax') return 'home';
     return page;
   };
 
@@ -107,7 +109,7 @@ const App: React.FC = () => {
           onNavigate={navigateTo}
           currentPage={getNavbarPage(currentPage)}
           enableStickySearch={currentPage === 'home'}
-          disableTransparency={currentPage === 'news-detail'}
+          disableTransparency={currentPage === 'news-detail' || currentPage === 'real-property-tax'}
         />
       )}
 
@@ -123,7 +125,7 @@ const App: React.FC = () => {
               <CalendarOfActivities onNavigate={navigateTo} />
             </div>
             <MayorMessage />
-            <CitizensGuides />
+            <CitizensGuides onNavigate={navigateTo} />
             <TransparencyBoard onNavigate={navigateTo} />
             <LocationMap />
           </>
@@ -193,6 +195,12 @@ const App: React.FC = () => {
                 }, 100);
               }} />
           </React.Suspense>
+        )}
+
+        {currentPage === 'real-property-tax' && (
+           <React.Suspense fallback={<PageSkeleton />}>
+              <RealPropertyTaxPage onBack={() => navigateTo('home')} />
+           </React.Suspense>
         )}
       </main>
 

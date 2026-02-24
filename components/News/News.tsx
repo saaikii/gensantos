@@ -136,7 +136,16 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
             >
               <article
                 onClick={() => handleNewsClick(news)}
-                className="group cursor-pointer flex flex-col h-full bg-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-1 relative"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleNewsClick(news);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Read full story: ${news.title}`}
+                className="group cursor-pointer flex flex-col h-full bg-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-1 relative focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {loadingNewsId === news.id && <LoadingOverlay />}
                 <div className="relative overflow-hidden aspect-[4/3] bg-gray-100 transition-colors duration-300">
@@ -186,7 +195,11 @@ const News: React.FC<NewsProps> = ({ onReadMore }) => {
         </div>
 
         <div className="mt-12 text-center">
-          <a href="#" className="inline-flex items-center gap-2 bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all uppercase tracking-widest text-sm">
+          <a 
+            href="#" 
+            aria-label={`View all ${activeTab}`}
+            className="inline-flex items-center gap-2 bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all uppercase tracking-widest text-sm"
+          >
             View All {activeTab} <ArrowRight size={20} />
           </a>
         </div>

@@ -127,7 +127,7 @@ const CalendarOfActivities: React.FC<CalendarProps> = ({ onNavigate }) => {
                 <div className="text-center mb-16">
 
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0038A8] mb-6 uppercase tracking-tight drop-shadow-sm font-serif">
-                        Calendar of <span className="text-yellow-500">Activities</span>
+                        Calendar of Activities
                     </h2>
                     <div className="w-24 h-1.5 bg-gradient-to-r from-[#0038A8] to-yellow-500 mx-auto rounded-full mb-8"></div>
                     <p className="text-slate-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">

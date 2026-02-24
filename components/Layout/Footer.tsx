@@ -8,7 +8,11 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-blue-900 font-bold">G</div>
+              <img 
+                src="https://gensantos.gov.ph/wp-content/uploads/2024/01/cropped-lgulogo.png" 
+                alt="Gensan Seal" 
+                className="w-10 h-10 object-contain"
+              />
               <span className="text-xl font-bold">General Santos City</span>
             </div>
             <p className="text-slate-400 text-sm max-w-sm">

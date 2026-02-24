@@ -2,7 +2,11 @@ import React from 'react';
 import { Calculator, Home, ArrowRight } from 'lucide-react';
 import ScrollReveal from '../Shared/ScrollReveal';
 
-const CitizensGuides: React.FC = () => {
+interface CitizensGuidesProps {
+  onNavigate?: (page: any) => void;
+}
+
+const CitizensGuides: React.FC<CitizensGuidesProps> = ({ onNavigate }) => {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       {/* Background Seal Watermark */}
@@ -59,7 +63,10 @@ const CitizensGuides: React.FC = () => {
 
           {/* Real Property Tax Card */}
           <ScrollReveal delay={200} className="h-full">
-            <a href="#" className="group relative bg-white rounded-[2rem] p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:-translate-y-2 flex flex-col items-start overflow-hidden h-full">
+            <button 
+              onClick={() => onNavigate?.('real-property-tax')}
+              className="w-full text-left group relative bg-white rounded-[2rem] p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:-translate-y-2 flex flex-col items-start overflow-hidden h-full"
+            >
               <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-50 rounded-bl-[100px] -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
 
               <div className="relative w-16 h-16 bg-yellow-400 text-blue-900 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-yellow-400/30 group-hover:-rotate-6 transition-transform duration-300">
@@ -76,7 +83,7 @@ const CitizensGuides: React.FC = () => {
               <div className="mt-auto flex items-center gap-2 text-yellow-600 font-bold uppercase tracking-wide text-sm group-hover:gap-3 transition-all">
                 View Guide <ArrowRight size={18} />
               </div>
-            </a>
+            </button>
           </ScrollReveal>
 
         </div>
